@@ -1,5 +1,4 @@
 * {
-    padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
@@ -11,6 +10,7 @@ body {
     align-items: center;
     height: 100vh;
     font-size: 1em;
+    background: linear-gradient(to right, rgb(228, 226, 226), white );
 }
 
 .pay {
@@ -42,8 +42,6 @@ body {
     display: flex;
     padding: 10vh;
     flex-direction: column;
-    justify-content: flex-start;
-    box-sizing: border-box;
 }
 
 .top {
@@ -143,12 +141,12 @@ body {
 
 .complete a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 5, 5);
 }
 
 .complete button {
     padding: 12px;
-    background-color: rgb(191, 191, 191);
+    background-color: rgb(79, 212, 113);
     border: none;
     border-radius: 4px;
     font-size: 1em;
@@ -174,25 +172,28 @@ body {
 
 .text p {
     margin: 0;
-    font-size: 16px;
-}
-
-.text h5 {
-    display: inline-block;
-    margin: 0 0 0 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #9b5353;
 }
 
 .text tr:nth-child(2) p {
     margin-bottom: 10px;
 }
 
-.text tr:last-child {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 15px;
+.text tr:last-child td{
+    border-bottom: none;
 }
+
+.cart-items-container div {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.cart-items-container div:not(:last-child) {
+    border-bottom: 1px solid #dcdcdc; 
+}
+
 
 @media (max-width: 1200px) {
     .pay-left, .pay-right {
@@ -215,12 +216,18 @@ body {
     }
 
     .pay-right {
-        display: grid;
+        display: flex;
         order: -1;
+        padding: 15px;
     }
 
     .complete button {
         margin-left: 10px;
+    }
+
+    .infor input, .address select {
+        font-size: 0.9em; 
+        padding: 10px; 
     }
 }
 
@@ -233,4 +240,43 @@ body {
         font-size: 14px;
         padding: 8px;
     }
+}
+
+.noti{
+    display: none;
+}
+
+.notification {
+    text-align: center;
+    margin: 20px auto; 
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.notification img {
+    width: 200px; 
+    height: auto; 
+    margin-top: 100px; 
+    vertical-align: middle; 
+}
+
+.selec {
+    display: flex;
+    text-align: center; 
+    margin-top: 10px; 
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px;
+    font-size: 1.5em;
+    background: #ffffff;
+    color: #5c55de;
+    text-decoration: none;
+    border: 1px solid rgb(136, 136, 196);
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px;
+    min-width: 150px;
 }

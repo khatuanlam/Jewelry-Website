@@ -1,4 +1,3 @@
-
 let data;
 
 fetch("json/vn_only_simplified_json_generated_data_vn_units.json") 
@@ -65,3 +64,43 @@ function populateWards(districtCode) {
         wardSelect.appendChild(option);
     });
 }
+
+//cap nhat san pham tu gio hang
+function getCart() {
+    const cart = sessionStorage.getItem('cart');
+    return cart ? JSON.parse(cart) : [];
+}
+
+function displayCart() {
+    const cart = getCart();
+    const cartItemsContainer = document.querySelector('.cart-items-container'); 
+    const subtotalElement = document.getElementById('subtotal');
+    const totalElement = document.getElementById('total');
+
+    let cartTotal = 0;
+    cartItemsContainer.innerHTML = '';
+
+    cart.forEach(item => {
+        const itemElement = document.createElement('div'); 
+        itemElement.innerHTML = `
+            <p>${item.name} - ${item.price} VND</p>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+        cartTotal += item.price;
+    });
+
+    subtotalElement.textContent = `${cartTotal} VND`;
+    totalElement.textContent = `${cartTotal} VND`;
+}
+
+window.onload = function() {
+    displayCart();
+};
+//cap nhat thong bao sau khi bam hoan tat don
+document.getElementById('order').addEventListener('click', function(event) {
+    event.preventDefault();
+    const noti = document.querySelector('.noti');
+    noti.style.display = 'block';
+    document.querySelector('.pay').style.display = 'none';
+});
+
