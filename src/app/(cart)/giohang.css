@@ -11,10 +11,12 @@ body {
     align-items: center;
     height: 100vh;
     font-size: 1em;
-}
+    background: linear-gradient(to right, pink, white);
+};
+
 header {
     text-align: center;
-    margin-top: 5%;
+    margin-top: 100px;
 }
 
 .cart {
@@ -73,30 +75,12 @@ header {
     padding: 10px 0;
 }
 
-/* .order::before {
-    content: ' ';
-    position: absolute;
-    background: rgb(233, 196, 228);
-    width: 111%;
-    height: 20%;
-    top: 0;
-    margin-left: -20px;
-    margin-top: -21px;
-    border-radius: 1px;
-} */
-
 .text p {
     margin: 10px 0;
 }
 
-.invoice label{
-    display: flex;
-    margin-right: 140px;
-}
-
-.invoice checkbox {
-    height: 100%;
-    width: 100%;
+.invoice input[type="checkbox"] {
+    margin-left: 100px;
 }
 
 .form_note {
@@ -134,8 +118,8 @@ header {
     margin-top: 10px;
     width: 100%;
     height: 6vh;
-    background: rgb(170, 169, 169);
-    border: 1px solid #807e7e;
+    background: rgb(60, 180, 47);
+    border: 1px solid #fbf7f7;
 }
 
 .select p {
@@ -151,6 +135,10 @@ header {
     color: #0b58b0;
 }
 
+.continue.show {
+    display: block;
+}
+
 .modal {
     display: none; 
     position: fixed; 
@@ -164,7 +152,7 @@ header {
 }
 
 .modal_content {
-    background-color: #fefefe;
+    background-color: #ffffff;
     margin: 10% auto; 
     padding: 20px;
     border: 1px solid #888;
@@ -199,5 +187,13 @@ header {
 
     .cart-right {
         margin-top: 20px;
+    }
+
+    .modal_content {
+        width: 100%;
+    }
+
+    .invoice input[type="checkbox"]{
+        margin-left: 350px;
     }
 }

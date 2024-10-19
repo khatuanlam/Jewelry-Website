@@ -16,13 +16,14 @@
             <div class="cart-left">
                 <div class="top">
                     <nav>
-                        <p><h4><a href="#">Trang chủ</a> > Giỏ hàng(0)</h4></p>
+                        <p><h4><a href="#">Trang chủ</a> > Giỏ hàng(<span class="cart-count">0</span>)</h4></p>
                     </nav>
                 </div>
                 <div class="continue">
                     <p>Giỏ hàng của bạn đang trống</p>
                     <a href="sanpham.html">Tiếp tục mua hàng</a>
                 </div>
+                <div class="cart-items"></div>
             </div>
 
             <div class="cart-right">
@@ -30,12 +31,12 @@
                     <div class="order"><h2>ĐƠN HÀNG</h2></div>
                     <hr>
                     <div class="text">
-                        <span>Đơn hàng (<span class="item-count">0</span>)</p>
+                        <span>Đơn hàng (<span class="order-count">0</span>)</p>
                         <hr>
                     </div>
                     <div class="invoice">
                         <label for="issue_invoice">Xuất hóa đơn cho đơn hàng</label>
-                        <input type="checkbox" id="issue_invoice"><br>
+                        <input type="checkbox" id="issue_invoice">
                         <hr>
                     </div>
                     <div class="notes">
@@ -45,7 +46,7 @@
                         <hr>
                         </div>
                     </div>
-                    <h2>Tạm tính: <span class="tmp">0</h2> đ</span>
+                    <h2>Tạm tính: <span class="tmp">0</h2></span>
                     <hr>
                     <div class="pay">
                         <div class="demand">
@@ -82,9 +83,7 @@
                             </div>
                         </div>
                         <div class="select">
-                            <a href="thanhtoan.html">
-                                <button id="pay-button" type="button">THANH TOÁN</button>
-                            </a>
+                            <button id="pay-button" type="button">THANH TOÁN</button>
                             <p>hoặc</p>
                             <div class="continue-buy">
                                 <a href="sanpham.html">Tiếp tục mua hàng</a>
