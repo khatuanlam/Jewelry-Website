@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Giỏ hàng</title>
+        <link rel="stylesheet" href="giohang.css">
+    </head>
+    <body>
+        <header>
+            <h2>Giỏ hàng của bạn</h2>
+        </header>
+
+        <div class="cart">
+
+            <div class="cart-left">
+                <div class="top">
+                    <nav>
+                        <p><h4><a href="#">Trang chủ</a> > Giỏ hàng(<span class="cart-count">0</span>)</h4></p>
+                    </nav>
+                </div>
+                <div class="continue">
+                    <p>Giỏ hàng của bạn đang trống</p>
+                    <a href="sanpham.html">Tiếp tục mua hàng</a>
+                </div>
+                <div class="cart-items"></div>
+            </div>
+
+            <div class="cart-right">
+                <div class="bill">
+                    <div class="order"><h2>ĐƠN HÀNG</h2></div>
+                    <hr>
+                    <div class="text">
+                        <span>Đơn hàng (<span class="order-count">0</span>)</p>
+                        <hr>
+                    </div>
+                    <div class="invoice">
+                        <label for="issue_invoice">Xuất hóa đơn cho đơn hàng</label>
+                        <input type="checkbox" id="issue_invoice">
+                        <hr>
+                    </div>
+                    <div class="notes">
+                        <div class="note">Ghi chú đơn hàng</div>
+                        <div class="write">
+                            <textarea class="form_note" id="note" name="note" rows="5"></textarea>
+                        <hr>
+                        </div>
+                    </div>
+                    <h2>Tạm tính: <span class="tmp">0</h2></span>
+                    <hr>
+                    <div class="pay">
+                        <div class="demand">
+                            <input type="checkbox" id="check">
+                            <label for="text">
+                                Khi bấm nút "Thanh toán" đồng nghĩa khách hàng đã hiểu và đồng ý các
+                                <span class="clause"><a href="#" id="showterms">Điều khoản dịch vụ</a></span> của chúng tôi.</label>
+                                <br>
+                        </div>
+                        <div id="mymodal" class="modal">
+                            <div class="modal_content">
+                                <span class="close">&times;</span>
+                                <p>
+                                    <h2>Điều khoản dịch vụ</h2><br>
+                                    <h4>1. Giới thiệu</h4>
+                                    <p>
+                                        Chào mừng quý khách hàng đến với website chúng tôi.<br>
+                                        Khi quý khách hàng truy cập vào trang website của chúng tôi có nghĩa là quý khách đồng ý với các điều khoản này. Trang web có quyền thay đổi, chỉnh sửa, thêm hoặc lược bỏ bất kỳ phần nào trong 
+                                        Điều khoản mua bán hàng hóa này, vào bất cứ lúc nào. Các thay đổi có hiệu lực ngay khi được đăng trên trang web mà không cần thông báo trước. Và khi quý khách tiếp tục sử dụng trang web, sau khi các thay đổi về Điều khoản này được đăng tải, có nghĩa là quý khách chấp nhận với những thay đổi đó.<br>
+                                        Quý khách hàng vui lòng kiểm tra thường xuyên để cập nhật những thay đổi của chúng tôi.<br>
+                                    </p>
+                                    <h4>2. Hướng dẫn sử dụng website</h4>
+                                    <p>
+                                        Khách hàng đảm bảo có đầy đủ hành vi dân sự để thực hiện các giao dịch mua bán hàng hóa theo quy định hiện hành của pháp luật Việt Nam.<br>
+                                    </p>
+                                    <h4>3. Thanh toán an toàn và tiện lợi</h4>
+                                    <p>
+                                        Người mua có thể tham khảo các phương thức thanh toán sau đây và lựa chọn áp dụng phương thức phù hợp:<br>
+                                        Cách 1: Thẻ ATM/Visa/Master/JCB/QR Pay qua cổng VNPAY<br>
+                                        Cách 2: Thanh toán khi giao hàng (COD)<br>
+                                        Cách 3: Ví MoMo
+                                    </p>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="select">
+                            <button id="pay-button" type="button">THANH TOÁN</button>
+                            <p>hoặc</p>
+                            <div class="continue-buy">
+                                <a href="sanpham.html">Tiếp tục mua hàng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="giohang.js"></script>
+    </body>
+</html>
