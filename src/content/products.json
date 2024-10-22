@@ -1,0 +1,241 @@
+[{
+        "id": 1,
+        "name": "Smartphone X1",
+        "description": "A high-end smartphone with an excellent display.",
+        "price": 899,
+        "category": "Electronics",
+        "inStock": true
+    },
+    {
+        "id": 2,
+        "name": "Laptop Pro 15",
+        "description": "A powerful laptop for professionals.",
+        "price": 1299,
+        "category": "Computers",
+        "inStock": true
+    },
+    {
+        "id": 3,
+        "name": "Wireless Headphones",
+        "description": "Noise-cancelling wireless headphones with long battery life.",
+        "price": 199,
+        "category": "Accessories",
+        "inStock": true
+    },
+    {
+        "id": 4,
+        "name": "4K TV 55 inch",
+        "description": "A 55-inch 4K TV with HDR support.",
+        "price": 599,
+        "category": "Electronics",
+        "inStock": false
+    },
+    {
+        "id": 5,
+        "name": "Gaming Chair",
+        "description": "Comfortable chair designed for gamers.",
+        "price": 299,
+        "category": "Furniture",
+        "inStock": true
+    },
+    {
+        "id": 6,
+        "name": "Smartwatch Series 5",
+        "description": "A smartwatch with fitness tracking and GPS.",
+        "price": 299,
+        "category": "Wearables",
+        "inStock": true
+    },
+    {
+        "id": 7,
+        "name": "Bluetooth Speaker",
+        "description": "Portable Bluetooth speaker with deep bass.",
+        "price": 89,
+        "category": "Accessories",
+        "inStock": false
+    },
+    {
+        "id": 8,
+        "name": "Electric Toothbrush",
+        "description": "Rechargeable electric toothbrush with 3 modes.",
+        "price": 49,
+        "category": "Health",
+        "inStock": true
+    },
+    {
+        "id": 9,
+        "name": "Camera D500",
+        "description": "A high-resolution DSLR camera for professionals.",
+        "price": 1199,
+        "category": "Electronics",
+        "inStock": true
+    },
+    {
+        "id": 10,
+        "name": "Fitness Tracker",
+        "description": "Track your daily activities and health metrics.",
+        "price": 129,
+        "category": "Wearables",
+        "inStock": true
+    },
+    {
+        "id": 11,
+        "name": "Wireless Mouse",
+        "description": "Ergonomic wireless mouse with long battery life.",
+        "price": 49,
+        "category": "Accessories",
+        "inStock": true
+    },
+    {
+        "id": 12,
+        "name": "Mechanical Keyboard",
+        "description": "A backlit mechanical keyboard for gamers and coders.",
+        "price": 109,
+        "category": "Accessories",
+        "inStock": true
+    },
+    {
+        "id": 13,
+        "name": "Action Camera",
+        "description": "Compact action camera with 4K video recording.",
+        "price": 249,
+        "category": "Electronics",
+        "inStock": true
+    },
+    {
+        "id": 14,
+        "name": "Electric Kettle",
+        "description": "Stainless steel electric kettle with auto shut-off.",
+        "price": 35,
+        "category": "Home Appliances",
+        "inStock": true
+    },
+    {
+        "id": 15,
+        "name": "Coffee Maker",
+        "description": "Brews a perfect cup of coffee every time.",
+        "price": 89,
+        "category": "Home Appliances",
+        "inStock": false
+    },
+    {
+        "id": 16,
+        "name": "Vacuum Cleaner",
+        "description": "Powerful vacuum cleaner for deep cleaning.",
+        "price": 149,
+        "category": "Home Appliances",
+        "inStock": true
+    },
+    {
+        "id": 17,
+        "name": "Air Purifier",
+        "description": "Cleans the air in your home with HEPA filters.",
+        "price": 199,
+        "category": "Home Appliances",
+        "inStock": false
+    },
+    {
+        "id": 18,
+        "name": "Smart Light Bulb",
+        "description": "Control the lights in your home with an app.",
+        "price": 29,
+        "category": "Smart Home",
+        "inStock": true
+    },
+    {
+        "id": 19,
+        "name": "Smart Door Lock",
+        "description": "Secure your home with a smart door lock.",
+        "price": 199,
+        "category": "Smart Home",
+        "inStock": true
+    },
+    {
+        "id": 20,
+        "name": "Robot Vacuum",
+        "description": "Automated vacuum cleaner for hands-free cleaning.",
+        "price": 299,
+        "category": "Smart Home",
+        "inStock": true
+    },
+    {
+        "id": 21,
+        "name": "Tablet S9",
+        "description": "A high-performance tablet for entertainment and work.",
+        "price": 499,
+        "category": "Electronics",
+        "inStock": false
+    },
+    {
+        "id": 22,
+        "name": "Noise-Cancelling Earbuds",
+        "description": "Compact earbuds with active noise-cancellation.",
+        "price": 149,
+        "category": "Accessories",
+        "inStock": true
+    },
+    {
+        "id": 23,
+        "name": "Gaming Console Z",
+        "description": "The latest gaming console with high performance.",
+        "price": 399,
+        "category": "Electronics",
+        "inStock": true
+    },
+    {
+        "id": 24,
+        "name": "E-Reader",
+        "description": "A lightweight e-reader with a high-resolution screen.",
+        "price": 129,
+        "category": "Books",
+        "inStock": true
+    },
+    {
+        "id": 25,
+        "name": "Yoga Mat",
+        "description": "Eco-friendly yoga mat with a non-slip surface.",
+        "price": 39,
+        "category": "Sports",
+        "inStock": true
+    },
+    {
+        "id": 26,
+        "name": "Electric Scooter",
+        "description": "A foldable electric scooter with a long range.",
+        "price": 599,
+        "category": "Transportation",
+        "inStock": false
+    },
+    {
+        "id": 27,
+        "name": "Mountain Bike",
+        "description": "Durable mountain bike with front suspension.",
+        "price": 899,
+        "category": "Sports",
+        "inStock": true
+    },
+    {
+        "id": 28,
+        "name": "Running Shoes",
+        "description": "Lightweight running shoes with great support.",
+        "price": 120,
+        "category": "Sports",
+        "inStock": true
+    },
+    {
+        "id": 29,
+        "name": "Smart Thermostat",
+        "description": "Control the temperature in your home from anywhere.",
+        "price": 199,
+        "category": "Smart Home",
+        "inStock": true
+    },
+    {
+        "id": 30,
+        "name": "Fitness Treadmill",
+        "description": "A foldable treadmill for indoor running.",
+        "price": 799,
+        "category": "Sports",
+        "inStock": true
+    }
+]

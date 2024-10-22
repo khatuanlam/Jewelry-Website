@@ -18,3 +18,4 @@ EXPOSE 3000
 
 # Lệnh để chạy ứng dụng
 CMD ["npm", "run dev"]
+
