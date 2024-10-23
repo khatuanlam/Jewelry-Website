@@ -3,6 +3,7 @@ import '@styles/giohang.css';
 import "@styles/globals.css";
 import '@styles/responsive.css';
 import { Inter } from 'next/font/google';
+import Footer from "./ui/RootLayout/Footer";
 import Header from "./ui/RootLayout/Header";
 
 export const metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           <main>
             <Header />
             {children}
+            <Footer />
           </main>
           {/* </AuthProvider> */}
         </ThemeProvider>

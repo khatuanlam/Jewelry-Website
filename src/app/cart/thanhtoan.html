@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Thanh toán</title>
         <link rel="stylesheet" href="thanhtoan.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
-    <body>      
+
+    <body>
         <div class="pay">
 
             <div class="pay-left">
                 <div class="top">
                     <nav>
-                        <h4><a href="giohang.html">Giỏ hàng</a> > Thông tin giao hàng</h4>
+                        <h4><a href="giohang.html">Giỏ hàng</a> > Thông tin giao
+                            hàng
+                        </h4>
                     </nav>
                 </div>
                 <div class="acc">
@@ -24,57 +29,73 @@
                 <div class="container">
                     <form>
                         <div class="infor">
-                            <input type="name" placeholder="Họ và tên" required><br>
+                            <input type="name" placeholder="Họ và tên"
+                                required><br>
                             <div class="infor-1">
-                                <input type="email" name="email" placeholder="Email" required>
-                                <input type="tel" name="phone" placeholder="Số điện thoại" required><br>
+                                <input type="email" name="email"
+                                    placeholder="Email" required>
+                                <input type="tel" name="phone"
+                                    placeholder="Số điện thoại" required><br>
                             </div>
-                            <input type="text" name="address" placeholder="Địa chỉ nhận hàng" required>
+                            <input type="text" name="address"
+                                placeholder="Địa chỉ nhận hàng" required>
                             <div class="address">
                                 <select id="province" name="province" required>
-                                    <option value="">Chọn tỉnh / thành</option>
+                                    <option value>Chọn tỉnh / thành</option>
                                 </select>
                                 <select id="district" name="district" required>
-                                    <option value="">Chọn quận / huyện</option>
+                                    <option value>Chọn quận / huyện</option>
                                 </select>
                                 <select id="ward" name="ward" required>
-                                    <option value="">Chọn phường / xã</option>
+                                    <option value>Chọn phường / xã</option>
                                 </select>
                             </div>
                         </div>
                         <div class="pay-money">
                             <h4>Phương thức thanh toán</h4>
-                                <div class="method">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio" id="pay" name="pay-method">
-                                                    <i class="fa-regular fa-credit-card"></i>
-                                                    <label for="pay">Thẻ ATM/Visa/Master/JCB/QR Pay qua cổng VNPAY</label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio" id="pay-cod" name="pay-method">
-                                                    <i class="fa-solid fa-box"></i>
-                                                    <label for="pay-cod">Thanh toán khi giao hàng (COD)</label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio" id="momo" name="pay-method">
-                                                     <i class="fa-solid fa-wallet"></i> 
-                                                     <label for="momo">Ví MoMo</label>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="method">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="pay"
+                                                    name="pay-method">
+                                                <i
+                                                    class="fa-regular fa-credit-card"></i>
+                                                <label for="pay">Thẻ
+                                                    ATM/Visa/Master/JCB/QR Pay
+                                                    qua cổng VNPAY</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="pay-cod"
+                                                    name="pay-method">
+                                                <i class="fa-solid fa-box"></i>
+                                                <label for="pay-cod">Thanh toán
+                                                    khi giao hàng (COD)</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="radio" id="momo"
+                                                    name="pay-method">
+                                                <i
+                                                    class="fa-solid fa-wallet"></i>
+                                                <label for="momo">Ví
+                                                    MoMo</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
                         <div class="complete">
-                            <a href="giohang.html"><p>Giỏ hàng</p></a>
-                            <button id="order" name="button">Hoàn tất đơn hàng</button>
+                            <a href="./giohang.html">
+                                <p>Giỏ hàng</p>
+                            </a>
+                            <button id="order" name="button">Hoàn tất đơn
+                                hàng</button>
                         </div>
                     </form>
                 </div>
@@ -90,17 +111,20 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <p>Tạm tính: <span id="subtotal">0 VND</span></p><br>
-                                    <p>Phí vận chuyển: <span id="shipping-free">0</span></p>
+                                    <p>Tạm tính: <span id="subtotal">0
+                                            VND</span></p><br>
+                                    <p>Phí vận chuyển: <span
+                                            id="shipping-free">0</span></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p>Tổng cộng: <strong><span id="total">0 VND</span></strong></p>
+                                    <p>Tổng cộng: <strong><span id="total">0
+                                                VND</span></strong></p>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>                
+                    </table>
                 </div>
             </div>
         </div>
@@ -111,11 +135,11 @@
             </div>
             <div class="selec">
                 <a href="#" class="button">Quay về trang chủ</a>
-                <a href="sanpham.html" class="button">Tiếp tục mua hàng</a>
+                <a href="./sanpham.html" class="button">Tiếp tục mua hàng</a>
             </div>
         </div>
 
-        <script src="thanhtoan.js"></script>
+        <script src="./thanhtoan.js"></script>
     </body>
-</html> 
 
+</html>

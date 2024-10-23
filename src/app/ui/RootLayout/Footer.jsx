@@ -1,7 +1,10 @@
+'use client'
+
 import { useRouterContext } from "@contexts/ThemeProvider";
 
 export default function Footer() {
     const router = useRouterContext();
+
     return (
         <>
             {/* Footer */}
