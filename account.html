@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Charisma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }   
+
+        .header1 {
+    position: fixed;
+    top:0;
+
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 8.5rem;
+    background-color: white;
+    z-index: 10;
+}
+
+.logo_pink {
+    background-color: rgb(255, 202, 212);
+    height: 2rem;
+    width: 100vw;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 202, 212);
+    width: 100vw;
+    padding-bottom: 0.6rem;
+
+}
+
+.charisma {
+    display: flex;
+    background-color: rgb(248, 249, 250);
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    position: relative;
+    align-items: center;
+
+}
+
+.charisma img {
+    width: auto;
+    height: 1.7rem;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.log {
+            height: 100%;
+            display: flex;
+            gap: 1rem;
+            position: absolute;
+            right: 3rem;
+            align-items: center;
+        }
+
+
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+    right: 0;
+    width: 7.5rem;
+}
+
+.user-menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.dropdown a:hover {
+    color: rgb(251, 149, 166);
+
+}
+
+#search-box {
+    background-color: rgb(239, 236, 236);
+    border-radius: 30px;
+    height:60%;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#search-box i {
+   color: #000;
+}
+#search-box:hover #search-text,
+#search-box #search-text:valid {
+    padding-left: 10px;
+    width: 250px;
+}
+
+#search-text {
+    margin: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 13px;
+    width: 0;
+    color: #000;
+    transition: all 0.25s ease-in-out;
+}
+
+#search-button {
+    border: none;
+    background-color: rgb(239, 236, 236);
+    cursor: pointer;
+    padding: 0px;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.menu {
+
+    display: flex;
+    background-color: rgb(239, 236, 236);
+    margin: 0;
+    padding: 0;
+
+}
+
+.menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    list-style-type: none;
+}
+
+.list-item {
+
+    float: left;
+    height: auto;
+    width: auto;
+
+}
+
+.list-item a:hover {
+    font-weight: 700;
+    color: rgb(251, 149, 166);
+}
+
+.list-item a {
+    color: #000;
+    font-weight: 540;
+    text-decoration: none;
+}
+
+
+.chatlieu ul {
+
+    position: absolute;
+    display: none;
+    list-style-type: none;
+    /* bỏ gạch dấu chấm trước mục */
+    margin: 0;
+    padding: 15px 0px 0px 0px;
+    background-color:  rgb(239, 236, 236);
+    width: 200px;
+
+}
+
+.list-item:hover .chatlieu ul {
+    display: block;
+
+
+}
+
+.list-item .chatlieu {
+    text-decoration: none;
+    text-align: left;
+
+}
+
+@media (max-width: 1024px) {
+    .menu-list {
+        gap: 30px;
+    }
+
+    #search-box:hover #search-text,
+    #search-box #search-text:valid {
+        padding-left: 10px;
+        width: 250px;
+    }
+}
+
+/* Khi chiều rộng nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .menu-list {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    #search-box:hover #search-text,
+    #search-box #search-text:valid {
+        padding-left: 10px;
+        width: 120px;
+    }
+}
+
+
+
+
+        .header {
+            height: 250px;
+            background: linear-gradient(to right, rgb(255, 202, 212), #ffffff);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           
+            margin:8.5rem 0 0 0;
+            color: #333;
+           
+        }
+
+        .welcome {
+            margin-left: 1rem;
+            text-align: left;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+        .container {
+           min-height: 500px;
+            margin: 0 ;
+            padding: 0;
+            background-color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .info-block {
+            flex: 1;
+            min-width: 300px;
+            margin: 50px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        h2 {
+            color: #333;
+        }
+        .edit-link {
+            text-decoration: underline;
+            color: #0d0d0d;
+            cursor: pointer;
+        }
+        .edit-link:hover{
+            color: rgb(252, 132, 154);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        @media (max-width: 60%) {
+            .info-block {
+                flex: 100%;
+            }
+        }
+        .footer{
+    margin:  0;
+    padding: 10px 0 10px 0;
+    width: 100vw;
+    background-color:rgb(255, 202, 212);
+    height:auto;
+}
+.footer p{
+    cursor: pointer;
+    font-size: 13px;
+    margin: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="header1">
+        <div class="logo">
+            <div class="logo_pink">
+            </div>
+            <div class="charisma">
+                <a href="trangchu.html">
+                    <img src="img/logo3.png" alt="charisma"></a>
+                <div class="log">
+                    <form action="" id="search-box">
+                        <input type="text" id="search-text" placeholder="Bạn muốn tìm gì?" required>
+                        <button id="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="user-menu">
+                        <i class="fas fa-user sss"></i>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+            <ul class="menu-list">
+                <li class="list-item">
+                    <a href="trangchu.html">TRANG CHỦ</a>
+                </li>
+                <li class="list-item">
+                    <a href="Vongtay.HTML">VÒNG TAY</a>
+                </li>
+                <li class="list-item">
+                    <a href="Charm.html">CHARM</a>
+                </li>
+                <li class="list-item">
+                    <a href="#">BỘ SƯU TẬP</a>
+                    <div class="chatlieu">
+                        <ul>
+                            <ul>
+                                <li><a href="#">Bộ sưu tập mới</a></li>
+                                <li><a href="#">Tâm linh</a></li>
+                                <li><a href="#">Tình yêu & tình bạn</a></li>
+                                <li><a href="#">Sang trọng </a></li>
+                                <li><a href="#">Vintage</a></li>
+                                <li><a href="#">Vòng tự chọn charm</a></li>
+                            </ul>
+                        </ul>
+                    </div>
+                </li>
+                <li class="list-item">
+                    <a href="gioithieu.html">GIỚI THIỆU</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="welcome" id="welcome-header">XIN CHÀO</div>
+    </div>
+
+    <div class="container">
+        <div class="info-block">
+            <h2 style="border-bottom:1px solid #aeaeae ;">Thông Tin Tài Khoản</h2>
+            <p><strong>Tên:</strong> <span id="display-name"></span></p>
+            <p><strong>Email:</strong> <span id="display-email"></span></p>
+            <p><strong>Số điện thoại:</strong> <span id="display-phone"></span></p>
+            <p><strong>Giới tính:</strong> <span id="display-gender"></span></p>
+            <p><strong>Ngày sinh:</strong> <span id="display-birthdate"></span></p>
+            <a class="edit-link" onclick="showEditForm()">Sửa Thông Tin</a>
+
+        </div>
+
+        <div class="info-block">
+            <h2 style="border-bottom:1px solid #aeaeae  ; ">Lịch Sử Mua Hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody id="purchase-history">
+                    <!-- Lịch sử mua hàng sẽ được thêm vào đây bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideEditForm()">&times;</span>
+            <h2>Sửa Thông Tin Tài Khoản</h2>
+            <form id="account-form">
+                <label for="name">Tên:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Số điện thoại:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="gender">Giới tính:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+
+                <label for="birthdate">Ngày sinh:</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+
+                <button type="submit">Lưu Thay Đổi</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Mọi thắc mắc xin vui lòng liên hệ :</p>
+        <p><i class="fab fa-facebook"></i> Facebook: <a href="#"></a>CHARISMA</p>
+        <p><i class="fab fa-instagram"></i> Instagram: <a href="#"></a>Charisma_2024</p>
+        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:#"></a>Charisma2024@gmail.com</p>
+        <p><i class="fas fa-phone"></i> Hotline: <a href="#"></a>0386601904</p>
+    </div>
+    <script>
+
+        // Hàm để lấy dữ liệu từ các phần tử HTML khác
+        function fetchDataFromHTML() {
+            // Giả định rằng có các phần tử HTML chứa dữ liệu người dùng
+            const nameElement = document.getElementById('user-name');
+            const emailElement = document.getElementById('user-email');
+            const phoneElement = document.getElementById('user-phone');
+            const genderElement = document.getElementById('user-gender');
+            const birthdateElement = document.getElementById('user-birthdate');
+
+            if (nameElement && emailElement && phoneElement && genderElement && birthdateElement) {
+                return {
+                    name: nameElement.textContent,
+                    email: emailElement.textContent,
+                    phone: phoneElement.textContent,
+                    gender: genderElement.textContent,
+                    birthdate: birthdateElement.textContent
+                };
+            } else {
+                // Nếu không tìm thấy phần tử, trả về dữ liệu mặc định
+                return {
+                    name: "Chưa có thông tin",
+                    email: "Chưa có thông tin",
+                    phone: "Chưa có thông tin",
+                    gender: "Chưa có thông tin",
+                    birthdate: "Chưa có thông tin"
+                };
+            }
+        }
+
+        // Hàm để lấy lịch sử mua hàng từ HTML
+        function fetchPurchaseHistoryFromHTML() {
+            const historyTable = document.getElementById('purchase-history-data');
+            const purchases = [];
+
+            if (historyTable) {
+                const rows = historyTable.getElementsByTagName('tr');
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    if (cells.length === 3) {
+                        purchases.push({
+                            date: cells[0].textContent,
+                            product: cells[1].textContent,
+                            price: cells[2].textContent
+                        });
+                    }
+                }
+            }
+
+            return purchases;
+        }
+
+        // Hiển thị thông tin người dùng
+        function displayUserInfo() {
+            const userData = fetchDataFromHTML();
+            document.getElementById("welcome-header").textContent += " " + userData.name;
+            document.getElementById("display-name").textContent = userData.name;
+            document.getElementById("display-email").textContent = userData.email;
+            document.getElementById("display-phone").textContent = userData.phone;
+            document.getElementById("display-gender").textContent = userData.gender;
+            document.getElementById("display-birthdate").textContent = userData.birthdate;
+        }
+
+        // Hiển thị lịch sử mua hàng
+        function displayPurchaseHistory() {
+            const purchaseHistory = fetchPurchaseHistoryFromHTML();
+            const tableBody = document.getElementById("purchase-history");
+            purchaseHistory.forEach(purchase => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = purchase.date;
+                row.insertCell(1).textContent = purchase.product;
+                row.insertCell(2).textContent = purchase.price;
+            });
+        }
+
+        // Hiển thị form chỉnh sửa
+        function showEditForm() {
+            const modal = document.getElementById("edit-modal");
+            modal.style.display = "block";
+            const userData = fetchDataFromHTML();
+            document.getElementById("name").value = userData.name;
+            document.getElementById("email").value = userData.email;
+            document.getElementById("phone").value = userData.phone;
+            document.getElementById("gender").value = userData.gender;
+            document.getElementById("birthdate").value = userData.birthdate;
+        }
+
+        // Ẩn form chỉnh sửa
+        function hideEditForm() {
+            const modal = document.getElementById("edit-modal");
+            modal.style.display = "none";
+        }
+
+        // Xử lý việc cập nhật thông tin tài khoản
+        document.getElementById("account-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const newName = document.getElementById("name").value;
+            const newEmail = document.getElementById("email").value;
+            const newPhone = document.getElementById("phone").value;
+            const newGender = document.getElementById("gender").value;
+            const newBirthdate = document.getElementById("birthdate").value;
+
+            document.getElementById("display-name").textContent = newName;
+            document.getElementById("display-email").textContent = newEmail;
+            document.getElementById("display-phone").textContent = newPhone;
+            document.getElementById("display-gender").textContent = newGender;
+            document.getElementById("display-birthdate").textContent = newBirthdate;
+            document.getElementById("welcome-header").textContent = "XIN CHÀO " + newName;
+
+            hideEditForm();
+        });
+
+        // Đóng modal khi click bên ngoài
+        window.onclick = function(event) {
+            const modal = document.getElementById("edit-modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Khởi tạo trang
+        displayUserInfo();
+        displayPurchaseHistory();
+    </script>
+</body>
+</html>
