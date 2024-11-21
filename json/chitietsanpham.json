@@ -8,7 +8,20 @@
     "stock": 120,
     "rating": 5.0,
     "brand": "Charisma",
-    "images": ["images/id_1a.jpg", "images/id_1b.jpg", "images/id_1c.jpg"]
+    "collection": [
+      "Vòng tự chọn charm",
+      "Bộ sưu tập mới",
+      "Sang trọng",
+      "Tình yêu và tình bạn"
+    ],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_1a.jpg",
+      "images/id_1b.jpg",
+      "images/id_1c.jpg",
+      "images/id_1d.jpg"
+    ]
   },
 
   {
@@ -20,7 +33,16 @@
     "stock": 110,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_2a.jpg", "images/id_2b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_2a.jpg",
+      "images/id_2b.jpg",
+      "images/id_2c.jpg",
+      "images/id_2d.jpg",
+      "images/id_2e.jpg"
+    ]
   },
 
   {
@@ -32,7 +54,15 @@
     "stock": 210,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_3a.jpg", "images/id_3b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới"],
+    "color": "Xanh",
+    "material": "Bạc",
+    "images": [
+      "images/id_3a.jpg",
+      "images/id_3b.jpg",
+      "images/id_3c.jpg",
+      "images/id_3d.jpg"
+    ]
   },
 
   {
@@ -44,7 +74,15 @@
     "stock": 200,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_4a.jpg", "images/id_4b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_4a.jpg",
+      "images/id_4b.jpg",
+      "images/id_4c.jpg",
+      "images/id_4d.jpg"
+    ]
   },
 
   {
@@ -56,7 +94,16 @@
     "stock": 200,
     "rating": 2.5,
     "brand": "Charisma",
-    "images": ["images/id_5a.jpg", "images/id_5b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Nhiều màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_5a.jpg",
+      "images/id_5b.jpg",
+      "images/id_5c.jpg",
+      "images/id_5d.jpg",
+      "images/id_5e.jpg"
+    ]
   },
 
   {
@@ -68,7 +115,15 @@
     "stock": 100,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_6a.jpg", "images/id_6b.jpg"]
+    "collection": 112,
+    "color": "Đỏ",
+    "material": ["Vòng tự chọn charm", "Tình yêu và tình bạn"],
+    "images": [
+      "images/id_6a.jpg",
+      "images/id_6b.jpg",
+      "images/id_6c.jpg",
+      "images/id_6d.jpg"
+    ]
   },
 
   {
@@ -80,7 +135,15 @@
     "stock": 120,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_7a.jpg", "images/id_7b.jpg"]
+    "collection": ["Sang trọng"],
+    "color": "Không màu",
+    "material": "Mạ vàng hồng 14k",
+    "images": [
+      "images/id_7a.jpg",
+      "images/id_7b.jpg",
+      "images/id_7c.jpg",
+      "images/id_7d.jpg"
+    ]
   },
 
   {
@@ -92,19 +155,35 @@
     "stock": 310,
     "rating": 2.0,
     "brand": "Charisma",
-    "images": ["images/id_8a.jpg", "images/id_8b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng"],
+    "color": "Vàng",
+    "material": "Mạ Vàng 14K",
+    "images": [
+      "images/id_8a.jpg",
+      "images/id_8b.jpg",
+      "images/id_8c.jpg",
+      "images/id_8d.jpg"
+    ]
   },
 
   {
     "id": 9,
     "name": "Vòng Tay Bạc Charisma ME Với Các Hạt Mắt Nối",
-    "description": "Dây Chuyền Vòng amp; Liên Kết Charisma ME Metal Bead chứng minh rằng trái ngược có thể hấp dẫn nhau. Kết hợp hai phong cách thiết yếu - các viên kim loại và liên kết xích - chiếc vòng đeo tay bạc Sterling này có thể được tùy chỉnh bằng cách tạo kiểu cho các liên kết bằng các móc móc mini hoặc móc mễ đạo. Cân bằng ảnh hưởng từ punk rock thập kỷ 90 với sự vĩnh cửu của bạc bóng bẩy, chiếc vòng đeo tay tuyên bố này có thể tồn tại độc lập hoặc được kết hợp, xếp chồng và tạo kiểu theo cách mới mẻ hàng ngày.",
+    "description": "Vòng amp; Liên Kết Charisma ME Metal Bead chứng minh rằng trái ngược có thể hấp dẫn nhau. Kết hợp hai phong cách thiết yếu - các viên kim loại và liên kết xích - chiếc vòng đeo tay bạc Sterling này có thể được tùy chỉnh bằng cách tạo kiểu cho các liên kết bằng các móc móc mini hoặc móc mễ đạo. Cân bằng ảnh hưởng từ punk rock thập kỷ 90 với sự vĩnh cửu của bạc bóng bẩy, chiếc vòng đeo tay tuyên bố này có thể tồn tại độc lập hoặc được kết hợp, xếp chồng và tạo kiểu theo cách mới mẻ hàng ngày.",
     "price": 2723000,
     "category": "Vòng tay tự chọn charm",
     "stock": 100,
     "rating": 3.0,
     "brand": "Charisma",
-    "images": ["images/id_9a.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_9a.jpg",
+      "images/id_9b.jpg",
+      "images/id_9c.jpg",
+      "images/id_9d.jpg"
+    ]
   },
 
   {
@@ -116,7 +195,15 @@
     "stock": 150,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_10a.jpg", "images/id_10b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_10a.jpg",
+      "images/id_10b.jpg",
+      "images/id_10c.jpg",
+      "images/id_10d.jpg"
+    ]
   },
 
   {
@@ -128,7 +215,16 @@
     "stock": 120,
     "rating": 2.5,
     "brand": "Charisma",
-    "images": ["images/id_11a.jpg", "images/id_11b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Mạ vàng 14k",
+    "images": [
+      "images/id_11a.jpg",
+      "images/id_11b.jpg",
+      "images/id_11c.jpg",
+      "images/id_11d.jpg",
+      "images/id_11e.jpg"
+    ]
   },
 
   {
@@ -140,7 +236,15 @@
     "stock": 200,
     "rating": 1.5,
     "brand": "Charisma",
-    "images": ["images/id_12a.jpg", "images/id_12b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Vintage"],
+    "color": "Xanh",
+    "material": "Da",
+    "images": [
+      "images/id_12a.jpg",
+      "images/id_12b.jpg",
+      "images/id_12c.jpg",
+      "images/id_12d.jpg"
+    ]
   },
 
   {
@@ -152,7 +256,15 @@
     "stock": 120,
     "rating": 5.0,
     "brand": "Charisma",
-    "images": ["images/id_13a.jpg", "images/id_13b.jpg"]
+    "collection": ["Vòng tự chọn charm", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_13a.jpg",
+      "images/id_13b.jpg",
+      "images/id_13c.jpg",
+      "images/id_13d.jpg"
+    ]
   },
 
   {
@@ -164,7 +276,15 @@
     "stock": 310,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_14a.jpg", "images/id_14b.jpg"]
+    "collection": ["Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Nhiều màu",
+    "material": "Mạ vàng 14K",
+    "images": [
+      "images/id_14a.jpg",
+      "images/id_14b.jpg",
+      "images/id_14c.jpg",
+      "images/id_14d.jpg"
+    ]
   },
 
   {
@@ -176,7 +296,15 @@
     "stock": 200,
     "rating": 2.5,
     "brand": "Charisma",
-    "images": ["images/id_15a.jpg", "images/id_15b.jpg"]
+    "collection": ["Sang trọng", "Tâm linh"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_15a.jpg",
+      "images/id_15b.jpg",
+      "images/id_15c.jpg",
+      "images/id_15d.jpg"
+    ]
   },
 
   {
@@ -188,7 +316,15 @@
     "stock": 200,
     "rating": 4.5,
     "brand": "Charisma",
-    "images": ["images/id_16a.jpg", "images/id_16b.jpg"]
+    "collection": ["Tình yêu và tình bạn"],
+    "color": "Nhiều màu",
+    "material": "Mạ vàng 14K",
+    "images": [
+      "images/id_16a.jpg",
+      "images/id_16b.jpg",
+      "images/id_16c.jpg",
+      "images/id_16d.jpg"
+    ]
   },
 
   {
@@ -200,7 +336,15 @@
     "stock": 200,
     "rating": 2.5,
     "brand": "Charisma",
-    "images": ["images/id_17a.jpg", "images/id_17b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng"],
+    "color": "Nhiều màu",
+    "material": "Mạ vàng 14K",
+    "images": [
+      "images/id_17a.jpg",
+      "images/id_17b.jpg",
+      "images/id_17c.jpg",
+      "images/id_17d.jpg"
+    ]
   },
 
   {
@@ -212,7 +356,15 @@
     "stock": 100,
     "rating": 4.5,
     "brand": "Charisma",
-    "images": ["images/id_18a.jpg", "images/id_18b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Nhiều màu",
+    "material": "Mạ vàng 14K",
+    "images": [
+      "images/id_18a.jpg",
+      "images/id_18b.jpg",
+      "images/id_18c.jpg",
+      "images/id_18d.jpg"
+    ]
   },
 
   {
@@ -224,7 +376,15 @@
     "stock": 330,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_19a.jpg", "images/id_19b.jpg", "images/id_19c.jpg"]
+    "collection": ["Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_19a.jpg",
+      "images/id_19b.jpg",
+      "images/id_19c.jpg",
+      "images/id_19d.jpg"
+    ]
   },
 
   {
@@ -236,7 +396,15 @@
     "stock": 200,
     "rating": 5.0,
     "brand": "Charisma",
-    "images": ["images/id_20a.jpg", "images/id_20b.jpg"]
+    "collection": ["Sang trọng"],
+    "color": "Đỏ",
+    "material": "Bạc",
+    "images": [
+      "images/id_20a.jpg",
+      "images/id_20b.jpg",
+      "images/id_20c.jpg",
+      "images/id_20d.jpg"
+    ]
   },
 
   {
@@ -248,7 +416,15 @@
     "stock": 100,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_21a.jpg", "images/id_21b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Tình yêu và tình bạn"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_21a.jpg",
+      "images/id_21b.jpg",
+      "images/id_21c.jpg",
+      "images/id_21d.jpg"
+    ]
   },
 
   {
@@ -260,7 +436,15 @@
     "stock": 110,
     "rating": 3.5,
     "brand": "Charisma",
-    "images": ["images/id_22a.jpg", "images/id_22b.jpg"]
+    "collection": ["Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_22a.jpg",
+      "images/id_22b.jpg",
+      "images/id_22c.jpg",
+      "images/id_22d.jpg"
+    ]
   },
 
   {
@@ -272,7 +456,15 @@
     "stock": 220,
     "rating": 4.5,
     "brand": "Charisma",
-    "images": ["images/id_23a.jpg", "images/id_23b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_23a.jpg",
+      "images/id_23b.jpg",
+      "images/id_23c.jpg",
+      "images/id_23d.jpg"
+    ]
   },
 
   {
@@ -284,7 +476,15 @@
     "stock": 250,
     "rating": 5.0,
     "brand": "Charisma",
-    "images": ["images/id_24a.jpg", "images/id_24b.jpg", "images/id_24c.jpg"]
+    "collection": ["Tình yêu và tình bạn"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_24a.jpg",
+      "images/id_24b.jpg",
+      "images/id_24c.jpg",
+      "images/id_24d.jpg"
+    ]
   },
 
   {
@@ -296,7 +496,15 @@
     "stock": 120,
     "rating": 4.5,
     "brand": "Charisma",
-    "images": ["images/id_25a.jpg", "images/id_25b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng", "Tình yêu và tình bạn"],
+    "color": "Hồng",
+    "material": "Mạ Vàng Hồng 14K",
+    "images": [
+      "images/id_25a.jpg",
+      "images/id_25b.jpg",
+      "images/id_25c.jpg",
+      "images/id_25d.jpg"
+    ]
   },
 
   {
@@ -308,7 +516,15 @@
     "stock": 300,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_26a.jpg", "images/id_26b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng"],
+    "color": "Nhiều màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_26a.jpg",
+      "images/id_26b.jpg",
+      "images/id_26c.jpg",
+      "images/id_26d.jpg"
+    ]
   },
 
   {
@@ -320,7 +536,15 @@
     "stock": 135,
     "rating": 2.5,
     "brand": "Charisma",
-    "images": ["images/id_27a.jpg", "images/id_27b.jpg"]
+    "collection": ["Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_27a.jpg",
+      "images/id_27b.jpg",
+      "images/id_27c.jpg",
+      "images/id_27d.jpg"
+    ]
   },
 
   {
@@ -332,7 +556,15 @@
     "stock": 130,
     "rating": 4.0,
     "brand": "Charisma",
-    "images": ["images/id_28a.jpg"]
+    "collection": ["Vòng tự chọn charm", "Bộ sưu tập mới", "Sang trọng"],
+    "color": "Không màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_28a.jpg",
+      "images/id_28b.jpg",
+      "images/id_28c.jpg",
+      "images/id_28d.jpg"
+    ]
   },
 
   {
@@ -344,7 +576,15 @@
     "stock": 100,
     "rating": 2.0,
     "brand": "Charisma",
-    "images": ["images/id_29a.jpg", "images/id_29b.jpg"]
+    "collection": ["Bộ sưu tập mới", "Sang trọng"],
+    "color": "Nhiều màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_29a.jpg",
+      "images/id_29b.jpg",
+      "images/id_29c.jpg",
+      "images/id_29d.jpg"
+    ]
   },
 
   {
@@ -356,6 +596,14 @@
     "stock": 290,
     "rating": 3.0,
     "brand": "Charisma",
-    "images": ["images/id_30a.jpg", "images/id_30b.jpg"]
+    "collection": ["Sang trọng"],
+    "color": "Nhiều màu",
+    "material": "Bạc",
+    "images": [
+      "images/id_30a.jpg",
+      "images/id_30b.jpg",
+      "images/id_30c.jpg",
+      "images/id_30d.jpg"
+    ]
   }
 ]
