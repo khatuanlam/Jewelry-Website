@@ -11,9 +11,7 @@ export default function Page() {
                     Với thiết kế thanh lịch, sang trọng nhưng không kém phần độc đáo, Charisma mang đến sự tự tin
                     và phong cách cho những ai yêu thích sự khác biệt. Tại Charisma, chúng tôi tạo nên những chiếc vòng tay không chỉ để đeo,
                     mà để khẳng định cá tính và tôn vinh vẻ đẹp nội tại của bạn.</p>
-                <a href="trangchu.html">quay lại trang chủ</a>
             </div>
-            <div class="blank"></div>
             <div class="container second">
                 <div class="item">
                     <div class="img img-first"></div>

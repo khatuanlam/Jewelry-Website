@@ -8,9 +8,9 @@ import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RadioGroup, RadioGroupItem } from "@components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/ui/select"
-import { login } from "@lib/actions"
+import AuthContext from "@contexts/auth/AuthContext"
 import { EyeIcon, EyeOffIcon, Facebook, Mail } from "lucide-react"
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 
 export default function AuthForms() {
     const habits = ['Sports', 'Music', 'Movies', 'Books', 'Technology', 'Travel', 'Food', 'Art']
@@ -18,20 +18,33 @@ export default function AuthForms() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const isVisible = useRef(false)
     const [tab, setTab] = useState("login");
-
-
-    // const [error, dispatch] = useFormState(login, undefined);
-
+    const { userLogin, updateCookie } = useContext(AuthContext);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)
     }
 
-    const handelSubmit = (event) => {
-        event.preventDefault(); // Ngăn chặn hành động mặc định
-        const formData = new FormData(event.target); // Lấy FormData từ form
+    const handleSubmit = async (e) => {
 
-    }
+        try {
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries()); // Chuyển FormData thành đối tượng
+
+            const response = await fetch('/api/account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data), // Gửi dữ liệu dưới dạng JSON
+            });
+
+            if (!response.ok) {
+                throw new Error('Lỗi kết nối')
+            }
+        } catch (error) {
+
+        }
+    };
 
     const toggleConfirmPasswordVisibility = () => {
         setShowConfirmPassword(!showConfirmPassword)
@@ -51,7 +64,7 @@ export default function AuthForms() {
                             <TabsTrigger value="register">Register</TabsTrigger>
                         </TabsList>
                         <TabsContent value="login">
-                            <form action={login} id={tab} >
+                            <form action={handleSubmit} id={tab} >
                                 <div className="grid w-full items-center gap-4">
                                     <div className="flex flex-col space-y-1.5">
                                         <Label htmlFor="login_email">Email</Label>
