@@ -128,7 +128,10 @@
         "birthdate": "1989-09-09",
         "hobbies": ["running", "basketball"],
         "password": "tranminhL123",
-        "active": true
+        "active": true,
+        "shopping_cart": {
+
+        }
     },
     {
         "id": 13,

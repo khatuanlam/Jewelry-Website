@@ -25,7 +25,7 @@ const products = Array(10).fill(null).map((_, index) => ({
     id: index + 1,
     name: `Sản phẩm ${index + 1}`,
     price: `${(Math.random() * 2000000 + 500000).toFixed(0)}₫`,
-    image: `/placeholder.svg?height=300&width=300`,
+    image: `/logo.png?height=300&width=300`,
 }))
 
 const filters = [

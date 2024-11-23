@@ -7,26 +7,37 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardFooter } from "@components/ui/card"
+import getProductByID from "@services/page"
+import { formatCurrency } from "@utils/page"
 import { ChevronRight, Heart, Minus, Plus, Share2 } from 'lucide-react'
-import { useState } from 'react'
+import Image from "next/image"
+import { useCallback, useEffect, useState } from 'react'
 
 export default function ProductDetail({ params }) {
     const [quantity, setQuantity] = useState(1)
     const [currentImage, setCurrentImage] = useState(0)
+    const baseProduct = getProductByID(params.id)
+
+    const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
+
+    const addToCartAction = useCallback(() => {
+        setAddToCart('Đã thêm vào giỏ hàng')
+    }, [])
+
+    useEffect(() => {
+        if (addToCart === 'Đã thêm vào giỏ hàng') {
+            const timer = setTimeout(() => {
+                setAddToCart('Thêm vào giỏ hàng');
+                setIsAdded(false);
+            }, 2000);
+            return () => clearTimeout(timer)
+        }
+    }, [addToCart]);
 
     const product = {
-        name: params.name,
-        price: "1.590.000₫",
-        sku: "791735CZ",
-        images: [
-            "/placeholder.svg?height=600&width=600",
-            "/placeholder.svg?height=600&width=600",
-            "/placeholder.svg?height=600&width=600",
-            "/placeholder.svg?height=600&width=600",
-        ],
-        description: "Charm bạc Pandora Moments Dream Catcher là một tác phẩm tinh xảo, được chế tác từ bạc 925 sterling. Thiết kế lấy cảm hứng từ những chiếc dreamcatcher truyền thống, với những sợi dây đan xen tinh tế và điểm xuyết bởi những viên đá cubic zirconia lấp lánh. Charm này không chỉ là một món trang sức mà còn mang ý nghĩa về những giấc mơ và hy vọng, là món quà ý nghĩa cho bản thân hoặc người thân yêu.",
+        ...baseProduct,
         details: [
             { label: "Chất liệu", value: "Bạc 925 sterling" },
             { label: "Màu sắc", value: "Bạc" },
@@ -34,7 +45,6 @@ export default function ProductDetail({ params }) {
             { label: "Kích thước", value: "Đường kính: 3.1cm" },
         ],
     }
-
     const relatedProducts = [
         { id: 1, name: "Vòng tay Pandora Moments", price: "2.090.000₫" },
         { id: 2, name: "Charm bạc Pandora Butterfly", price: "1.290.000₫" },
@@ -66,9 +76,11 @@ export default function ProductDetail({ params }) {
                         {/* Product Images */}
                         <div className="space-y-4">
                             <div className="aspect-square overflow-hidden rounded-lg">
-                                <img
+                                <Image
                                     src={product.images[currentImage]}
                                     alt={product.name}
+                                    width={600}
+                                    height={600}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -80,7 +92,8 @@ export default function ProductDetail({ params }) {
                                             }`}
                                         onClick={() => setCurrentImage(index)}
                                     >
-                                        <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                                        <Image src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" width={600}
+                                            height={600} />
                                     </button>
                                 ))}
                             </div>
@@ -89,8 +102,8 @@ export default function ProductDetail({ params }) {
                         {/* Product Info */}
                         <div className="space-y-6">
                             <h1 className="text-3xl font-bold">{product.name}</h1>
-                            <p className="text-2xl font-semibold">{product.price}</p>
-                            <p className="text-sm text-muted-foreground">SKU: {product.sku}</p>
+                            <p className="text-2xl font-semibold">{`${formatCurrency(product.price)} VNĐ`}</p>
+                            <p className="text-sm text-muted-foreground">Thương hiệu: {product.brand}</p>
 
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center border rounded-md">
@@ -116,7 +129,9 @@ export default function ProductDetail({ params }) {
                                         <Plus className="h-4 w-4" />
                                     </Button>
                                 </div>
-                                <Button className="flex-1">Thêm vào giỏ hàng</Button>
+                                <Button className="flex-1" onClick={addToCartAction}>{addToCart}</Button>
+                                <Button className="flex-1 bg-slate-50 text-black hover:bg-slate-800">Mua ngay</Button>
+
                             </div>
 
                             <div className="flex space-x-4">
@@ -169,11 +184,11 @@ export default function ProductDetail({ params }) {
                         {relatedProducts.map((item) => (
                             <Card key={item.id}>
                                 <CardContent className="p-0">
-                                    <img src={`/placeholder.svg?height=300&width=300`} alt={item.name} className="w-full h-48 object-cover" />
+                                    <Image src={`/logo.png?height=300&width=300`} alt={item.name} className="w-full h-48 object-cover" width={300} height={300} />
                                 </CardContent>
                                 <CardFooter className="flex flex-col items-start p-4">
                                     <h3 className="font-semibold">{item.name}</h3>
-                                    <span className="mt-2 font-bold">{item.price}</span>
+                                    <span className="mt-2 font-bold">{formatCurrency(item.price)}</span>
                                 </CardFooter>
                             </Card>
                         ))}

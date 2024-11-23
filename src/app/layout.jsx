@@ -1,5 +1,7 @@
 import ThemeProvider from "@/contexts/ThemeProvider";
+import AuthProvider from "@contexts/auth/AuthProvider";
 import '@styles/giohang.css';
+// import '@styles/gioithieu.css';
 import "@styles/globals.css";
 import '@styles/responsive.css';
 import { Inter } from 'next/font/google';
@@ -22,13 +24,13 @@ export default function RootLayout({ children }) {
       <body>
         {/* <SessionProvider> */}
         <ThemeProvider>
-          {/* <AuthProvider> */}
-          <main>
-            <Header />
-            {children}
-            <Footer />
-          </main>
-          {/* </AuthProvider> */}
+          <AuthProvider>
+            <main>
+              <Header />
+              {children}
+              <Footer />
+            </main>
+          </AuthProvider>
         </ThemeProvider>
         {/* </SessionProvider> */}
       </body>
