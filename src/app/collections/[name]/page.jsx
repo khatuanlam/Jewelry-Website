@@ -19,14 +19,8 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Filter, X } from 'lucide-react'
-import { useState } from 'react'
-
-const products = Array(10).fill(null).map((_, index) => ({
-    id: index + 1,
-    name: `Sản phẩm ${index + 1}`,
-    price: `${(Math.random() * 2000000 + 500000).toFixed(0)}₫`,
-    image: `/logo.png?height=300&width=300`,
-}))
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation';
 
 const filters = [
     {
@@ -46,7 +40,27 @@ const filters = [
 export default function CollectionPage() {
     const [activeFilters, setActiveFilters] = useState([])
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [cart, setCart] = useState([])
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)  // Loading state for fetching products
+    const [error, setError] = useState(null)  // Error state for fetch
+    const router = useRouter()
 
+    // Hàm tải dữ liệu sản phẩm từ file JSON
+    useEffect(() => {
+        fetch('/products.json')
+            .then(response => response.json())
+            .then(data => {
+                setProducts(data)
+                setLoading(false)
+            })
+            .catch(error => {
+                setError("Error loading products")
+                setLoading(false)
+            });
+    }, []);
+
+    
     const toggleFilter = (filter) => {
         setActiveFilters(prev =>
             prev.includes(filter)
@@ -55,12 +69,31 @@ export default function CollectionPage() {
         )
     }
 
-    return (
-        <div className="min-h-screen bg-background text-foreground">
-            {/* Header would go here (same as homepage) */}
+    const addToCart = (product) => {
+        setCart(prevCart => [...prevCart, product])
+        alert(`Đã thêm "${product.name}" vào giỏ hàng!`)
+        router.push('/cart')  // Điều hướng đến trang giỏ hàng
+    }
 
+    // Filter products based on active filters
+    const filteredProducts = products.filter(product => {
+        return activeFilters.every(filter => {
+            return product.category.includes(filter) || product.material.includes(filter) || product.priceRange.includes(filter);
+        });
+    });
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (error) {
+        return <div>{error}</div>
+    }
+
+    return (
+        <div className="min-h-screen bg-white text-black">
             {/* Collection Banner */}
-            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/placeholder.svg?height=400&width=1200')` }}>
+            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/assets/images/lehoi.jpg')` }}>
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <div className="text-center text-white">
                         <h1 className="text-4xl font-bold mb-4">Chào đón mùa lễ hội</h1>
@@ -75,10 +108,10 @@ export default function CollectionPage() {
                     <div className="flex flex-col md:flex-row gap-8">
                         {/* Filters - Desktop */}
                         <div className="w-full md:w-1/4 space-y-6 hidden md:block">
-                            <h2 className="text-2xl font-bold">Bộ lọc</h2>
+                            <h2 className="text-2xl font-bold text-black">Bộ lọc</h2>
                             {filters.map((filter) => (
                                 <div key={filter.name}>
-                                    <h3 className="font-semibold mb-2">{filter.name}</h3>
+                                    <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
                                     <div className="space-y-2">
                                         {filter.options.map((option) => (
                                             <div key={option} className="flex items-center">
@@ -87,7 +120,7 @@ export default function CollectionPage() {
                                                     checked={activeFilters.includes(option)}
                                                     onCheckedChange={() => toggleFilter(option)}
                                                 />
-                                                <label htmlFor={option} className="ml-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                                <label htmlFor={option} className="ml-2 text-sm font-medium leading-none text-black">
                                                     {option}
                                                 </label>
                                             </div>
@@ -100,7 +133,7 @@ export default function CollectionPage() {
                         {/* Products */}
                         <div className="w-full md:w-3/4">
                             <div className="flex justify-between items-center mb-6">
-                                <p className="text-sm text-muted-foreground">Hiển thị {products.length} sản phẩm</p>
+                                <p className="text-sm text-black">Hiển thị {filteredProducts.length} sản phẩm</p>
                                 <div className="flex items-center gap-4">
                                     <Select>
                                         <SelectTrigger className="w-[180px]">
@@ -129,7 +162,7 @@ export default function CollectionPage() {
                                             <div className="mt-4 space-y-6">
                                                 {filters.map((filter) => (
                                                     <div key={filter.name}>
-                                                        <h3 className="font-semibold mb-2">{filter.name}</h3>
+                                                        <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
                                                         <div className="space-y-2">
                                                             {filter.options.map((option) => (
                                                                 <div key={option} className="flex items-center">
@@ -138,7 +171,7 @@ export default function CollectionPage() {
                                                                         checked={activeFilters.includes(option)}
                                                                         onCheckedChange={() => toggleFilter(option)}
                                                                     />
-                                                                    <label htmlFor={`mobile-${option}`} className="ml-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                                                                    <label htmlFor={`mobile-${option}`} className="ml-2 text-sm font-medium leading-none text-black">
                                                                         {option}
                                                                     </label>
                                                                 </div>
@@ -168,14 +201,26 @@ export default function CollectionPage() {
 
                             {/* Product Grid */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {products.map((product) => (
+                                {filteredProducts.map((product) => (
                                     <Card key={product.id}>
                                         <CardContent className="p-0">
-                                            <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+                                            <img
+                                                src={Array.isArray(product.images) ? product.images[0] : product.images}
+                                                alt={product.name}
+                                                className="w-full h-48 object-cover"
+                                            />
                                         </CardContent>
                                         <CardFooter className="flex flex-col items-start p-4">
-                                            <h3 className="font-semibold">{product.name}</h3>
-                                            <span className="mt-2 font-bold">{product.price}</span>
+                                            <h3 className="font-semibold text-black">{product.name}</h3>
+                                            <span className="mt-2 font-bold text-black">{product.price}</span>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                className="mt-4"
+                                                onClick={() => addToCart(product)}
+                                            >
+                                                Thêm vào giỏ hàng
+                                            </Button>
                                         </CardFooter>
                                     </Card>
                                 ))}
@@ -189,8 +234,6 @@ export default function CollectionPage() {
                     </div>
                 </div>
             </section>
-
-            {/* Footer would go here (same as homepage) */}
         </div>
     )
 }
