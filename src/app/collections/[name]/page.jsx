@@ -19,8 +19,8 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Filter, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const filters = [
     {
@@ -60,7 +60,7 @@ export default function CollectionPage() {
             });
     }, []);
 
-    
+
     const toggleFilter = (filter) => {
         setActiveFilters(prev =>
             prev.includes(filter)
