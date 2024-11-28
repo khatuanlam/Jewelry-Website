@@ -106,7 +106,7 @@ export default function CheckoutPage() {
     sessionStorage.setItem('cart', JSON.stringify(cart))
     router.push('/cart/pay')
   }
-  
+
   // Calculate totalAmount
   const totalAmount = cart.reduce((total, item) => {
     return total + item.price * item.quantity
@@ -115,12 +115,20 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <header className="bg-white p-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-4 w-full justify-center lg:justify-start mt-5">
+            <img src="/logo.png" alt="Logo" className="h-13 w-auto" />
+          </div>
+        </div>
+      </header>
+
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-x-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-x-16 gap-y-8">
           {/* Left Column */}
-          <div className="lg:col-span-3 flex flex-col">
+          <div className="lg:col-span-3 flex flex-col order-last lg:order-first">
             <nav className="mb-8">
-              <div className="flex items-center text-sm">
+              <div className="fflex items-center text-sm hidden lg:flex">
                 <Link href="/cart" className="text-gray-600 hover:text-gray-800">
                   Giỏ hàng
                 </Link>
@@ -152,16 +160,16 @@ export default function CheckoutPage() {
                     className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
                     required
                     value={email}
-  onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <input
-  type="tel"
-  placeholder="Số điện thoại"
-  className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
-  required
-  value={phone}
-  onChange={(e) => setPhone(e.target.value)} // Cập nhật giá trị phone
-/>
+                    type="tel"
+                    placeholder="Số điện thoại"
+                    className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)} // Cập nhật giá trị phone
+                  />
 
                 </div>
                 <input
@@ -285,8 +293,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column */}
-          <div className="mt-8 lg:mt-0 lg:col-span-2 flex flex-col">
-            <div className="rounded-lg bg-gray-50 p-6 flex-1">
+          <div className="lg:col-span-2 lg:col-start-4 order-first lg:order-last">
+            <div className="rounded-lg bg-gray-50 p-6 h-full">
               <div className="space-y-6">
                 <div className="space-y-4">
                   {/* Hiển thị giỏ hàng */}
@@ -296,10 +304,9 @@ export default function CheckoutPage() {
                         <div className="flex items-center space-x-4">
                           {/* Hiển thị hình ảnh */}
                           <img src={item.images} className="h-12 w-12 object-cover rounded" />
-                          <span className="text-gray-600">{item.name}</span>
+                          <span className="text-gray-600 break-words max-w-md">{item.name}</span>
                         </div>
-                        <span>{(item.quantity * item.price).toLocaleString()} VND</span>
-                      </div>
+                        <span className="ml-4">{(item.quantity * item.price).toLocaleString()} VND</span>                      </div>
                     ))
                   }
                 </div>
