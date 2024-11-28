@@ -82,7 +82,8 @@ export default function Cart() {
                 <div key={index} className="flex items-center justify-between p-4 border-b">
                   <div className="flex items-center">
                     <Image
-                      src={`/assets/images/${item.images}`}
+                      src={item.images}
+                      alt=""
                       width={50}
                       height={50}
                       className="mr-4"
@@ -162,10 +163,13 @@ export default function Cart() {
                   />
                   <span>
                     Khi bấm nút &quot;Thanh toán&quot; đồng nghĩa khách hàng đã hiểu và đồng ý các
-                    <span onClick={toggleModal} className="text-blue-500 hover:text-blue-600 ml-1 cursor-pointer">
+                    <span
+                      onClick={toggleModal}
+                      className="text-blue-500 hover:text-blue-600 ml-1 cursor-pointer"
+                    >
                       Điều khoản dịch vụ
                     </span>
-                    của chúng tôi.
+                    {' '}của chúng tôi.
                   </span>
                 </label>
               </div>

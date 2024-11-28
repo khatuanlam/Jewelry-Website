@@ -27,26 +27,22 @@ export default function ProductDetail({ params }) {
     const addToCartAction = useCallback(() => {
         const cart = JSON.parse(localStorage.getItem("cart") || "[]")
         const existingProduct = cart.find(item => item.id === baseProduct.id)
-
+    
         if (existingProduct) {
-            // Cập nhật số lượng nếu sản phẩm đã tồn tại
             existingProduct.quantity += quantity
         } else {
-            // Thêm sản phẩm mới vào giỏ hàng
             cart.push({
                 id: baseProduct.id,
                 name: baseProduct.name,
                 price: baseProduct.price,
                 quantity,
+                images: baseProduct.images[0], // Giữ nguyên đường dẫn ảnh
             })
         }
-
-        // Lưu lại giỏ hàng vào localStorage
+    
         localStorage.setItem("cart", JSON.stringify(cart))
-
-        // Hiển thị thông báo đã thêm vào giỏ hàng
         setAddToCart('Đã thêm vào giỏ hàng')
-    }, [baseProduct, quantity])
+    }, [baseProduct, quantity])        
 
     useEffect(() => {
         if (addToCart === 'Đã thêm vào giỏ hàng') {
@@ -71,6 +67,7 @@ export default function ProductDetail({ params }) {
                 id: baseProduct.id,
                 name: baseProduct.name,
                 price: baseProduct.price,
+                images: baseProduct.images[currentImage],
                 quantity,
             });
         }

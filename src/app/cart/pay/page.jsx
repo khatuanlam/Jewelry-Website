@@ -84,7 +84,6 @@ export default function CheckoutPage() {
     const emailIsValid = email.includes('@gmail.com')
     const phoneIsValid = phone.length === 10 && /^[0-9]+$/.test(phone)
     const paymentMethodIsSelected = paymentMethod !== ''
-    const isAgreedToTerms = isAgreed
 
     if (!emailIsValid) {
       alert('Email phải có định dạng @gmail.com')
@@ -101,17 +100,13 @@ export default function CheckoutPage() {
       return
     }
 
-    if (!isAgreedToTerms) {
-      alert('Vui lòng đồng ý với điều khoản dịch vụ!')
-      return
-    }
-
     setOrderCompleted(true)
+    setPaymentMethod('processing')
     // Lưu giỏ hàng vào sessionStorage và chuyển đến trang thanh toán
     sessionStorage.setItem('cart', JSON.stringify(cart))
     router.push('/cart/pay')
   }
-
+  
   // Calculate totalAmount
   const totalAmount = cart.reduce((total, item) => {
     return total + item.price * item.quantity
@@ -156,13 +151,18 @@ export default function CheckoutPage() {
                     placeholder="Email"
                     className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
                     required
+                    value={email}
+  onChange={(e) => setEmail(e.target.value)}
                   />
                   <input
-                    type="tel"
-                    placeholder="Số điện thoại"
-                    className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
-                    required
-                  />
+  type="tel"
+  placeholder="Số điện thoại"
+  className="w-full rounded-md border border-gray-300 px-4 py-3 focus:border-gray-400 focus:outline-none"
+  required
+  value={phone}
+  onChange={(e) => setPhone(e.target.value)} // Cập nhật giá trị phone
+/>
+
                 </div>
                 <input
                   type="text"
@@ -265,7 +265,7 @@ export default function CheckoutPage() {
             {orderCompleted && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                 <div className="bg-white p-8 rounded-md text-center max-w-lg w-full">
-                  <img src="/assets/images/tick.png" alt="Tick" className="mx-auto mb-5 w-[140px] h-[120px]" />
+                  <img src="/assets/images/tick.png" alt="" className="mx-auto mb-5 w-[140px] h-[120px]" />
                   <h2 className="text-2xl font-semibold mb-4">Đơn hàng đã hoàn tất</h2>
                   <div className="flex space-x-4 justify-center">
                     <button className="flex items-center justify-center space-x-2 text-blue-600 border border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50">
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
                       <div key={item.id} className="flex justify-between text-sm">
                         <div className="flex items-center space-x-4">
                           {/* Hiển thị hình ảnh */}
-                          <img src={item.image} className="h-12 w-12 object-cover rounded" />
+                          <img src={item.images} className="h-12 w-12 object-cover rounded" />
                           <span className="text-gray-600">{item.name}</span>
                         </div>
                         <span>{(item.quantity * item.price).toLocaleString()} VND</span>
