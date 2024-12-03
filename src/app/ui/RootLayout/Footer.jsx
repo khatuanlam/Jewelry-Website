@@ -12,7 +12,7 @@ export default function Footer() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         <div>
-                            <h3 className="text-lg font-semibold mb-4">Về PNJ</h3>
+                            <h3 className="text-lg font-semibold mb-4">Về Charisma</h3>
                             <ul className="space-y-2">
                                 <li onClick={() => { router.push("/about") }}>Giới thiệu</li>
                                 <li onClick={() => { router.push("/careers") }}>Tuyển dụng</li>
@@ -31,7 +31,7 @@ export default function Footer() {
                             <h3 className="text-lg font-semibold mb-4">Liên hệ</h3>
                             <ul className="space-y-2">
                                 <li>Hotline: 1800 54 54 57</li>
-                                <li>Email: customer@pnj.com.vn</li>
+                                <li>Email: customer@Charisma.com.vn</li>
                                 <li>Địa chỉ: 170E Phan Đăng Lưu, P.3, Q.Phú Nhuận, TP.HCM</li>
                             </ul>
                         </div>
@@ -57,7 +57,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="mt-8 text-center">
-                        <p>&copy; 2024 PNJ. Tất cả quyền được bảo lưu.</p>
+                        <p>&copy; 2024 Charisma. Tất cả quyền được bảo lưu.</p>
                     </div>
                 </div>
             </footer>

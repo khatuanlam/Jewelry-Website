@@ -62,11 +62,12 @@ export default function AccountPage() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <header className="bg-gradient-to-r from-primary to-primary-foreground h-64 flex flex-col justify-center shadow-lg">
-        <h1 className="text-4xl font-semibold text-white ml-4 flex items-center">
-          XIN CHÀO, {userInfo.name || 'KHÁCH'}
-        </h1>
-      </header>
+     <header className="bg-gradient-to-r from-gray-500 to-gray-100 h-64 flex flex-col justify-center shadow-lg">
+  <h1 className="text-4xl font-semibold text-white ml-4 flex items-center">
+    XIN CHÀO, {userInfo.name || 'KHÁCH'}
+  </h1>
+</header>
+
 
       <main className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-8">

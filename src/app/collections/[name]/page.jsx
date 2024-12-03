@@ -1,5 +1,6 @@
 'use client'
 
+import { useParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -20,12 +21,12 @@ import {
 } from "@/components/ui/sheet"
 import { Filter, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
 const filters = [
     {
         name: 'Loại sản phẩm',
-        options: ['Vòng tay', 'Dây chuyền', 'Nhẫn', 'Hoa tai'],
+        options: ['Vòng tay', 'Charm'],
     },
     {
         name: 'Chất liệu',
@@ -35,31 +36,66 @@ const filters = [
         name: 'Giá',
         options: ['Dưới 1 triệu', '1 - 2 triệu', '2 - 5 triệu', 'Trên 5 triệu'],
     },
+    {
+        name: 'Bộ sưu tập',
+        options: ['Mùa lễ hội', 'Sang trọng', 'Vintage', 'Tình yêu và tình bạn'],
+    },
 ]
 
 export default function CollectionPage() {
+    const params = useParams();
+    const collectionName = params?.name
+        ? decodeURIComponent(params.name)
+            .replace(/-/g, ' ')
+            .replace(/^\w/, char => char.toUpperCase())
+        : "Default Collection";
+    
     const [activeFilters, setActiveFilters] = useState([])
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [cart, setCart] = useState([])
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)  // Loading state for fetching products
-    const [error, setError] = useState(null)  // Error state for fetch
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
     const router = useRouter()
 
-    // Hàm tải dữ liệu sản phẩm từ file JSON
     useEffect(() => {
-        fetch('/products.json')
+        fetch('/products.json?cache-bust=' + new Date().getTime())
             .then(response => response.json())
             .then(data => {
-                setProducts(data)
-                setLoading(false)
+                console.log("Tất cả sản phẩm:", data);
+                console.log("Collection Name:", collectionName);
+
+                const collectionFilteredProducts = data.filter(product => {
+                    if (Array.isArray(product.collection)) {
+                        return product.collection.includes(collectionName);
+                    }
+                    return product.collection === collectionName;
+                });
+                
+                console.log("Sản phẩm theo bộ sưu tập:", collectionFilteredProducts);
+    
+                const filteredProducts = collectionFilteredProducts.filter(product => {
+                    return activeFilters.every(filter => {
+                        return (
+                            product.category === filter ||
+                            product.material === filter ||
+                            priceRange(product.price) === filter ||
+                            (Array.isArray(product.collection) ? product.collection.includes(filter) : product.collection === filter)
+                        );
+                    });
+                });
+    
+                console.log("Sản phẩm sau khi lọc:", filteredProducts);
+    
+                setProducts(filteredProducts);
+                setLoading(false);
             })
             .catch(error => {
-                setError("Error loading products")
-                setLoading(false)
+                console.error(error);
+                setError("Error loading products");
+                setLoading(false);
             });
-    }, []);
-
+    }, [collectionName, activeFilters]);
     
     const toggleFilter = (filter) => {
         setActiveFilters(prev =>
@@ -72,15 +108,17 @@ export default function CollectionPage() {
     const addToCart = (product) => {
         setCart(prevCart => [...prevCart, product])
         alert(`Đã thêm "${product.name}" vào giỏ hàng!`)
-        router.push('/cart')  // Điều hướng đến trang giỏ hàng
+        router.push('/cart')
     }
 
-    // Filter products based on active filters
     const filteredProducts = products.filter(product => {
         return activeFilters.every(filter => {
-            return product.category.includes(filter) || product.material.includes(filter) || product.priceRange.includes(filter);
-        });
-    });
+            return product.category.includes(filter) || 
+                   product.material.includes(filter) || 
+                   product.priceRange.includes(filter) ||
+                   product.collection.includes(filter)
+        })
+    })
 
     if (loading) {
         return <div>Loading...</div>
@@ -93,11 +131,11 @@ export default function CollectionPage() {
     return (
         <div className="min-h-screen bg-white text-black">
             {/* Collection Banner */}
-            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/assets/images/lehoi.jpg')` }}>
+            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/lehoi.jpg')` }}>
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <div className="text-center text-white">
-                        <h1 className="text-4xl font-bold mb-4">Chào đón mùa lễ hội</h1>
-                        <p className="text-xl">Khám phá bộ sưu tập trang sức lấp lánh cho mùa lễ hội</p>
+                        <h1 className="text-4xl font-bold mb-4">{collectionName}</h1>
+                        <p className="text-xl">Khám phá bộ sưu tập trang sức {collectionName}</p>
                     </div>
                 </div>
             </section>
@@ -204,14 +242,23 @@ export default function CollectionPage() {
                                 {filteredProducts.map((product) => (
                                     <Card key={product.id}>
                                         <CardContent className="p-0">
-                                            <img
-                                                src={Array.isArray(product.images) ? product.images[0] : product.images}
-                                                alt={product.name}
-                                                className="w-full h-48 object-cover"
-                                            />
+                                            {Array.isArray(product.images) && product.images.length > 0 ? (
+                                                <img
+                                                    src={product.images[0]}
+                                                    alt={product.name}
+                                                    className="w-full h-48 object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
+                                                    <span className="text-gray-500">Không có ảnh</span>
+                                                </div>
+                                            )}
                                         </CardContent>
                                         <CardFooter className="flex flex-col items-start p-4">
                                             <h3 className="font-semibold text-black">{product.name}</h3>
+                                            {product.collection && !['vintage', 'Bộ sưu tập mới', 'Sang trọng', 'Tình yêu và tình bạn'].includes(product.collection) && (
+                                                <span className="text-sm text-gray-500">{product.collection}</span>
+                                            )}
                                             <span className="mt-2 font-bold text-black">{product.price}</span>
                                             <Button
                                                 variant="outline"
@@ -237,3 +284,4 @@ export default function CollectionPage() {
         </div>
     )
 }
+
