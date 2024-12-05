@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AdminHeader from "@app/ui/AdminLayout/Header"
-import Sidebar from "@app/ui/AdminLayout/Sidebar"
+import OrdersTabs from '@app/ui/AdminLayout/Tabs/OrdersTabs'
 import ProductsTabs from "@app/ui/AdminLayout/Tabs/ProductsTabs"
 import UserTabs from "@app/ui/AdminLayout/Tabs/UserTabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@components/ui/card'
@@ -20,11 +20,11 @@ export default function AdminDashboard({ children }) {
         setActiveTab(value)
     }
 
+
+
     return (
         <div className="flex w-screen h-screen overfzolow-hidden bg-gray-100">
 
-            {/* Sidebar */}
-            <Sidebar />
             {/* Main content */}
             <div className="flex flex-1 flex-col overflow-hidden">
                 {/* Header */}
@@ -43,6 +43,8 @@ export default function AdminDashboard({ children }) {
                         <UserTabs />
                         {/* Products */}
                         <ProductsTabs />
+
+                        <OrdersTabs />
 
                         <TabsContent value="statistics" className="space-y-4">
                             <Card>

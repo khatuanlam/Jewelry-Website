@@ -21,7 +21,7 @@ export default function AuthForms() {
     const isVisible = useRef(false)
     const [tab, setTab] = useState("login");
     const { router } = useContext(ThemeContext)
-    const { login, isLoggedIn, userLogin, setIsAmin } = useContext(AuthContext);
+    const { login, isLoggedIn, userLogin, admin } = useContext(AuthContext);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)
@@ -69,15 +69,21 @@ export default function AuthForms() {
                 throw new Error(errorData.message || 'Lỗi kết nối');
             }
 
-            // Trả lại thông tin của người dùng
-            const responseData = await response.json();
-            const currentUser = JSON.stringify(responseData.updateUser);
+            if (response.status === 202) {
+                alert('Tài khoản của bạn đã bị khóa')
+                // Tải lại trang
+                router.push('/')
+            } else {
+                // Trả lại thông tin của người dùng
+                const responseData = await response.json();
+                const currentUser = JSON.stringify(responseData.updateUser);
 
-            // Cập nhật trạng thái đăng nhập 
-            login(currentUser)
+                // Cập nhật trạng thái đăng nhập 
+                login(currentUser)
 
-            // Tải lại trang
-            router.refresh()
+                // Tải lại trang
+                router.push('/')
+            }
 
         } catch (error) {
             console.error('Error:', error.message);
@@ -87,7 +93,7 @@ export default function AuthForms() {
     };
 
     return (
-        isLoggedIn ? (
+        isLoggedIn && admin == false ? (
             <AccountPage info={userLogin} />
         ) : (
             <div className="flex items-center justify-center min-h-screen w-screen bg-gray-100" >

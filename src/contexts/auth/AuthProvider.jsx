@@ -35,8 +35,10 @@ export default function AuthProvider({ children }) {
         const currentUser = JSON.parse(sessionStorage.getItem('user'))
         setUserLogin(currentUser)
 
-        if (currentUser.promoted) {
+        if (currentUser.promoted == true) {
             setIsAdmin(true)
+            // Lưu giá trị vào session
+            sessionStorage.setItem('user', user)
         }
     }
 
@@ -44,10 +46,10 @@ export default function AuthProvider({ children }) {
     const logout = () => {
         setIsLoggedIn(false)
         setUserLogin(null)
+        setIsAdmin(false)
         // Xóa giá trị trong session 
         sessionStorage.clear()
         localStorage.clear()
-
         router.push('/')
     }
 

@@ -15,9 +15,13 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@components/ui/button"
+import AuthContext from "@contexts/auth/AuthContext"
 import { BarChart, Bell, FileText, LayoutDashboard, LogOut, Menu, Package, Settings, Users } from "lucide-react"
 import Link from "next/link"
+import { useContext } from "react"
+
 export default function AdminHeader() {
+    const { logout, userLogin } = useContext(AuthContext)
     return (
         <header className="flex h-16 items-center justify-between border-b bg-white px-6">
             <div className="flex items-center">
@@ -56,7 +60,7 @@ export default function AdminHeader() {
                         </nav>
                     </SheetContent>
                 </Sheet>
-                <h1 className="ml-4 text-lg font-semibold text-gray-800">Dashboard</h1>
+                <h1 className="ml-4 text-lg font-semibold text-gray-800">Admin Page Management</h1>
             </div>
             <div className="flex items-center">
                 <Button variant="ghost" size="icon" className="mr-4 text-gray-600 hover:text-gray-900">
@@ -68,16 +72,15 @@ export default function AdminHeader() {
                         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                             <Avatar className="h-8 w-8">
                                 <AvatarImage src="/placeholder-user.jpg" alt="@johndoe" />
-                                <AvatarFallback>JD</AvatarFallback>
+                                <AvatarFallback>AD</AvatarFallback>
                             </Avatar>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56" align="end" forceMount>
                         <DropdownMenuLabel className="font-normal">
                             <div className="flex flex-col space-y-1">
-                                <p className="text-sm font-medium leading-none">John Doe</p>
+                                <p className="text-sm font-medium leading-none">{userLogin.email}</p>
                                 <p className="text-xs leading-none text-gray-500">
-                                    john.doe@example.com
                                 </p>
                             </div>
                         </DropdownMenuLabel>
@@ -86,7 +89,7 @@ export default function AdminHeader() {
                             <Settings className="mr-2 h-4 w-4" />
                             <span>Settings</span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => logout()}>
                             <LogOut className="mr-2 h-4 w-4" />
                             <span>Log out</span>
                         </DropdownMenuItem>

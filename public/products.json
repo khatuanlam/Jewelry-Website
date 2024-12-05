@@ -156,15 +156,14 @@
         "brand": "Charisma",
         "collection": ["Bộ sưu tập mới", "Sang trọng"],
         "color": "Vàng",
-        "material": "Mạ Vàng 14K",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_8a.jpg",
             "/assets/images/id_8b.jpg",
             "/assets/images/id_8c.jpg",
             "/assets/images/id_8d.jpg"
         ],
-        "date": "19/04/2022",
-        "quantity": 10
+        "date": "19/04/2022"
     },
     {
         "id": 9,
@@ -217,7 +216,7 @@
         "brand": "Charisma",
         "collection": ["Vòng tự chọn charm", "Sang trọng"],
         "color": "Không màu",
-        "material": "Mạ vàng 14k",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_11a.jpg",
             "/assets/images/id_11b.jpg",
@@ -278,7 +277,7 @@
         "brand": "Charisma",
         "collection": ["Sang trọng", "Tình yêu và tình bạn"],
         "color": "Nhiều màu",
-        "material": "Mạ vàng 14K",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_14a.jpg",
             "/assets/images/id_14b.jpg",
@@ -318,7 +317,7 @@
         "brand": "Charisma",
         "collection": ["Tình yêu và tình bạn"],
         "color": "Nhiều màu",
-        "material": "Mạ vàng 14K",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_16a.jpg",
             "/assets/images/id_16b.jpg",
@@ -338,7 +337,7 @@
         "brand": "Charisma",
         "collection": ["Bộ sưu tập mới", "Sang trọng"],
         "color": "Nhiều màu",
-        "material": "Mạ vàng 14K",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_17a.jpg",
             "/assets/images/id_17b.jpg",
@@ -358,7 +357,7 @@
         "brand": "Charisma",
         "collection": ["Bộ sưu tập mới", "Sang trọng", "Tình yêu và tình bạn"],
         "color": "Nhiều màu",
-        "material": "Mạ vàng 14K",
+        "material": "Vàng",
         "images": [
             "/assets/images/id_18a.jpg",
             "/assets/images/id_18b.jpg",
@@ -505,8 +504,7 @@
             "/assets/images/id_25c.jpg",
             "/assets/images/id_25d.jpg"
         ],
-        "date": "23/04/2022",
-        "quantity": 20
+        "date": "23/04/2022"
     },
     {
         "id": 26,
@@ -579,7 +577,7 @@
         "brand": "Charisma",
         "collection": ["Bộ sưu tập mới", "Sang trọng"],
         "color": "Nhiều màu",
-        "material": "Bạc",
+        "material": "Vàng hồng",
         "images": [
             "/assets/images/id_29a.jpg",
             "/assets/images/id_29b.jpg",
@@ -599,7 +597,7 @@
         "brand": "Charisma",
         "collection": ["Sang trọng"],
         "color": "Nhiều màu",
-        "material": "Bạc",
+        "material": "Da",
         "images": [
             "/assets/images/id_30a.jpg",
             "/assets/images/id_30b.jpg",

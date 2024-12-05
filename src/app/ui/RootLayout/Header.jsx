@@ -36,7 +36,7 @@ export default function Header() {
   const routes = [
     {
       name: 'Sản phẩm',
-      path: '/products',
+      path: '/collections',
       categories: ['Vòng tay ', 'Charm']
     },
     {

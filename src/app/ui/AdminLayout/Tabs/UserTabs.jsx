@@ -1,88 +1,115 @@
-import { Button } from "@/components/ui/button";
+'use client'
+
+import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TabsContent } from "@/components/ui/tabs";
-import users from '@content/users.json';
-import { useState } from 'react';
-
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { TabsContent } from "@/components/ui/tabs"
+import { addUser, editUser, toggleUserStatus } from '@app/actions'
+import { users } from '@content'
+import { useEffect, useState, useTransition } from 'react'
 export default function UserTabs() {
     const tabs = ['Name', 'Email', 'Status', 'Actions']
-    const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-    const itemsPerPage = 5; // Số người dùng mỗi trang
-    const [userList, setUserList] = useState(users); // Danh sách người dùng
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemsPerPage = 5
+    const [userList, setUserList] = useState([])
+    const [newUser, setNewUser] = useState({ name: '', email: '' })
+    const [isPending, startTransition] = useTransition()
 
-    const totalPages = Math.ceil(userList.length / itemsPerPage);
+    useEffect(() => {
+        startTransition(async () => {
+            console.log(users);
+            setUserList(users)
+        })
+    }, [])
 
-    // Xử lý phân trang
-    const paginatedUsers = userList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalPages = Math.ceil(userList.length / itemsPerPage)
 
-    // Chuyển trang
+    const paginatedUsers = userList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+
     const handlePageChange = (newPage) => {
         if (newPage > 0 && newPage <= totalPages) {
-            setCurrentPage(newPage);
+            setCurrentPage(newPage)
         }
-    };
+    }
 
-    // Chỉnh sửa người dùng
-    const handleEditUser = (index, updatedUser) => {
-        const updatedUserList = [...userList];
-        updatedUserList[index] = updatedUser;
-        setUserList(updatedUserList);
-    };
+    const handleAddUser = async (e) => {
+        e.preventDefault()
+        startTransition(async () => {
+            const updatedUsers = await addUser({ ...newUser, active: true })
+            setUserList(updatedUsers)
+            setNewUser({ name: '', email: '' })
+        })
+    }
 
-    // Lock người dùng (đổi trạng thái active)
-    const handleLockUser = (index) => {
-        const updatedUserList = [...userList];
-        updatedUserList[index].active = !updatedUserList[index].active;
-        setUserList(updatedUserList);
-    };
+    const handleEditUser = async (index, updatedUser) => {
+        const globalIndex = (currentPage - 1) * itemsPerPage + index
+        startTransition(async () => {
+            const updatedUsers = await editUser(globalIndex, updatedUser)
+            setUserList(updatedUsers)
+        })
+    }
+
+    const handleLockUser = async (index) => {
+        const globalIndex = (currentPage - 1) * itemsPerPage + index
+        startTransition(async () => {
+            const updatedUsers = await toggleUserStatus(globalIndex)
+            setUserList(updatedUsers)
+        })
+    }
 
     return (
         <TabsContent value="users" className="space-y-4">
             <Card>
                 <CardHeader>
-                    <CardTitle>User Management</CardTitle>
+                    <CardTitle>Quản lý người dùng</CardTitle>
                     <CardDescription>Add, edit, or lock user accounts.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="space-y-4">
+                    <form onSubmit={handleAddUser} className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
-                                <Input id="name" placeholder="Enter user's name" />
+                                <Label htmlFor="name">Tên người dùng</Label>
+                                <Input
+                                    id="name"
+                                    placeholder="Enter user's name"
+                                    value={newUser.name}
+                                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" placeholder="Enter user's email" type="email" />
+                                <Input
+                                    id="email"
+                                    placeholder="Enter user's email"
+                                    type="email"
+                                    value={newUser.email}
+                                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                                />
                             </div>
                         </div>
-                        <Button>Add User</Button>
-                    </div>
+                        <Button type="submit" disabled={isPending}>Add User</Button>
+                    </form>
 
-                    {/* Bảng danh sách người dùng */}
                     <div className="mt-6">
                         <Table>
                             <TableHeader>
                                 <TableRow>
                                     {tabs.map((tab, index) => (
-                                        <>
-                                            <TableHead>{tab}</TableHead>
-                                        </>
+                                        <TableHead key={index}>{tab}</TableHead>
                                     ))}
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {paginatedUsers.map((user, index) => (
-                                    <TableRow key={user.email}> {/* Sử dụng email hoặc id nếu có */}
+                                    <TableRow key={user.email}>
                                         <TableCell>{user.name || 'No value'}</TableCell>
                                         <TableCell>{user.email}</TableCell>
                                         <TableCell>{user.active ? 'Active' : 'Inactive'}</TableCell>
@@ -91,7 +118,13 @@ export default function UserTabs() {
                                                 variant="outline"
                                                 size="sm"
                                                 className="mr-2"
-                                                onClick={() => handleEditUser(index, { ...user, name: prompt('New name:', user.name) })}
+                                                onClick={() => {
+                                                    const newName = prompt('New name:', user.name)
+                                                    if (newName) {
+                                                        handleEditUser(index, { ...user, name: newName })
+                                                    }
+                                                }}
+                                                disabled={isPending}
                                             >
                                                 Edit
                                             </Button>
@@ -99,29 +132,29 @@ export default function UserTabs() {
                                                 variant="destructive"
                                                 size="sm"
                                                 onClick={() => handleLockUser(index)}
+                                                disabled={isPending}
                                             >
-                                                {user.active ? 'Lock' : 'Unlock'}
+                                                {user.isLock ? 'Unlock' : 'Lock'}
                                             </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
-
                             </TableBody>
                         </Table>
                     </div>
 
-                    {/* Phân trang */}
                     <div className="flex justify-between items-center mt-4">
-                        <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                        <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1 || isPending}>
                             Previous
                         </Button>
                         <span>Page {currentPage} of {totalPages}</span>
-                        <Button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+                        <Button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages || isPending}>
                             Next
                         </Button>
                     </div>
                 </CardContent>
             </Card>
         </TabsContent>
-    );
+    )
 }
+

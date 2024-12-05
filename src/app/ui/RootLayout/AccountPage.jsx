@@ -21,7 +21,7 @@ export default function AccountPage({ info }) {
     };
 
     useEffect(() => {
-        const historyOrder = getHistoryOrder(userInfo.id)
+        const historyOrder = getHistoryOrder(userInfo.id) ? getHistoryOrder(userInfo.id) : []
         if (historyOrder) {
             setHistory(historyOrder)
         } else {
