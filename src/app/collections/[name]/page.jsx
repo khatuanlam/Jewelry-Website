@@ -1,6 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -56,6 +57,7 @@ export default function CollectionPage() {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [displayedProducts, setDisplayedProducts] = useState(6)
     const router = useRouter()
 
     useEffect(() => {
@@ -239,44 +241,59 @@ export default function CollectionPage() {
 
                             {/* Product Grid */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {filteredProducts.map((product) => (
-                                    <Card key={product.id}>
-                                        <CardContent className="p-0">
-                                            {Array.isArray(product.images) && product.images.length > 0 ? (
-                                                <img
-                                                    src={product.images[0]}
-                                                    alt={product.name}
-                                                    className="w-full h-48 object-cover"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
-                                                    <span className="text-gray-500">Không có ảnh</span>
+                                {filteredProducts.slice(0, displayedProducts).map((product) => (
+                                    <Card key={product.id} className="relative group">
+                                        <Link href={`/product/${product.id}`}>
+                                            <CardContent className="p-0 relative">
+                                                {Array.isArray(product.images) && product.images.length > 0 ? (
+                                                    <img
+                                                        src={product.images[0]}
+                                                        alt={product.name}
+                                                        className="w-full h-48 object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
+                                                        <span className="text-gray-500">Không có ảnh</span>
+                                                    </div>
+                                                )}
+                                                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <span className="text-white font-semibold">Xem chi tiết sản phẩm</span>
                                                 </div>
-                                            )}
-                                        </CardContent>
-                                        <CardFooter className="flex flex-col items-start p-4">
-                                            <h3 className="font-semibold text-black">{product.name}</h3>
-                                            {product.collection && !['vintage', 'Bộ sưu tập mới', 'Sang trọng', 'Tình yêu và tình bạn'].includes(product.collection) && (
-                                                <span className="text-sm text-gray-500">{product.collection}</span>
-                                            )}
-                                            <span className="mt-2 font-bold text-black">{product.price}</span>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="mt-4"
-                                                onClick={() => addToCart(product)}
-                                            >
-                                                Thêm vào giỏ hàng
-                                            </Button>
-                                        </CardFooter>
+                                            </CardContent>
+                                            <CardFooter className="flex flex-col items-start p-4">
+                                                <h3 className="font-semibold text-black">{product.name}</h3>
+                                                {product.collection && !['vintage', 'Bộ sưu tập mới', 'Sang trọng', 'Tình yêu và tình bạn'].includes(product.collection) && (
+                                                    <span className="text-sm text-gray-500">{product.collection}</span>
+                                                )}
+                                                <span className="mt-2 font-bold text-black">{product.price}</span>
+                                            </CardFooter>
+                                        </Link>
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="mt-4 absolute bottom-4 right-4"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                addToCart(product);
+                                            }}
+                                        >
+                                            Thêm vào giỏ hàng
+                                        </Button>
                                     </Card>
                                 ))}
                             </div>
 
                             {/* Load More Button */}
-                            <div className="mt-8 text-center">
-                                <Button variant="outline">Xem thêm sản phẩm</Button>
-                            </div>
+                            {filteredProducts.length > displayedProducts && (
+                                <div className="mt-8 text-center">
+                                    <Button 
+                                        variant="outline" 
+                                        onClick={() => setDisplayedProducts(prev => Math.min(prev + 6, filteredProducts.length))}
+                                    >
+                                        Xem thêm sản phẩm
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
