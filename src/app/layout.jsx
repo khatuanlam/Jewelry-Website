@@ -18,11 +18,11 @@ const inter = Inter({
   display: 'swap'
 })
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className}>
       <body>
-        {/* <SessionProvider> */}
         <ThemeProvider>
           <AuthProvider>
             <main>
@@ -32,7 +32,6 @@ export default function RootLayout({ children }) {
             </main>
           </AuthProvider>
         </ThemeProvider>
-        {/* </SessionProvider> */}
       </body>
     </html>
   );

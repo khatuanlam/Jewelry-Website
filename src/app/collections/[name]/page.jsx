@@ -18,9 +18,10 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import ThemeContext from "@contexts/ThemeContext"
 import { Filter, X } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import Image from "next/image"
+import { useContext, useEffect, useState } from 'react'
 
 const filters = [
     {
@@ -37,28 +38,24 @@ const filters = [
     },
 ]
 
-export default function CollectionPage() {
+export default function CollectionPage({ params }) {
     const [activeFilters, setActiveFilters] = useState([])
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [cart, setCart] = useState([])
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)  // Loading state for fetching products
     const [error, setError] = useState(null)  // Error state for fetch
-    const router = useRouter()
+    const { router } = useContext(ThemeContext)
+    const [showAlert, setShowAlert] = useState(false)
 
-    // Hàm tải dữ liệu sản phẩm từ file JSON
     useEffect(() => {
-        fetch('/products.json')
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data)
-                setLoading(false)
-            })
-            .catch(error => {
-                setError("Error loading products")
-                setLoading(false)
-            });
-    }, []);
+        if (showAlert) {
+            const timer = setTimeout(() => {
+                setShowAlert(false)
+            }, 3000)
+
+            return () => clearTimeout(timer)
+        }
+    }, [showAlert])
 
 
     const toggleFilter = (filter) => {
@@ -67,6 +64,15 @@ export default function CollectionPage() {
                 ? prev.filter(f => f !== filter)
                 : [...prev, filter]
         )
+    }
+
+
+    const handleAdd = (product) => {
+        if (showAlert) {
+            addToCart(product)
+        } else {
+            setShowAlert(true)
+        }
     }
 
     const addToCart = (product) => {
@@ -78,13 +84,10 @@ export default function CollectionPage() {
     // Filter products based on active filters
     const filteredProducts = products.filter(product => {
         return activeFilters.every(filter => {
-            return product.category.includes(filter) || product.material.includes(filter) || product.priceRange.includes(filter);
+            return product.category.includes(filter) || product.material.includes(filter) || product.price.includes(filter);
         });
     });
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
 
     if (error) {
         return <div>{error}</div>
@@ -204,7 +207,7 @@ export default function CollectionPage() {
                                 {filteredProducts.map((product) => (
                                     <Card key={product.id}>
                                         <CardContent className="p-0">
-                                            <img
+                                            <Image
                                                 src={Array.isArray(product.images) ? product.images[0] : product.images}
                                                 alt={product.name}
                                                 className="w-full h-48 object-cover"
@@ -217,7 +220,7 @@ export default function CollectionPage() {
                                                 variant="outline"
                                                 size="sm"
                                                 className="mt-4"
-                                                onClick={() => addToCart(product)}
+                                                onClick={handleAdd(product)}
                                             >
                                                 Thêm vào giỏ hàng
                                             </Button>

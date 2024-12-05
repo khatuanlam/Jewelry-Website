@@ -8,3 +8,21 @@ export function formatCurrency(value) {
 
     return formatted;
 }
+
+// Kiểm tra định dạng email
+export const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+
+export function extractDate(datetime) {
+    // Tách chuỗi thành phần thời gian và ngày
+    const [time, date] = datetime.split(' ');
+
+    // Tách ngày thành các thành phần
+    const [day, month, year] = date.split('/');
+
+    // Tạo đối tượng Date mới (lưu ý: tháng trong JavaScript bắt đầu từ 0)
+    return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}

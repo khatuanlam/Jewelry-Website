@@ -7,26 +7,26 @@ import ThemeContext from "@contexts/ThemeContext";
 import { useContext, useMemo } from "react";
 
 export default function Home() {
-  const { product, setProducts } = useContext(ThemeContext)
+  const { products } = useContext(ThemeContext)
 
   const bestSeller = useMemo(() => {
-    return product.filter(item => {
+    return products.filter(item => {
       const rate = parseFloat(item.rating);
       return !isNaN(rate) && rate >= 3.5;
     });
-  }, [product]);
+  }, [products]);
 
   return (
     <>
       <div className="min-h-screen bg-background text-foreground grid grid-flow-row grid-rows-3">
         <HeroSection />
-        <PaginatePage value={product} tab={<span className="text-black">Danh mục sản phẩm</span>} />
-        <PaginatePage value={product} tab={<span className="text-black">Sản phẩm mới</span>} />
+        <PaginatePage value={products} tab={<span className="text-black">Danh mục sản phẩm</span>} />
+        <PaginatePage value={products} tab={<span className="text-black">Sản phẩm mới</span>} />
 
         <section className="py-12">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative h-[300px] w-full bg-cover bg-center" style={{ backgroundImage: `url('/assets/images/collectionngaycuoi.jpg')` }}>
-              
+
               <div className="absolute inset-0 bg-white  bg-opacity-40 flex items-center justify-center">
                 <div className="text-center text-black">
                   <h2 className="text-4xl font-bold mb-4">Bộ sưu tập mùa cưới</h2>

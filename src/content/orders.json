@@ -1,0 +1,50 @@
+[{
+    "id": 1,
+    "name": "lam tuan",
+    "email": "tuanlam777@gmail.com",
+    "phone": "1919282001",
+    "address": "Số 8, Tp hcm",
+    "province": "",
+    "payment": "cash",
+    "user_id": 2,
+    "products": [{
+        "id": 2,
+        "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
+        "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+        "price": 5390000,
+        "category": "Vòng tay",
+        "stock": 110,
+        "rating": 4,
+        "brand": "Charisma",
+        "collection": [
+            "Vòng tự chọn charm",
+            "Bộ sưu tập mới",
+            "Sang trọng"
+        ],
+        "color": "Không màu",
+        "material": "Bạc",
+        "images": [
+            "/assets/images/id_2a.jpg",
+            "/assets/images/id_2b.jpg",
+            "/assets/images/id_2c.jpg",
+            "/assets/images/id_2d.jpg",
+            "/assets/images/id_2e.jpg"
+        ],
+        "date": "09/05/2020",
+        "quantity": 1
+    }],
+    "owner": {
+        "id": 2,
+        "name": "Mai Thy",
+        "email": "thuyngocmaithyy@gmail.com",
+        "password": "12345678",
+        "confirm_password": "12345678",
+        "gender": "female",
+        "dob": "2024-12-18",
+        "interest": "movies",
+        "address": "Số 8, Tp hcm",
+        "active": true
+    },
+    "price": 5409000,
+    "createAt": "04:33:07 5/12/2024"
+}]

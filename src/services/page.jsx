@@ -1,8 +1,21 @@
-import products from '@content/products.json'
-import users from '@content/users.json'
+import { orders, products, users } from "@content";
 
 
-const findUserByEmail = (email) => users.find(user => user.email === email)
-const getProductByID = (id) => products.find(product => product.id == id)
+//Tìm người dùng theo thuộc tính
+const findUserByEmail = (email) => users.find(user => user.email == email);
+const findUserById = (id) => users.find(user => user.id == id)
 
-export default getProductByID
+// Tìm sản phẩm theo thuộc tính
+const getProductById = (id) => products.find(product => product.id == id);
+const getProductsByCollection = (collection) =>
+    products.filter(product => product.collection === collection);
+
+// Tìm lịch sử đơn hàng 
+const getHistoryOrder = (id) => orders.filter(order => order.owner.id === id)
+
+export {
+    findUserByEmail, findUserById, getHistoryOrder, getProductById, getProductsByCollection
+};
+
+
+

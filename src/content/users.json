@@ -1,180 +1,50 @@
-[{
+[
+
+
+    {
         "id": 1,
-        "name": "Lam Kha Tuan",
-        "email": "tuan.lam@example.com",
-        "age": 29,
-        "gender": "male",
-        "birthdate": "1995-05-20",
-        "hobbies": ["reading", "traveling"],
-        "password": "password123",
-        "active": true
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "password": "admin",
+        "confirm_password": "12345678",
+        "gender": "female",
+        "dob": "2024-12-18",
+        "interest": "movies",
+        "address": "Số 8, Tp hcm",
+        "active": true,
+        "promoted": true
     },
+
     {
         "id": 2,
-        "name": "Nguyen Van A",
-        "email": "nguyenvana@example.com",
-        "age": 25,
-        "gender": "male",
-        "birthdate": "1998-03-15",
-        "hobbies": ["football", "gaming"],
-        "password": "passwordABC",
-        "active": false
+        "name": "Mai Thy",
+        "email": "thuyngocmaithyy@gmail.com",
+        "password": "12345678",
+        "confirm_password": "12345678",
+        "gender": "female",
+        "dob": "2024-12-18",
+        "interest": "movies",
+        "address": "Số 8, Tp hcm",
+        "active": true
     },
     {
         "id": 3,
-        "name": "Tran Thi B",
-        "email": "tranthib@example.com",
-        "age": 22,
-        "gender": "female",
-        "birthdate": "2001-07-11",
-        "hobbies": ["cooking", "photography"],
-        "password": "tranthi321",
-        "active": true
+        "name": "Lâm KHa TUấn",
+        "email": "thuyngocmaithyy@gmail.com",
+        "password": "12345678",
+        "confirm_password": "12345678",
+        "gender": "male",
+        "dob": "2024-12-13",
+        "address": "Số 8, Tp hcm"
     },
     {
         "id": 4,
-        "name": "Le Hoang C",
-        "email": "lehoangc@example.com",
-        "age": 30,
+        "name": "lam tuan",
+        "email": "thuyngocmaithyy@gmail.com",
+        "password": "12345678",
+        "confirm_password": "12345678",
         "gender": "male",
-        "birthdate": "1993-01-25",
-        "hobbies": ["cycling", "hiking"],
-        "password": "hoang2020",
-        "active": false
-    },
-    {
-        "id": 5,
-        "name": "Pham Minh D",
-        "email": "phamminhd@example.com",
-        "age": 26,
-        "gender": "male",
-        "birthdate": "1997-09-05",
-        "hobbies": ["fishing", "gardening"],
-        "password": "minhd@password",
-        "active": true
-    },
-    {
-        "id": 6,
-        "name": "Ho Thi E",
-        "email": "hothie@example.com",
-        "age": 31,
-        "gender": "female",
-        "birthdate": "1992-12-12",
-        "hobbies": ["yoga", "reading"],
-        "password": "hothi@2023",
-        "active": false
-    },
-    {
-        "id": 7,
-        "name": "Vuong Quoc F",
-        "email": "vuongquocf@example.com",
-        "age": 28,
-        "gender": "male",
-        "birthdate": "1996-04-30",
-        "hobbies": ["golf", "swimming"],
-        "password": "quocfPass",
-        "active": true
-    },
-    {
-        "id": 8,
-        "name": "Dao Nhat G",
-        "email": "daonhatg@example.com",
-        "age": 27,
-        "gender": "male",
-        "birthdate": "1997-08-17",
-        "hobbies": ["gaming", "photography"],
-        "password": "nhatg123",
-        "active": false
-    },
-    {
-        "id": 9,
-        "name": "Ngo Thanh H",
-        "email": "ngothanhh@example.com",
-        "age": 24,
-        "gender": "female",
-        "birthdate": "2000-02-02",
-        "hobbies": ["painting", "dancing"],
-        "password": "ngothanhH@",
-        "active": true
-    },
-    {
-        "id": 10,
-        "name": "Nguyen Huu I",
-        "email": "nguyenhuui@example.com",
-        "age": 29,
-        "gender": "male",
-        "birthdate": "1995-06-22",
-        "hobbies": ["hiking", "camping"],
-        "password": "huuI321",
-        "active": true
-    },
-    {
-        "id": 11,
-        "name": "Pham Quang K",
-        "email": "phamquangk@example.com",
-        "age": 33,
-        "gender": "male",
-        "birthdate": "1990-11-30",
-        "hobbies": ["reading", "fishing"],
-        "password": "quangk@pass",
-        "active": false
-    },
-    {
-        "id": 12,
-        "name": "Tran Minh L",
-        "email": "tranminhl@example.com",
-        "age": 35,
-        "gender": "male",
-        "birthdate": "1989-09-09",
-        "hobbies": ["running", "basketball"],
-        "password": "tranminhL123",
-        "active": true,
-        "shopping_cart": {
-
-        }
-    },
-    {
-        "id": 13,
-        "name": "Bui Thi M",
-        "email": "buithim@example.com",
-        "age": 32,
-        "gender": "female",
-        "birthdate": "1991-10-15",
-        "hobbies": ["cooking", "yoga"],
-        "password": "buiM2023",
-        "active": false
-    },
-    {
-        "id": 14,
-        "name": "Le Duy N",
-        "email": "leduyn@example.com",
-        "age": 27,
-        "gender": "male",
-        "birthdate": "1996-05-18",
-        "hobbies": ["swimming", "football"],
-        "password": "duyNpass",
-        "active": true
-    },
-    {
-        "id": 15,
-        "name": "Vu Thi O",
-        "email": "vuthio@example.com",
-        "age": 23,
-        "gender": "female",
-        "birthdate": "2001-03-28",
-        "hobbies": ["singing", "traveling"],
-        "password": "vuO321",
-        "active": true
-    },
-    {
-        "id": 16,
-        "name": "Nguyen Van P",
-        "email": "nguyenvanp@example.com",
-        "age": 29,
-        "gender": "male",
-        "birthdate": "1995-07-14",
-        "hobbies": ["gaming", "cycling"],
-        "password": "vanP1234",
-        "active": false
+        "dob": "2024-11-26",
+        "address": "rèibầb, ađakdbksa, 3123 ,ạohsaoh"
     }
 ]

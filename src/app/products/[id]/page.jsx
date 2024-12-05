@@ -1,3 +1,4 @@
+
 'use client'
 
 import {
@@ -9,32 +10,80 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter } from "@components/ui/card"
-import getProductByID from "@services/page"
+import AuthContext from "@contexts/auth/AuthContext"
+import ThemeContext from "@contexts/ThemeContext"
+import { getProductById } from "@services/page"
 import { formatCurrency } from "@utils/page"
 import { ChevronRight, Heart, Minus, Plus, Share2 } from 'lucide-react'
 import Image from "next/image"
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
+
 
 export default function ProductDetail({ params }) {
+    const { isLoggedIn } = useContext(AuthContext)
     const [quantity, setQuantity] = useState(1)
     const [currentImage, setCurrentImage] = useState(0)
-    const baseProduct = getProductByID(params.id)
+    const { router } = useContext(ThemeContext)
+    // Lấy sản phẩm tương ứng
+    const baseProduct = getProductById(params.id)
 
     const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
 
     const addToCartAction = useCallback(() => {
+        // Thêm vào giỏ hàng
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        const existingProduct = cart.find(item => item.id === baseProduct.id)
+
+        if (existingProduct) {
+            // Cập nhật số lượng nếu sản phẩm đã tồn tại
+            existingProduct.quantity += quantity
+        } else {
+            // Thêm sản phẩm mới vào giỏ hàng
+            cart.push({
+                ...baseProduct,
+                quantity,
+            })
+        }
+
+        // Lưu lại giỏ hàng vào localStorage
+        localStorage.setItem("cart", JSON.stringify(cart))
+
+        // Hiển thị thông báo đã thêm vào giỏ hàng
         setAddToCart('Đã thêm vào giỏ hàng')
-    }, [])
+    }, [baseProduct, quantity])
 
     useEffect(() => {
         if (addToCart === 'Đã thêm vào giỏ hàng') {
             const timer = setTimeout(() => {
                 setAddToCart('Thêm vào giỏ hàng');
-                setIsAdded(false);
             }, 2000);
             return () => clearTimeout(timer)
         }
-    }, [addToCart]);
+    }, [addToCart])
+
+    const buyNowAction = useCallback(() => {
+        // Lấy giỏ hàng hiện tại từ localStorage
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const existingProduct = cart.find(item => item.id === baseProduct.id);
+
+        if (existingProduct) {
+            // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+            existingProduct.quantity += quantity;
+        } else {
+            // Thêm sản phẩm mới vào giỏ hàng
+            cart.push({
+                ...baseProduct,
+                quantity,
+            });
+        }
+
+        // Lưu giỏ hàng vào localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Chuyển đến trang giỏ hàng
+        router.push("/cart");
+    }, [baseProduct, quantity, router]);
+
 
     const product = {
         ...baseProduct,
@@ -45,11 +94,12 @@ export default function ProductDetail({ params }) {
             { label: "Kích thước", value: "Đường kính: 3.1cm" },
         ],
     }
+
     const relatedProducts = [
-        { id: 1, name: "Vòng tay Pandora Moments", price: "2.090.000₫" },
-        { id: 2, name: "Charm bạc Pandora Butterfly", price: "1.290.000₫" },
-        { id: 3, name: "Hoa tai Pandora Sparkling", price: "1.790.000₫" },
-        { id: 4, name: "Nhẫn bạc Pandora Crown", price: "1.390.000₫" },
+        { id: 1, name: "Vòng tay Pandora Moments", price: 2090000 },
+        { id: 2, name: "Charm bạc Pandora Butterfly", price: 1290000 },
+        { id: 3, name: "Hoa tai Pandora Sparkling", price: 1790000 },
+        { id: 4, name: "Nhẫn bạc Pandora Crown", price: 1390000 },
     ]
 
     return (
@@ -130,7 +180,12 @@ export default function ProductDetail({ params }) {
                                     </Button>
                                 </div>
                                 <Button className="flex-1" onClick={addToCartAction}>{addToCart}</Button>
-                                <Button className="flex-1 bg-slate-50 text-black hover:bg-slate-800">Mua ngay</Button>
+                                <Button
+                                    className="flex-1 bg-slate-50 text-black hover:bg-slate-800 hover:text-white"
+                                    onClick={() => buyNowAction()}
+                                >
+                                    Mua ngay
+                                </Button>
 
                             </div>
 

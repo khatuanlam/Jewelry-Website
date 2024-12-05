@@ -32,10 +32,8 @@ export default function PaginatePage({ value, tab }) {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold mb-8 text-center">{tab}</h2>
                     <Tabs defaultValue="all" className="w-full" onValueChange={setFilter}>
-                        <TabsList className="grid w-full grid-cols-4 mb-8">
-                            <TabsTrigger value="Vòng tay tình yêu và tình bạn">Tình yêu</TabsTrigger>
-                            <TabsTrigger value="Vòng tay tự chọn charm">Vòng tay</TabsTrigger>
-                            <TabsTrigger value="Vòng tay sang trọng">Sang trọng</TabsTrigger>
+                        <TabsList className="grid w-full grid-cols-2 mb-8">
+                            <TabsTrigger value="Vòng tay">Vòng tay</TabsTrigger>
                             <TabsTrigger value="Charm">Khuyên tai</TabsTrigger>
                         </TabsList>
                         <TabsContent value={filter}>
