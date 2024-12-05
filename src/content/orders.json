@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": 1,
     "name": "lam tuan",
     "email": "tuanlam777@gmail.com",
@@ -7,7 +8,8 @@
     "province": "",
     "payment": "cash",
     "user_id": 2,
-    "products": [{
+    "products": [
+      {
         "id": 2,
         "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
         "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
@@ -17,34 +19,165 @@
         "rating": 4,
         "brand": "Charisma",
         "collection": [
-            "Vòng tự chọn charm",
-            "Bộ sưu tập mới",
-            "Sang trọng"
+          "Vòng tự chọn charm",
+          "Bộ sưu tập mới",
+          "Sang trọng"
         ],
         "color": "Không màu",
         "material": "Bạc",
         "images": [
-            "/assets/images/id_2a.jpg",
-            "/assets/images/id_2b.jpg",
-            "/assets/images/id_2c.jpg",
-            "/assets/images/id_2d.jpg",
-            "/assets/images/id_2e.jpg"
+          "/assets/images/id_2a.jpg",
+          "/assets/images/id_2b.jpg",
+          "/assets/images/id_2c.jpg",
+          "/assets/images/id_2d.jpg",
+          "/assets/images/id_2e.jpg"
         ],
         "date": "09/05/2020",
         "quantity": 1
-    }],
+      }
+    ],
     "owner": {
-        "id": 2,
-        "name": "Mai Thy",
-        "email": "thuyngocmaithyy@gmail.com",
-        "password": "12345678",
-        "confirm_password": "12345678",
-        "gender": "female",
-        "dob": "2024-12-18",
-        "interest": "movies",
-        "address": "Số 8, Tp hcm",
-        "active": true
+      "id": 2,
+      "name": "Mai Thy",
+      "email": "thuyngocmaithyy@gmail.com",
+      "password": "12345678",
+      "confirm_password": "12345678",
+      "gender": "female",
+      "dob": "2024-12-18",
+      "interest": "movies",
+      "address": "Số 8, Tp hcm",
+      "active": true
     },
     "price": 5409000,
     "createAt": "04:33:07 5/12/2024"
-}]
+  },
+  {
+    "id": 2,
+    "name": "Bùi Thị Thanh Hằng",
+    "email": "thanhhang25032005@gmail.com",
+    "phone": "0386601904",
+    "address": "TÂN XUÂN, HÀM TÂN, BÌNH THUẬN",
+    "province": "30",
+    "district": "299",
+    "ward": "11227",
+    "payment": "cash",
+    "user_id": 5,
+    "products": [
+      {
+        "id": 2,
+        "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
+        "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+        "price": 5390000,
+        "category": "Vòng tay",
+        "stock": 110,
+        "rating": 4,
+        "brand": "Charisma",
+        "collection": [
+          "Vòng tự chọn charm",
+          "Bộ sưu tập mới",
+          "Sang trọng"
+        ],
+        "color": "Không màu",
+        "material": "Bạc",
+        "images": [
+          "/assets/images/id_2a.jpg",
+          "/assets/images/id_2b.jpg",
+          "/assets/images/id_2c.jpg",
+          "/assets/images/id_2d.jpg",
+          "/assets/images/id_2e.jpg"
+        ],
+        "date": "09/05/2020",
+        "quantity": 1
+      }
+    ],
+    "owner": {
+      "id": 5,
+      "name": "Bùi Thị Thanh Hằng",
+      "email": "thanhhang25032005@gmail.com",
+      "password": "hang55555",
+      "confirm_password": "hang55555",
+      "gender": "female",
+      "dob": "2024-12-05",
+      "address": "TÂN XUÂN, HÀM TÂN, BÌNH THUẬN",
+      "active": true
+    },
+    "price": 5409000,
+    "createAt": "16:55:13 5/12/2024"
+  },
+  {
+    "id": 3,
+    "name": "c++",
+    "email": "thanhhang25032005@gmail.com",
+    "phone": "0386601904",
+    "address": "TÂN XUÂN, HÀM TÂN, BÌNH THUẬN",
+    "province": "24",
+    "district": "",
+    "payment": "cash",
+    "user_id": 5,
+    "products": [
+      {
+        "id": 3,
+        "name": "Vòng Charisma Timeless Tennis Đính Đá Pha Lê Màu Xanh",
+        "description": "Chiếc vòng tennis cổ điển được chế tác từ bạc sterling và có một hàng đá pha lê màu xanh hoàng gia 34 viên đá. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một món trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+        "price": 4490000,
+        "category": "Vòng tay",
+        "stock": 210,
+        "rating": 3.5,
+        "brand": "Charisma",
+        "collection": [
+          "Vòng tự chọn charm",
+          "Bộ sưu tập mới"
+        ],
+        "color": "Xanh",
+        "material": "Bạc",
+        "images": [
+          "/assets/images/id_3a.jpg",
+          "/assets/images/id_3b.jpg",
+          "/assets/images/id_3c.jpg",
+          "/assets/images/id_3d.jpg"
+        ],
+        "date": "26/01/2023",
+        "quantity": 1
+      },
+      {
+        "id": 2,
+        "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
+        "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+        "price": 5390000,
+        "category": "Vòng tay",
+        "stock": 110,
+        "rating": 4,
+        "brand": "Charisma",
+        "collection": [
+          "Vòng tự chọn charm",
+          "Bộ sưu tập mới",
+          "Sang trọng"
+        ],
+        "color": "Không màu",
+        "material": "Bạc",
+        "images": [
+          "/assets/images/id_2a.jpg",
+          "/assets/images/id_2b.jpg",
+          "/assets/images/id_2c.jpg",
+          "/assets/images/id_2d.jpg",
+          "/assets/images/id_2e.jpg"
+        ],
+        "date": "09/05/2020",
+        "quantity": 1
+      }
+    ],
+    "owner": {
+      "id": 5,
+      "name": "Bùi Thị Thanh Hằng",
+      "email": "thanhhang25032005@gmail.com",
+      "password": "hang55555",
+      "confirm_password": "hang55555",
+      "gender": "female",
+      "dob": "2024-12-05",
+      "address": "TÂN XUÂN, HÀM TÂN, BÌNH THUẬN",
+      "active": true
+    },
+    "price": 9918000,
+    "createAt": "16:56:21 5/12/2024"
+  }
+]

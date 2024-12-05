@@ -1,4 +1,3 @@
-
 'use client'
 
 import {
@@ -14,76 +13,81 @@ import AuthContext from "@contexts/auth/AuthContext"
 import ThemeContext from "@contexts/ThemeContext"
 import { getProductById } from "@services/page"
 import { formatCurrency } from "@utils/page"
+import Link from 'next/link'
 import { ChevronRight, Heart, Minus, Plus, Share2 } from 'lucide-react'
 import Image from "next/image"
 import { useCallback, useContext, useEffect, useState } from 'react'
 
+// Import dữ liệu sản phẩm từ file JSON
+import productsData from "@/content/products.json"
 
 export default function ProductDetail({ params }) {
     const { isLoggedIn } = useContext(AuthContext)
     const [quantity, setQuantity] = useState(1)
     const [currentImage, setCurrentImage] = useState(0)
     const { router } = useContext(ThemeContext)
-    // Lấy sản phẩm tương ứng
+
+    // Lấy sản phẩm hiện tại
     const baseProduct = getProductById(params.id)
 
-    const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
+    // Lọc các sản phẩm liên quan dựa trên thuộc tính category
+    const relatedProducts = productsData.filter(
+        (item) => item.category === baseProduct.category && item.id !== baseProduct.id
+    )
 
+    const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
     const addToCartAction = useCallback(() => {
-        // Thêm vào giỏ hàng
+        if (!isLoggedIn) {
+            alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.")
+            return
+        }
+
         const cart = JSON.parse(localStorage.getItem("cart") || "[]")
         const existingProduct = cart.find(item => item.id === baseProduct.id)
 
         if (existingProduct) {
-            // Cập nhật số lượng nếu sản phẩm đã tồn tại
             existingProduct.quantity += quantity
         } else {
-            // Thêm sản phẩm mới vào giỏ hàng
             cart.push({
                 ...baseProduct,
                 quantity,
             })
         }
 
-        // Lưu lại giỏ hàng vào localStorage
         localStorage.setItem("cart", JSON.stringify(cart))
-
-        // Hiển thị thông báo đã thêm vào giỏ hàng
         setAddToCart('Đã thêm vào giỏ hàng')
-    }, [baseProduct, quantity])
+    }, [isLoggedIn, baseProduct, quantity])
 
     useEffect(() => {
         if (addToCart === 'Đã thêm vào giỏ hàng') {
             const timer = setTimeout(() => {
-                setAddToCart('Thêm vào giỏ hàng');
-            }, 2000);
+                setAddToCart('Thêm vào giỏ hàng')
+            }, 2000)
             return () => clearTimeout(timer)
         }
     }, [addToCart])
 
     const buyNowAction = useCallback(() => {
-        // Lấy giỏ hàng hiện tại từ localStorage
-        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        const existingProduct = cart.find(item => item.id === baseProduct.id);
+        if (!isLoggedIn) {
+            alert("Vui lòng đăng nhập để mua hàng.")
+            return
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        const existingProduct = cart.find(item => item.id === baseProduct.id)
 
         if (existingProduct) {
-            // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
-            existingProduct.quantity += quantity;
+            existingProduct.quantity += quantity
         } else {
-            // Thêm sản phẩm mới vào giỏ hàng
             cart.push({
                 ...baseProduct,
                 quantity,
-            });
+            })
         }
 
-        // Lưu giỏ hàng vào localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Chuyển đến trang giỏ hàng
-        router.push("/cart");
-    }, [baseProduct, quantity, router]);
-
+        localStorage.setItem("cart", JSON.stringify(cart))
+        router.push("/cart")
+    }, [isLoggedIn, baseProduct, quantity, router])
 
     const product = {
         ...baseProduct,
@@ -95,17 +99,8 @@ export default function ProductDetail({ params }) {
         ],
     }
 
-    const relatedProducts = [
-        { id: 1, name: "Vòng tay Pandora Moments", price: 2090000 },
-        { id: 2, name: "Charm bạc Pandora Butterfly", price: 1290000 },
-        { id: 3, name: "Hoa tai Pandora Sparkling", price: 1790000 },
-        { id: 4, name: "Nhẫn bạc Pandora Crown", price: 1390000 },
-    ]
-
     return (
         <div className="min-h-screen bg-background text-foreground">
-            {/* Header would go here (same as homepage) */}
-
             {/* Breadcrumb */}
             <nav className="py-4 bg-muted">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,8 +137,13 @@ export default function ProductDetail({ params }) {
                                             }`}
                                         onClick={() => setCurrentImage(index)}
                                     >
-                                        <Image src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" width={600}
-                                            height={600} />
+                                        <Image
+                                            src={image}
+                                            alt={`${product.name} ${index + 1}`}
+                                            className="w-full h-full object-cover"
+                                            width={600}
+                                            height={600}
+                                        />
                                     </button>
                                 ))}
                             </div>
@@ -186,16 +186,6 @@ export default function ProductDetail({ params }) {
                                 >
                                     Mua ngay
                                 </Button>
-
-                            </div>
-
-                            <div className="flex space-x-4">
-                                <Button variant="outline" size="icon">
-                                    <Heart className="h-4 w-4" />
-                                </Button>
-                                <Button variant="outline" size="icon">
-                                    <Share2 className="h-4 w-4" />
-                                </Button>
                             </div>
 
                             <Accordion type="single" collapsible className="w-full">
@@ -231,27 +221,40 @@ export default function ProductDetail({ params }) {
                 </div>
             </section>
 
+          
             {/* Related Products */}
             <section className="py-12 bg-muted">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-2xl font-bold mb-8">Sản phẩm liên quan</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                        {relatedProducts.map((item) => (
-                            <Card key={item.id}>
-                                <CardContent className="p-0">
-                                    <Image src={`/logo.png?height=300&width=300`} alt={item.name} className="w-full h-48 object-cover" width={300} height={300} />
-                                </CardContent>
-                                <CardFooter className="flex flex-col items-start p-4">
-                                    <h3 className="font-semibold">{item.name}</h3>
-                                    <span className="mt-2 font-bold">{formatCurrency(item.price)}</span>
-                                </CardFooter>
-                            </Card>
-                        ))}
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold mb-8">Sản phẩm liên quan</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {relatedProducts.slice(0, 4).map((item) => (
+                <div key={item.id} className="relative group">
+                    <Card>
+                        <CardContent className="p-0">
+                            <Image
+                                src={item.images[0]}
+                                alt={item.name}
+                                className="w-full h-48 object-cover"
+                                width={300}
+                                height={300}
+                            />
+                        </CardContent>
+                        <CardFooter className="flex flex-col items-start p-4">
+                            <h3 className="font-semibold">{item.name}</h3>
+                            <span className="mt-2 font-bold">{formatCurrency(item.price)}</span>
+                        </CardFooter>
+                    </Card>
+                    {/* Bao bọc trong Link để điều hướng đến trang chi tiết sản phẩm */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Link href={`/products/${item.id}`} className="text-white text-lg font-semibold">
+                            Xem chi tiết sản phẩm
+                        </Link>
                     </div>
                 </div>
-            </section>
-
-            {/* Footer would go here (same as homepage) */}
+            ))}
+        </div>
+    </div>
+</section>
         </div>
     )
 }
