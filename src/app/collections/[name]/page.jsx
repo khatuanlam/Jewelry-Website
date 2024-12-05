@@ -1,5 +1,7 @@
 'use client'
 
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -18,15 +20,14 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import ThemeContext from "@contexts/ThemeContext"
 import { Filter, X } from 'lucide-react'
-import Image from "next/image"
-import { useContext, useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 const filters = [
     {
         name: 'Loại sản phẩm',
-        options: ['Vòng tay', 'Dây chuyền', 'Nhẫn', 'Hoa tai'],
+        options: ['Vòng tay', 'Charm'],
     },
     {
         name: 'Chất liệu',
@@ -36,28 +37,68 @@ const filters = [
         name: 'Giá',
         options: ['Dưới 1 triệu', '1 - 2 triệu', '2 - 5 triệu', 'Trên 5 triệu'],
     },
+    {
+        name: 'Bộ sưu tập',
+        options: ['Mùa lễ hội', 'Sang trọng', 'Vintage', 'Tình yêu và tình bạn'],
+    },
 ]
 
-export default function CollectionPage({ params }) {
+export default function CollectionPage() {
+    const params = useParams();
+    const collectionName = params?.name
+        ? decodeURIComponent(params.name)
+            .replace(/-/g, ' ')
+            .replace(/^\w/, char => char.toUpperCase())
+        : "Default Collection";
+    
     const [activeFilters, setActiveFilters] = useState([])
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [cart, setCart] = useState([])
     const [products, setProducts] = useState([])
-    const [error, setError] = useState(null)  // Error state for fetch
-    const { router } = useContext(ThemeContext)
-    const [showAlert, setShowAlert] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [displayedProducts, setDisplayedProducts] = useState(6)
+    const router = useRouter()
 
     useEffect(() => {
-        if (showAlert) {
-            const timer = setTimeout(() => {
-                setShowAlert(false)
-            }, 3000)
+        fetch('/products.json?cache-bust=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                console.log("Tất cả sản phẩm:", data);
+                console.log("Collection Name:", collectionName);
 
-            return () => clearTimeout(timer)
-        }
-    }, [showAlert])
-
-
+                const collectionFilteredProducts = data.filter(product => {
+                    if (Array.isArray(product.collection)) {
+                        return product.collection.includes(collectionName);
+                    }
+                    return product.collection === collectionName;
+                });
+                
+                console.log("Sản phẩm theo bộ sưu tập:", collectionFilteredProducts);
+    
+                const filteredProducts = collectionFilteredProducts.filter(product => {
+                    return activeFilters.every(filter => {
+                        return (
+                            product.category === filter ||
+                            product.material === filter ||
+                            priceRange(product.price) === filter ||
+(Array.isArray(product.collection) ? product.collection.includes(filter) : product.collection === filter)
+                        );
+                    });
+                });
+    
+                console.log("Sản phẩm sau khi lọc:", filteredProducts);
+    
+                setProducts(filteredProducts);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setError("Error loading products");
+                setLoading(false);
+            });
+    }, [collectionName, activeFilters]);
+    
     const toggleFilter = (filter) => {
         setActiveFilters(prev =>
             prev.includes(filter)
@@ -66,28 +107,24 @@ export default function CollectionPage({ params }) {
         )
     }
 
-
-    const handleAdd = (product) => {
-        if (showAlert) {
-            addToCart(product)
-        } else {
-            setShowAlert(true)
-        }
-    }
-
     const addToCart = (product) => {
         setCart(prevCart => [...prevCart, product])
         alert(`Đã thêm "${product.name}" vào giỏ hàng!`)
-        router.push('/cart')  // Điều hướng đến trang giỏ hàng
+        router.push('/cart')
     }
 
-    // Filter products based on active filters
     const filteredProducts = products.filter(product => {
         return activeFilters.every(filter => {
-            return product.category.includes(filter) || product.material.includes(filter) || product.price.includes(filter);
-        });
-    });
+            return product.category.includes(filter) || 
+                   product.material.includes(filter) || 
+                   product.priceRange.includes(filter) ||
+                   product.collection.includes(filter)
+        })
+    })
 
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     if (error) {
         return <div>{error}</div>
@@ -96,11 +133,11 @@ export default function CollectionPage({ params }) {
     return (
         <div className="min-h-screen bg-white text-black">
             {/* Collection Banner */}
-            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/assets/images/lehoi.jpg')` }}>
+            <section className="relative h-[40vh] bg-cover bg-center" style={{ backgroundImage: `url('/lehoi.jpg')` }}>
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <div className="text-center text-white">
-                        <h1 className="text-4xl font-bold mb-4">Chào đón mùa lễ hội</h1>
-                        <p className="text-xl">Khám phá bộ sưu tập trang sức lấp lánh cho mùa lễ hội</p>
+                        <h1 className="text-4xl font-bold mb-4">{collectionName}</h1>
+                        <p className="text-xl">Khám phá bộ sưu tập trang sức {collectionName}</p>
                     </div>
                 </div>
             </section>
@@ -117,7 +154,7 @@ export default function CollectionPage({ params }) {
                                     <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
                                     <div className="space-y-2">
                                         {filter.options.map((option) => (
-                                            <div key={option} className="flex items-center">
+<div key={option} className="flex items-center">
                                                 <Checkbox
                                                     id={option}
                                                     checked={activeFilters.includes(option)}
@@ -160,7 +197,7 @@ export default function CollectionPage({ params }) {
                                                 <SheetTitle>Bộ lọc</SheetTitle>
                                                 <SheetDescription>
                                                     Lọc sản phẩm theo các tiêu chí
-                                                </SheetDescription>
+</SheetDescription>
                                             </SheetHeader>
                                             <div className="mt-4 space-y-6">
                                                 {filters.map((filter) => (
@@ -203,36 +240,60 @@ export default function CollectionPage({ params }) {
                             )}
 
                             {/* Product Grid */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {filteredProducts.map((product) => (
-                                    <Card key={product.id}>
-                                        <CardContent className="p-0">
-                                            <Image
-                                                src={Array.isArray(product.images) ? product.images[0] : product.images}
-                                                alt={product.name}
-                                                className="w-full h-48 object-cover"
-                                            />
-                                        </CardContent>
-                                        <CardFooter className="flex flex-col items-start p-4">
-                                            <h3 className="font-semibold text-black">{product.name}</h3>
-                                            <span className="mt-2 font-bold text-black">{product.price}</span>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                className="mt-4"
-                                                onClick={handleAdd(product)}
-                                            >
-                                                Thêm vào giỏ hàng
-                                            </Button>
-                                        </CardFooter>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {filteredProducts.slice(0, displayedProducts).map((product) => (
+                                    <Card key={product.id} className="relative group">
+                                        <Link href={`/product/${product.id}`}>
+                                            <CardContent className="p-0 relative">
+                                                {Array.isArray(product.images) && product.images.length > 0 ? (
+                                                    <img
+                                                        src={product.images[0]}
+                                                        alt={product.name}
+                                                        className="w-full h-48 object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
+                                                        <span className="text-gray-500">Không có ảnh</span>
+                                                    </div>
+                                                )}
+                                                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <span className="text-white font-semibold">Xem chi tiết sản phẩm</span>
+                                                </div>
+                                            </CardContent>
+                                            <CardFooter className="flex flex-col items-start p-4">
+                                                <h3 className="font-semibold text-black">{product.name}</h3>
+                                                {product.collection && !['vintage', 'Bộ sưu tập mới', 'Sang trọng', 'Tình yêu và tình bạn'].includes(product.collection) && (
+                                                    <span className="text-sm text-gray-500">{product.collection}</span>
+                                                )}
+                                                <span className="mt-2 font-bold text-black">{product.price}</span>
+                                            </CardFooter>
+                                        </Link>
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="mt-4 absolute bottom-4 right-4"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                addToCart(product);
+}}
+                                        >
+                                            Thêm vào giỏ hàng
+                                        </Button>
                                     </Card>
                                 ))}
                             </div>
 
                             {/* Load More Button */}
-                            <div className="mt-8 text-center">
-                                <Button variant="outline">Xem thêm sản phẩm</Button>
-                            </div>
+                            {filteredProducts.length > displayedProducts && (
+                                <div className="mt-8 text-center">
+                                    <Button 
+                                        variant="outline" 
+                                        onClick={() => setDisplayedProducts(prev => Math.min(prev + 6, filteredProducts.length))}
+                                    >
+                                        Xem thêm sản phẩm
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
