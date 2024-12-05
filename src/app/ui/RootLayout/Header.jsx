@@ -23,6 +23,9 @@ export default function Header() {
   const [showAlert, setShowAlert] = useState(false)
   const { admin } = useContext(AuthContext)
 
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+
   useEffect(() => {
     if (showAlert) {
       const timer = setTimeout(() => {
@@ -32,6 +35,14 @@ export default function Header() {
       return () => clearTimeout(timer)
     }
   }, [showAlert])
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (searchKeyword.trim()) {
+      // Dẫn đến trang tìm kiếm với từ khóa tìm kiếm
+      router.push(`/search?query=${encodeURIComponent(searchKeyword.trim())}`);
+    }
+  };
 
   const routes = [
     {
@@ -97,12 +108,16 @@ export default function Header() {
               </nav>
               <div className="flex items-center space-x-4">
                 <div className="relative">
-                  <Input
-                    type="search"
-                    placeholder="Tìm kiếm sản phẩm"
-                    className="w-64 hidden md:block text-black rounded-full pl-10"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                  <form onSubmit={handleSearch}>
+                    <Input
+                      type="search"
+                      placeholder="Tìm kiếm sản phẩm"
+                      value={searchKeyword}
+                      onChange={(e) => setSearchKeyword(e.target.value)}
+                      className="w-64 hidden md:block text-black rounded-full pl-10"
+                    />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                  </form>
                 </div>
 
                 <DropdownMenu>
