@@ -56,7 +56,7 @@ export default function Header() {
   }
 
   return (
-    admin && (
+    admin == false && (
       <>
         <div className="h-2" style={{ backgroundColor: 'rgb(255, 202, 212)', height: '40px', position: 'sticky', top: '0', zIndex: 10 }
         }></div>

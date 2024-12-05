@@ -21,7 +21,7 @@ export default function AuthForms() {
     const isVisible = useRef(false)
     const [tab, setTab] = useState("login");
     const { router } = useContext(ThemeContext)
-    const { login, isLoggedIn, userLogin } = useContext(AuthContext);
+    const { login, isLoggedIn, userLogin, setIsAmin } = useContext(AuthContext);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)

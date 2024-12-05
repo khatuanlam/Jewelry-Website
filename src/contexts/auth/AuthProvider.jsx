@@ -8,7 +8,7 @@ export default function AuthProvider({ children }) {
     // const { data: session } = useSession();
     const [userLogin, setUserLogin] = useState({})
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [admin, isAdmin] = useState(false)
+    const [admin, setIsAdmin] = useState(false)
     const { router } = useContext(ThemeContext)
 
     useEffect(() => {
@@ -16,6 +16,10 @@ export default function AuthProvider({ children }) {
             setIsLoggedIn(true)
             const currentUser = JSON.parse(sessionStorage.getItem('user'))
             setUserLogin(currentUser)
+            if (currentUser.promoted == true) {
+                setIsAdmin(true)
+            }
+            console.log(currentUser.promoted);
         } else {
             setIsLoggedIn(false)
         }
@@ -30,6 +34,10 @@ export default function AuthProvider({ children }) {
         sessionStorage.setItem('user', user)
         const currentUser = JSON.parse(sessionStorage.getItem('user'))
         setUserLogin(currentUser)
+
+        if (currentUser.promoted) {
+            setIsAdmin(true)
+        }
     }
 
     // Đăng xuất
@@ -44,7 +52,7 @@ export default function AuthProvider({ children }) {
     }
 
     const value = {
-        isLoggedIn, login, logout, userLogin
+        isLoggedIn, login, logout, userLogin, setIsAdmin, admin
     }
     return (
         <AuthContext.Provider value={value}>

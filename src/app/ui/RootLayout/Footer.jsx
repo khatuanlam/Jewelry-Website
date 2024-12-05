@@ -8,7 +8,7 @@ export default function Footer() {
     const { router } = useContext(ThemeContext)
     const { admin } = useContext(AuthContext)
     return (
-        admin && (
+        admin == false && (
             <>
                 {/* Footer */}
                 <footer className="bg-[rgb(255,202,212)] text-black py-8">
