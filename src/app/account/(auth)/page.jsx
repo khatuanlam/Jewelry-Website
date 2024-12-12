@@ -115,11 +115,11 @@ export default function AuthForms() {
                                             <Input id="login_email" name='login_email' placeholder="Enter your email" type="email" required />
                                         </div>
                                         <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="login_password">Password</Label>
+                                            <Label htmlFor="login_password">Mật khẩu</Label>
                                             <div className="relative">
                                                 <Input
                                                     id="login_password"
-                                                    placeholder="Enter your password"
+                                                    placeholder="Nhập mật khẩu"
                                                     type={showPassword ? "text" : "password"}
                                                     name='login_password'
                                                     required
