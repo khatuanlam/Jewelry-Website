@@ -9,7 +9,7 @@ import { Box, CreditCard, Wallet } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
-export default function CheckoutPage() {
+export default function PayPage() {
     const [state, setState] = useState({
         paymentMethod: '',
         orderCompleted: false,
