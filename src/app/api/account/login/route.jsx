@@ -1,4 +1,3 @@
-'use server'
 import { login } from "@app/actions";
 import { hashPassword } from "@lib/actions";
 import { NextResponse } from "next/server";
