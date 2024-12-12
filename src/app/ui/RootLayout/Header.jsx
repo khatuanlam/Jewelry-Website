@@ -74,7 +74,7 @@ export default function Header() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         {route.categories.map((subcategory, subIndex) => (
-                          <DropdownMenuItem key={subIndex} onSelect={() => router.push(`${route.path}/${decodeURIComponent(subcategory.toLowerCase().replace(' ', '-'))}`)} className="text-black">
+                          <DropdownMenuItem key={subIndex} onSelect={() => router.push(`${route.path}/${subcategory.toLowerCase().replace(' ', '-')}`)} className="text-black">
                             {subcategory}
                           </DropdownMenuItem>
                         ))}

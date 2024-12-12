@@ -3,7 +3,7 @@ import { hashPassword } from "@lib/actions";
 import { NextResponse } from "next/server";
 
 // /app/api/account/login/route.js
-export async function POST(request) {
+export default async function POST(request) {
     try {
         let data = await request.json(); // Nhận dữ liệu từ request body
         console.log('Received: ', data);
