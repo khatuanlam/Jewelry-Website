@@ -8,33 +8,21 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { Alert, AlertDescription } from "@components/ui/alert"
+import Notification from "@components/RootLayout/NotiPanel"
 import AuthContext from "@contexts/auth/AuthContext"
 import ThemeContext from "@contexts/ThemeContext"
 import { ChevronDown, LogIn, LogOut, Menu, Search, ShoppingBag, Signal, User } from "lucide-react"
 import Image from "next/image"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 
 export default function Header() {
-  const { router } = useContext(ThemeContext)
+  const { router, setShowNotification, showNotification } = useContext(ThemeContext)
   const [openDropdown, setOpenDropdown] = useState(null)
   // Lấy các thông tin về tài khoản đăng nhập
   const { logout, isLoggedIn } = useContext(AuthContext);
-  const [showAlert, setShowAlert] = useState(false)
   const { admin } = useContext(AuthContext)
 
   const [searchKeyword, setSearchKeyword] = useState('');
-
-
-  useEffect(() => {
-    if (showAlert) {
-      const timer = setTimeout(() => {
-        setShowAlert(false)
-      }, 3000)
-
-      return () => clearTimeout(timer)
-    }
-  }, [showAlert])
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -62,17 +50,15 @@ export default function Header() {
     if (isLoggedIn) {
       router.push('/cart')
     } else {
-      setShowAlert(true)
+      setShowNotification('Vui lòng thực hiện đăng nhập để mua hàng')
     }
   }
 
   return (
     admin == false && (
       <>
-        <div className="h-2" style={{ backgroundColor: 'rgb(255, 202, 212)', height: '40px', position: 'sticky', top: '0', zIndex: 10 }
-        }></div>
-        <header className="border-b bg-white sticky top-0 z-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-2">
+        <header className="border-b bg-white sticky top-0 z-50 ">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-2 relative">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center hover: cursor-pointer">
                 <Image width={180} height={500} alt="Logo" priority={true} src={'/logo.png'} onClick={() => { router.push('/') }} />
@@ -88,7 +74,7 @@ export default function Header() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         {route.categories.map((subcategory, subIndex) => (
-                          <DropdownMenuItem key={subIndex} onSelect={() => router.push(`${route.path}/${subcategory.toLowerCase().replace(' ', '-')}`)} className="text-black">
+                          <DropdownMenuItem key={subIndex} onSelect={() => router.push(`${route.path}/${decodeURIComponent(subcategory.toLowerCase().replace(' ', '-'))}`)} className="text-black">
                             {subcategory}
                           </DropdownMenuItem>
                         ))}
@@ -155,15 +141,6 @@ export default function Header() {
                 <Button variant="ghost" size="icon" onClick={handleCart} className="text-black relative">
                   <ShoppingBag className="h-5 w-5 text-black " />
                   <span className="sr-only">Giỏ hàng</span>
-                  {showAlert && (
-                    <div className="absolute top-full right-0 mt-2 w-64">
-                      <Alert variant="destructive">
-                        <AlertDescription>
-                          Vui lòng đăng nhập để xem giỏ hàng.
-                        </AlertDescription>
-                      </Alert>
-                    </div>
-                  )}
                 </Button>
                 <Button variant="ghost" size="icon" className="md:hidden text-black">
                   <Menu className="h-5 w-5 text-black" />
@@ -173,6 +150,7 @@ export default function Header() {
             </div>
           </div>
           <div className="h-2" style={{ backgroundColor: 'rgb(255, 202, 212)', height: '10px' }}></div>
+          {showNotification !== '' && !isLoggedIn && <Notification onClose={() => setShowNotification('')} />}
         </header>
       </>
     )

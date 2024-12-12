@@ -26,7 +26,8 @@ export default function CheckoutPage() {
     });
 
     const { userLogin } = useContext(AuthContext)
-    const { router } = useContext(ThemeContext)
+    const { router, setShowNotification } = useContext(ThemeContext)
+
 
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem('cart') || '[]')
@@ -85,17 +86,17 @@ export default function CheckoutPage() {
         const { email, phone, paymentMethod } = state
 
         if (!email.includes('@gmail.com')) {
-            alert('Email phải có định dạng @gmail.com')
+            setShowNotification('Email phải có định dạng @gmail.com')
             return
         }
 
         if (phone.length !== 10 || !/^[0-9]+$/.test(phone)) {
-            alert('Số điện thoại phải có 10 chữ số!')
+            setShowNotification('Số điện thoại phải có 10 chữ số!')
             return
         }
 
         if (!paymentMethod) {
-            alert('Vui lòng chọn phương thức thanh toán!')
+            setShowNotification('Vui lòng chọn phương thức thanh toán!')
             return
         }
 
@@ -106,6 +107,7 @@ export default function CheckoutPage() {
             products: state.cart,
             owner: userLogin,
             price: totalAmount,
+            status: 'pending',
             createAt: new Date(Date.now()).toLocaleString('vi-VN')
         }
 
@@ -331,7 +333,7 @@ export default function CheckoutPage() {
                         {state.orderCompleted && (
                             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                                 <div className="bg-white p-8 rounded-md text-center max-w-lg w-full">
-                                    <Image src="/assets/images/tick.png" alt="" className="mx-auto mb-5 w-[140px] h-[120px]" height={50} width={50} />
+                                    <Image src="/assets/images/tick.png" alt="" className="mx-auto mb-5 w-[140px] h-[120px]" height={300} width={300} />
                                     <h2 className="text-2xl font-semibold mb-4">Đơn hàng đã hoàn tất</h2>
                                     <div className="flex space-x-4 justify-center">
                                         <button className="flex items-center justify-center space-x-2 text-blue-600 border border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50">
@@ -361,7 +363,7 @@ export default function CheckoutPage() {
                                             <div key={item.id} className="flex justify-between text-sm">
                                                 <div className="flex items-center space-x-4">
                                                     {/* Hiển thị hình ảnh */}
-                                                    <Image src={item.images ? item.images[0] : item.images[1]} className="h-12 w-12 object-cover rounded" alt='' width={50} height={50} />
+                                                    <Image src={item.images ? item.images[0] : item.images[1]} className="h-12 w-12 object-cover rounded" alt='' width={300} height={300} />
                                                     <span className="text-gray-600 break-words max-w-md">{item.name}</span>
                                                 </div>
                                                 <span className="ml-4">{(item.quantity * item.price).toLocaleString()} VND</span>

@@ -1,15 +1,30 @@
-// Lấy danh sách orders
-export const getOrders = async () => {
-    const res = await fetch('/api/orders');
-    return res.json();
-};
+import bcrypt from 'bcrypt';
 
-// Thêm đơn hàng mới
-export const addOrder = async (order) => {
-    const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order),
-    });
-    return res.json();
-};
+// Function to hash a password
+async function hashPassword(password) {
+    // Number of salt rounds - higher means more secure but slower
+    const saltRounds = 12;
+
+    try {
+        // Generate a salt and hash the password
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        return hashedPassword;
+    } catch (error) {
+        console.error('Error hashing password:', error);
+        throw error;
+    }
+}
+
+// Function to verify a password
+async function verifyPassword(plainPassword, hashedPassword) {
+    try {
+        // Compare plain password with stored hashed password
+        const isMatch = await bcrypt.compare(plainPassword, hashedPassword);
+        return isMatch;
+    } catch (error) {
+        console.error('Error verifying password:', error);
+        throw error;
+    }
+}
+
+export { hashPassword, verifyPassword };

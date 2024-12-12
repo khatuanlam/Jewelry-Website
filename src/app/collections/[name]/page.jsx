@@ -4,13 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import {
     Sheet,
     SheetContent,
     SheetDescription,
@@ -20,15 +13,13 @@ import {
 } from "@/components/ui/sheet"
 import { formatCurrency } from "@utils/page"
 import { Filter, X } from 'lucide-react'
+import Image from "next/image"
 import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const filters = [
-    {
-        name: 'Loại sản phẩm',
-        options: ['Vòng tay', 'Charm'],
-    },
+
     {
         name: 'Chất liệu',
         options: ['Bạc', 'Vàng', 'Vàng hồng', 'Thép không gỉ'],
@@ -37,20 +28,23 @@ const filters = [
         name: 'Giá',
         options: ['Dưới 1 triệu', '1 - 2 triệu', '2 - 5 triệu', 'Trên 5 triệu'],
     },
-    {
-        name: 'Bộ sưu tập',
-        options: ['Mùa lễ hội', 'Sang trọng', 'Vintage', 'Tình yêu và tình bạn'],
-    },
+
 ]
 
-export default function CollectionPage() {
-    const params = useParams();
+const priceRange = (price) => {
+    const numericPrice = parseFloat(price);
+    if (numericPrice < 1000000) return 'Dưới 1 triệu';
+    if (numericPrice >= 1000000 && numericPrice < 2000000) return '1 - 2 triệu';
+    if (numericPrice >= 2000000 && numericPrice < 5000000) return '2 - 5 triệu';
+    return 'Trên 5 triệu';
+};
+
+export default function CollectionPage({ params }) {
     const collectionName = params?.name
         ? decodeURIComponent(params.name)
             .replace(/-/g, ' ')
             .replace(/^\w/, char => char.toUpperCase())
         : "Default Collection";
-
     const [activeFilters, setActiveFilters] = useState([])
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [cart, setCart] = useState([])
@@ -59,6 +53,8 @@ export default function CollectionPage() {
     const [error, setError] = useState(null)
     const [displayedProducts, setDisplayedProducts] = useState(6)
     const router = useRouter()
+    const { setShowNotification } = useContext(ThemeContext)
+
 
     useEffect(() => {
         fetch('/products.json?cache-bust=' + new Date().getTime())
@@ -81,19 +77,18 @@ export default function CollectionPage() {
                         return (
                             product.category === filter ||
                             product.material === filter ||
-                            priceRange(product.price) === filter || (Array.isArray(product.collection) ? product.collection.includes(filter) : product.collection === filter)
+                            priceRange(product.price) === filter ||
+                            (Array.isArray(product.collection) ? product.collection.includes(filter) : product.collection === filter)
                         );
                     });
                 });
-
                 console.log("Sản phẩm sau khi lọc:", filteredProducts);
-
                 setProducts(filteredProducts);
                 setLoading(false);
             })
             .catch(error => {
                 console.error(error);
-                setError("Error loading products");
+                // setError("Error loading products");
                 setLoading(false);
             });
     }, [collectionName, activeFilters]);
@@ -108,7 +103,7 @@ export default function CollectionPage() {
 
     const addToCart = (product) => {
         setCart(prevCart => [...prevCart, product])
-        alert(`Đã thêm "${product.name}" vào giỏ hàng!`)
+        setShowNotification(`Đã thêm "${product.name}" vào giỏ hàng!`)
         router.push('/cart')
     }
 
@@ -116,18 +111,15 @@ export default function CollectionPage() {
         return activeFilters.every(filter => {
             return product.category.includes(filter) ||
                 product.material.includes(filter) ||
-                // product.priceRange.includes(filter) ||
+                priceRange(product.price) === filter ||
                 product.collection.includes(filter)
         })
     })
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
 
-    if (error) {
-        return <div>{error}</div>
-    }
+
+
+
 
     return (
         <div className="min-h-screen bg-white text-black">
@@ -152,16 +144,17 @@ export default function CollectionPage() {
                                 <div key={filter.name}>
                                     <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
                                     <div className="space-y-2">
-                                        {filter.options.map((option) => (<div key={option} className="flex items-center">
-                                            <Checkbox
-                                                id={option}
-                                                checked={activeFilters.includes(option)}
-                                                onCheckedChange={() => toggleFilter(option)}
-                                            />
-                                            <label htmlFor={option} className="ml-2 text-sm font-medium leading-none text-black">
-                                                {option}
-                                            </label>
-                                        </div>
+                                        {filter.options.map((option) => (
+                                            <div key={option} className="flex items-center">
+                                                <Checkbox
+                                                    id={option}
+                                                    checked={activeFilters.includes(option)}
+                                                    onCheckedChange={() => toggleFilter(option)}
+                                                />
+                                                <label htmlFor={option} className="ml-2 text-sm font-medium leading-none text-black">
+                                                    {option}
+                                                </label>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -172,54 +165,59 @@ export default function CollectionPage() {
                         <div className="w-full md:w-3/4">
                             <div className="flex justify-between items-center mb-6">
                                 <p className="text-sm text-black">Hiển thị {filteredProducts.length} sản phẩm</p>
-                                <div className="flex items-center gap-4">
-                                    <Select>
-                                        <SelectTrigger className="w-[180px]">
-                                            <SelectValue placeholder="Sắp xếp" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="price-asc">Giá: Thấp đến cao</SelectItem>
-                                            <SelectItem value="price-desc">Giá: Cao đến thấp</SelectItem>
-                                            <SelectItem value="name-asc">Tên: A-Z</SelectItem>
-                                            <SelectItem value="name-desc">Tên: Z-A</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                    <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
-                                        <SheetTrigger asChild>
-                                            <Button variant="outline" className="md:hidden">
-                                                <Filter className="mr-2 h-4 w-4" /> Bộ lọc
-                                            </Button>
-                                        </SheetTrigger>
-                                        <SheetContent side="left">
-                                            <SheetHeader>
-                                                <SheetTitle>Bộ lọc</SheetTitle>
-                                                <SheetDescription>
-                                                    Lọc sản phẩm theo các tiêu chí </SheetDescription>
-                                            </SheetHeader>
-                                            <div className="mt-4 space-y-6">
-                                                {filters.map((filter) => (
-                                                    <div key={filter.name}>
-                                                        <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
-                                                        <div className="space-y-2">
-                                                            {filter.options.map((option) => (
-                                                                <div key={option} className="flex items-center">
-                                                                    <Checkbox
-                                                                        id={`mobile-${option}`}
-                                                                        checked={activeFilters.includes(option)}
-                                                                        onCheckedChange={() => toggleFilter(option)}
-                                                                    />
-                                                                    <label htmlFor={`mobile-${option}`} className="ml-2 text-sm font-medium leading-none text-black">
-                                                                        {option}
-                                                                    </label>
-                                                                </div>
-                                                            ))}
+                                {loading == false ? (
+                                    <div className="flex items-center gap-4">
+                                        {/* <Select onValueChange={handleChange}>
+                                            <SelectTrigger className="w-[180px]">
+                                                <SelectValue placeholder="Sắp xếp" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="price-asc">Giá: Thấp đến cao</SelectItem>
+                                                <SelectItem value="price-desc">Giá: Cao đến thấp</SelectItem>
+                                                <SelectItem value="name-asc">Tên: A-Z</SelectItem>
+                                                <SelectItem value="name-desc">Tên: Z-A</SelectItem>
+                                            </SelectContent>
+                                        </Select> */}
+                                        <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
+                                            <SheetTrigger asChild>
+                                                <Button variant="outline" className="md:hidden">
+                                                    <Filter className="mr-2 h-4 w-4" /> Bộ lọc
+                                                </Button>
+                                            </SheetTrigger>
+                                            <SheetContent side="left">
+                                                <SheetHeader>
+                                                    <SheetTitle>Bộ lọc</SheetTitle>
+                                                    <SheetDescription>
+                                                        Lọc sản phẩm theo các tiêu chí
+                                                    </SheetDescription>
+                                                </SheetHeader>
+                                                <div className="mt-4 space-y-6">
+                                                    {filters.map((filter) => (
+                                                        <div key={filter.name}>
+                                                            <h3 className="font-semibold mb-2 text-black">{filter.name}</h3>
+                                                            <div className="space-y-2">
+                                                                {filter.options.map((option) => (
+                                                                    <div key={option} className="flex items-center">
+                                                                        <Checkbox
+                                                                            id={`mobile-${option}`}
+                                                                            checked={activeFilters.includes(option)}
+                                                                            onCheckedChange={() => toggleFilter(option)}
+                                                                        />
+                                                                        <label htmlFor={`mobile-${option}`} className="ml-2 text-sm font-medium leading-none text-black">
+                                                                            {option}
+                                                                        </label>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </SheetContent>
-                                    </Sheet>
-                                </div>
+                                                    ))}
+                                                </div>
+                                            </SheetContent>
+                                        </Sheet>
+                                    </div>
+                                ) : (
+                                    <div>Loading...</div>
+                                )}
                             </div>
 
                             {/* Active Filters */}
@@ -235,16 +233,20 @@ export default function CollectionPage() {
                                     </Button>
                                 </div>
                             )}
+
+                            {/* Product Grid */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {filteredProducts.slice(0, displayedProducts).map((product) => (
                                     <Card key={product.id} className="relative group">
                                         <Link href={`/products/${product.id}`}>
                                             <CardContent className="p-0 relative">
                                                 {Array.isArray(product.images) && product.images.length > 0 ? (
-                                                    <img
+                                                    <Image
                                                         src={product.images[0]}
                                                         alt={product.name}
                                                         className="w-full h-48 object-cover"
+                                                        height={300}
+                                                        width={300}
                                                     />
                                                 ) : (
                                                     <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
@@ -260,7 +262,7 @@ export default function CollectionPage() {
                                                 {product.collection && !['vintage', 'Bộ sưu tập mới', 'Sang trọng', 'Tình yêu và tình bạn'].includes(product.collection) && (
                                                     <span className="text-sm text-gray-500">{product.collection}</span>
                                                 )}
-                                                <span className="mt-2 font-bold text-black">{formatCurrency(product.price)} đ</span>
+                                                <span className="mt-2 font-bold text-black">{formatCurrency(product.price)}</span>
                                             </CardFooter>
                                         </Link>
                                         {/* <Button

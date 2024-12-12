@@ -11,16 +11,16 @@ import { RadioGroup, RadioGroupItem } from "@components/ui/radio-group"
 import AuthContext from "@contexts/auth/AuthContext"
 import ThemeContext from "@contexts/ThemeContext"
 import { EyeIcon, EyeOffIcon, Facebook, Mail } from "lucide-react"
+import Link from "next/link"
 import { useContext, useRef, useState } from "react"
 
 
 export default function AuthForms() {
-    const habits = ['Sports', 'Music', 'Movies', 'Books', 'Technology', 'Travel', 'Food', 'Art']
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const isVisible = useRef(false)
     const [tab, setTab] = useState("login");
-    const { router } = useContext(ThemeContext)
+    const { router, setShowNotification } = useContext(ThemeContext)
     const { login, isLoggedIn, userLogin, admin } = useContext(AuthContext);
 
     const togglePasswordVisibility = () => {
@@ -70,9 +70,8 @@ export default function AuthForms() {
             }
 
             if (response.status === 202) {
-                alert('Tài khoản của bạn đã bị khóa')
-                // Tải lại trang
-                router.push('/')
+                setShowNotification('Tài khoản của bạn đã bị khóa')
+
             } else {
                 // Trả lại thông tin của người dùng
                 const responseData = await response.json();
@@ -88,7 +87,7 @@ export default function AuthForms() {
         } catch (error) {
             console.error('Error:', error.message);
             // Hiển thị thông báo lỗi (bạn có thể thêm state để hiển thị lỗi)
-            alert(error.message);
+            setShowNotification(error.message);
         }
     };
 
@@ -105,8 +104,8 @@ export default function AuthForms() {
                     <CardContent>
                         <Tabs defaultValue="login" onValueChange={(value) => { setTab(value) }}>
                             <TabsList className="grid w-full grid-cols-2">
-                                <TabsTrigger value="login">Login</TabsTrigger>
-                                <TabsTrigger value="register">Register</TabsTrigger>
+                                <TabsTrigger value="login">Đăng nhập</TabsTrigger>
+                                <TabsTrigger value="register">Đăng ký</TabsTrigger>
                             </TabsList>
                             <TabsContent value="login">
                                 <form onSubmit={handleSubmit} id={tab} >
@@ -242,15 +241,18 @@ export default function AuthForms() {
                         </Button>
                         <Separator className="my-4" />
                         <div className="grid w-full gap-2">
-                            <Button variant="outline" className="w-full">
-                                <Facebook className="mr-2 h-4 w-4 " />
-                                Continue with Facebook
-                            </Button>
-
-                            <Button variant="outline" className="w-full">
-                                <Mail className="mr-2 h-4 w-4" />
-                                Continue with Gmail
-                            </Button>
+                            <Link href={'https://www.facebook.com'}>
+                                <Button variant="outline" className="w-full">
+                                    <Facebook className="mr-2 h-4 w-4" />
+                                    Đăng nhập bằng Facebook
+                                </Button>
+                            </Link>
+                            <Link href={'https://mail.google.com/'}>
+                                <Button variant="outline" className="w-full">
+                                    <Mail className="mr-2 h-4 w-4" />
+                                    Đăng nhập bằng Gmail
+                                </Button>
+                            </Link>
                         </div>
                     </CardFooter>
                 </Card>

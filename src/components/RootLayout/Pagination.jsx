@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useContext, useMemo, useRef, useState } from "react";
 
-export default function PaginatePage({ value, tab }) {
+export default function PaginatePage({ value, tab, title }) {
     const slider = useRef(null);
     const [filter, setFilter] = useState('all')
     const { router } = useContext(ThemeContext)
@@ -32,10 +32,10 @@ export default function PaginatePage({ value, tab }) {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold mb-8 text-center">{tab}</h2>
                     <Tabs defaultValue="all" className="w-full" onValueChange={setFilter}>
-                        <TabsList className="grid w-full grid-cols-2 mb-8">
+                        {title == undefined && <TabsList className="grid w-full grid-cols-2 mb-8">
                             <TabsTrigger value="Vòng tay">Vòng tay</TabsTrigger>
-                            <TabsTrigger value="Charm">Khuyên tai</TabsTrigger>
-                        </TabsList>
+                            <TabsTrigger value="Charm">Charms</TabsTrigger>
+                        </TabsList>}
                         <TabsContent value={filter}>
                             <div className="relative">
                                 <div

@@ -1,12 +1,14 @@
 
 import { Button } from "@components/ui/button"
+import ThemeContext from "@contexts/ThemeContext"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 export default function HeroSection() {
     const [currentSlide, setCurrentSlide] = useState(0)
+    const { router } = useContext(ThemeContext)
     const slides = [
-        { image: '/assets/images/home/home1.webp?height=600&width=1200', title: 'Bộ sưu tập mùa hè', description: 'Khám phá những thiết kế mới nhất của chúng tôi' },
+        { image: '/assets/images/home/home1.webp?height=600&width=1200', title: 'Bộ sưu tập mới', description: 'Khám phá những thiết kế mới nhất của chúng tôi' },
         { image: '/assets/images/home/home2.jpg?height=600&width=1200', title: 'Quà tặng hoàn hảo', description: 'Tìm món quà ý nghĩa cho người thân yêu' },
         { image: '/assets/images/home/home3.jpg?height=600&width=1200', title: 'Xu hướng 2024', description: 'Cập nhật phong cách với những mẫu trang sức mới nhất' },
 
@@ -31,7 +33,7 @@ export default function HeroSection() {
                                         <div className="text-center text-white">
                                             <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
                                             <p className="text-xl mb-8">{slide.description}</p>
-                                            <Button size="lg">
+                                            <Button size="lg" onClick={() => { router.push(`/collections/${slide.title}`) }}>
                                                 Khám phá ngay
                                                 <ChevronRight className="ml-2 h-4 w-4" />
                                             </Button>

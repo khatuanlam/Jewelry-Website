@@ -1,112 +1,72 @@
-
 'use client'
 
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardFooter } from "@components/ui/card"
+import productsData from "@/content/products.json"
+import PaginatePage from "@components/RootLayout/Pagination"
 import AuthContext from "@contexts/auth/AuthContext"
 import ThemeContext from "@contexts/ThemeContext"
 import { getProductById } from "@services/page"
 import { formatCurrency } from "@utils/page"
-import { ChevronRight, Heart, Minus, Plus, Share2 } from 'lucide-react'
+import { ChevronRight, Minus, Plus } from 'lucide-react'
 import Image from "next/image"
 import { useCallback, useContext, useEffect, useState } from 'react'
 
-
 export default function ProductDetail({ params }) {
     const { isLoggedIn } = useContext(AuthContext)
+    const { router, setShowNotification } = useContext(ThemeContext)
     const [quantity, setQuantity] = useState(1)
     const [currentImage, setCurrentImage] = useState(0)
-    const { router } = useContext(ThemeContext)
-    // Lấy sản phẩm tương ứng
-    const baseProduct = getProductById(params.id)
-
     const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
 
-    const addToCartAction = useCallback(() => {
-        // Thêm vào giỏ hàng
+    const baseProduct = getProductById(params.id)
+    const relatedProducts = productsData.filter(
+        item => item.category === baseProduct.category && item.id !== baseProduct.id
+    )
+
+    const updateCart = useCallback((redirectToCart = false) => {
+        if (!isLoggedIn) {
+            setShowNotification('Vui lòng đăng nhập để mua hàng')
+            return
+        }
+
         const cart = JSON.parse(localStorage.getItem("cart") || "[]")
         const existingProduct = cart.find(item => item.id === baseProduct.id)
 
         if (existingProduct) {
-            // Cập nhật số lượng nếu sản phẩm đã tồn tại
             existingProduct.quantity += quantity
         } else {
-            // Thêm sản phẩm mới vào giỏ hàng
-            cart.push({
-                ...baseProduct,
-                quantity,
-            })
+            cart.push({ ...baseProduct, quantity })
         }
 
-        // Lưu lại giỏ hàng vào localStorage
         localStorage.setItem("cart", JSON.stringify(cart))
-
-        // Hiển thị thông báo đã thêm vào giỏ hàng
         setAddToCart('Đã thêm vào giỏ hàng')
-    }, [baseProduct, quantity])
+
+        if (redirectToCart) {
+            router.push("/cart")
+        }
+    }, [isLoggedIn, setShowNotification, baseProduct, quantity, router])
 
     useEffect(() => {
-        if (addToCart === 'Đã thêm vào giỏ hàng') {
-            const timer = setTimeout(() => {
-                setAddToCart('Thêm vào giỏ hàng');
-            }, 2000);
+        if (isLoggedIn) {
+            const timer = setTimeout(() => setAddToCart('Thêm vào giỏ hàng'), 2000)
             return () => clearTimeout(timer)
         }
-    }, [addToCart])
-
-    const buyNowAction = useCallback(() => {
-        // Lấy giỏ hàng hiện tại từ localStorage
-        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        const existingProduct = cart.find(item => item.id === baseProduct.id);
-
-        if (existingProduct) {
-            // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
-            existingProduct.quantity += quantity;
-        } else {
-            // Thêm sản phẩm mới vào giỏ hàng
-            cart.push({
-                ...baseProduct,
-                quantity,
-            });
-        }
-
-        // Lưu giỏ hàng vào localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        // Chuyển đến trang giỏ hàng
-        router.push("/cart");
-    }, [baseProduct, quantity, router]);
-
+    }, [addToCart, isLoggedIn])
 
     const product = {
         ...baseProduct,
         details: [
-            { label: "Chất liệu", value: "Bạc 925 sterling" },
-            { label: "Màu sắc", value: "Bạc" },
+            { label: "Chất liệu", value: baseProduct.material },
+            { label: "Màu sắc", value: baseProduct.color },
             { label: "Đá", value: "Cubic Zirconia" },
             { label: "Kích thước", value: "Đường kính: 3.1cm" },
         ],
     }
 
-    const relatedProducts = [
-        { id: 1, name: "Vòng tay Pandora Moments", price: 2090000 },
-        { id: 2, name: "Charm bạc Pandora Butterfly", price: 1290000 },
-        { id: 3, name: "Hoa tai Pandora Sparkling", price: 1790000 },
-        { id: 4, name: "Nhẫn bạc Pandora Crown", price: 1390000 },
-    ]
-
     return (
         <div className="min-h-screen bg-background text-foreground">
-            {/* Header would go here (same as homepage) */}
-
-            {/* Breadcrumb */}
             <nav className="py-4 bg-muted">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -119,7 +79,6 @@ export default function ProductDetail({ params }) {
                 </div>
             </nav>
 
-            {/* Product Details */}
             <section className="py-12">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -138,12 +97,17 @@ export default function ProductDetail({ params }) {
                                 {product.images.map((image, index) => (
                                     <button
                                         key={index}
-                                        className={`aspect-square overflow-hidden rounded-lg border-2 ${index === currentImage ? 'border-primary' : 'border-transparent'
-                                            }`}
+                                        className={`aspect-square overflow-hidden rounded-lg border-2 
+                                            ${index === currentImage ? 'border-primary' : 'border-transparent'}`}
                                         onClick={() => setCurrentImage(index)}
                                     >
-                                        <Image src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" width={600}
-                                            height={600} />
+                                        <Image
+                                            src={image}
+                                            alt={`${product.name} ${index + 1}`}
+                                            className="w-full h-full object-cover"
+                                            width={600}
+                                            height={600}
+                                        />
                                     </button>
                                 ))}
                             </div>
@@ -152,7 +116,7 @@ export default function ProductDetail({ params }) {
                         {/* Product Info */}
                         <div className="space-y-6">
                             <h1 className="text-3xl font-bold">{product.name}</h1>
-                            <p className="text-2xl font-semibold">{`${formatCurrency(product.price)} VNĐ`}</p>
+                            <p className="text-2xl font-semibold">{formatCurrency(product.price)} VNĐ</p>
                             <p className="text-sm text-muted-foreground">Thương hiệu: {product.brand}</p>
 
                             <div className="flex items-center space-x-4">
@@ -179,31 +143,19 @@ export default function ProductDetail({ params }) {
                                         <Plus className="h-4 w-4" />
                                     </Button>
                                 </div>
-                                <Button className="flex-1" onClick={addToCartAction}>{addToCart}</Button>
+                                <Button className="flex-1" onClick={() => updateCart()}>{addToCart}</Button>
                                 <Button
                                     className="flex-1 bg-slate-50 text-black hover:bg-slate-800 hover:text-white"
-                                    onClick={() => buyNowAction()}
+                                    onClick={() => updateCart(true)}
                                 >
                                     Mua ngay
-                                </Button>
-
-                            </div>
-
-                            <div className="flex space-x-4">
-                                <Button variant="outline" size="icon">
-                                    <Heart className="h-4 w-4" />
-                                </Button>
-                                <Button variant="outline" size="icon">
-                                    <Share2 className="h-4 w-4" />
                                 </Button>
                             </div>
 
                             <Accordion type="single" collapsible className="w-full">
                                 <AccordionItem value="description">
                                     <AccordionTrigger>Mô tả sản phẩm</AccordionTrigger>
-                                    <AccordionContent>
-                                        {product.description}
-                                    </AccordionContent>
+                                    <AccordionContent>{product.description}</AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="details">
                                     <AccordionTrigger>Thông số kỹ thuật</AccordionTrigger>
@@ -232,26 +184,11 @@ export default function ProductDetail({ params }) {
             </section>
 
             {/* Related Products */}
-            <section className="py-12 bg-muted">
+            <section className="bg-muted">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-2xl font-bold mb-8">Sản phẩm liên quan</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                        {relatedProducts.map((item) => (
-                            <Card key={item.id}>
-                                <CardContent className="p-0">
-                                    <Image src={`/logo.png?height=300&width=300`} alt={item.name} className="w-full h-48 object-cover" width={300} height={300} />
-                                </CardContent>
-                                <CardFooter className="flex flex-col items-start p-4">
-                                    <h3 className="font-semibold">{item.name}</h3>
-                                    <span className="mt-2 font-bold">{formatCurrency(item.price)}</span>
-                                </CardFooter>
-                            </Card>
-                        ))}
-                    </div>
+                    <PaginatePage value={relatedProducts} tab={<span className="text-black">Sản phẩm liên quan</span>} title={false} />
                 </div>
             </section>
-
-            {/* Footer would go here (same as homepage) */}
         </div>
     )
 }

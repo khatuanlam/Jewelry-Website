@@ -1,14 +1,16 @@
 'use client'
 
+import ThemeContext from '@contexts/ThemeContext'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 export default function Cart() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cart, setCart] = useState([])
     const [isAgreed, setIsAgreed] = useState(false)
+    const { setShowNotification } = useContext(ThemeContext)
     const router = useRouter()
 
     useEffect(() => {
@@ -42,13 +44,13 @@ export default function Cart() {
     const handlePayment = () => {
         if (!isAgreed) {
             // Thông báo người dùng cần đồng ý với điều khoản dịch vụ
-            alert("Vui lòng đồng ý với điều khoản dịch vụ trước khi thanh toán.");
+            setShowNotification("Vui lòng đồng ý với điều khoản dịch vụ trước khi thanh toán.");
             return;
         }
 
         if (cart.length === 0) {
             // Thông báo giỏ hàng trống
-            alert("Giỏ hàng của bạn đang trống.");
+            setShowNotification("Giỏ hàng của bạn đang trống.");
             return;
         }
 
@@ -57,7 +59,7 @@ export default function Cart() {
             router.push("/cart/pay");
         } catch (error) {
             console.error("Không thể lưu giỏ hàng vào localStorage:", error);
-            alert("Đã xảy ra lỗi. Vui lòng thử lại.");
+            setShowNotification("Đã xảy ra lỗi. Vui lòng thử lại.");
         }
     };
 
@@ -83,8 +85,8 @@ export default function Cart() {
                                     <div className="flex items-center">
                                         <Image
                                             src={item.images ? item.images[0] : item.images[1]}
-                                            width={50}
-                                            height={50}
+                                            width={300}
+                                            height={300}
                                             className="mr-4"
                                             alt=''
                                         />

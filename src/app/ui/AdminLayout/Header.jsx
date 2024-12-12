@@ -60,7 +60,7 @@ export default function AdminHeader() {
                         </nav>
                     </SheetContent>
                 </Sheet>
-                <h1 className="ml-4 text-lg font-semibold text-gray-800">Admin Page Management</h1>
+                <h1 className="ml-4 text-[2rem] font-semibold text-gray-800">TRANG QUẢN LÝ CHARISMA</h1>
             </div>
             <div className="flex items-center">
                 <Button variant="ghost" size="icon" className="mr-4 text-gray-600 hover:text-gray-900">

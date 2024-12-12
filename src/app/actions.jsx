@@ -1,12 +1,13 @@
 'use server'
 
 import { orders, products, users } from '@content';
+import { verifyPassword } from '@lib/actions';
 import fs from 'fs';
 import { NextResponse } from 'next/server';
 import path from 'path';
 const usersPath = path.join(process.cwd(), 'src/content/users.json');
 const ordersPath = path.join(process.cwd(), 'src/content/orders.json');
-const productsPath = path.join(process.cwd(), 'src/content/orders.json');
+const productsPath = path.join(process.cwd(), 'src/content/products.json');
 export async function login(account) {
     try {
         // Xác định người dùng có tài khoản chưa
@@ -20,7 +21,7 @@ export async function login(account) {
 
 
         // Kiểm tra mật khẩu
-        if (users[result].password !== account.login_password) {
+        if (!verifyPassword(users[result].password, account.login_password)) {
             return NextResponse.json({
                 message: 'Mật khẩu không chính xác'
             }, { status: 401 })
@@ -80,35 +81,60 @@ export async function take_order(order) {
     }, { status: 200 })
 }
 
-async function readUsersFile() {
-    try {
-        const data = await fs.readFile(usersPath, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        console.error('Error reading users file:', error);
-        return [];
+
+export async function editOrder(updatedOrder) {
+    const index = await orders.findIndex(o => o.id === updatedOrder.id);
+    if (index !== -1) {
+        orders[index] = { ...orders[index], ...updatedOrder };
+        fs.writeFileSync(ordersPath, JSON.stringify(orders, null, 2), 'utf8');
     }
+    return orders;
 }
+
+export async function editProduct(updatedProduct) {
+    const index = await products.findIndex(p => p.id === updatedProduct.id);
+    if (index !== -1) {
+        products[index] = { ...products[index], ...updatedProduct };
+        fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
+    } else {
+        console.log('updatedProduct:', updatedProduct);
+        console.log('Không tìm thấy sản phẩm ');
+    }
+    return products;
+}
+
+export async function filterOrders(startDate, endDate, status) {
+    return orders.filter(order => {
+        const orderDate = new Date(order.createAt);
+        const isInDateRange = (!startDate || orderDate >= new Date(startDate)) &&
+            (!endDate || orderDate <= new Date(endDate));
+        const matchesStatus = !status || order.status === status;
+        return isInDateRange && matchesStatus;
+    });
+}
+
 
 async function writeUsersFile(users) {
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2), 'utf8');
 }
 
+async function writeProductsFile(products) {
+    fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
 
-export async function getUsers() {
-    return await readUsersFile()
 }
-
-
-
 export async function addUser(newUser) {
-    users.push(newUser)
-    await writeUsersFile(users)
+    const result = await users.findIndex(u => u.email === newUser.email)
+    if (result != -1) {
+        users.push({ id: users.length + 1, ...newUser })
+        await writeUsersFile(users)
+    }
+    else {
+        console.log('Email bị trùng');
+    }
     return users
 }
 
-export async function editUser(index, updatedUser) {
-
+export async function editingUser(index, updatedUser) {
     users[index] = updatedUser
     await writeUsersFile(users)
     return users
@@ -116,28 +142,25 @@ export async function editUser(index, updatedUser) {
 
 
 export async function addProduct(newProduct) {
-
-    const updatedProducts = [...products, { id: products.length + 1, ...newProduct }];
-    fs.writeFileSync(productsPath, JSON.stringify(updatedProducts, null, 2), 'utf8');
-    return updatedProducts;
-}
-
-export async function editProduct(updatedProduct) {
-
-    const index = products.findIndex(p => p.id === updatedProduct.id);
-    if (index !== -1) {
-        products[index] = updatedProduct;
-        fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
+    const index = await products.findIndex(p => p.id === newProduct.id);
+    if (index === -1) {
+        products.push({ id: products.length + 1, ...newProduct });
+        await writeProductsFile(products)
+    } else {
+        console.log('Sản phẩm đã được thêm vào ');
     }
-    return products;
+
+    return products
 }
+
+
 
 export async function deleteProduct(productId) {
-
     const updatedProducts = products.filter(p => p.id !== productId);
-    fs.writeFileSync(productsPath, JSON.stringify(updatedProducts, null, 2), 'utf8');
+    await writeProductsFile(updatedProducts)
     return updatedProducts;
 }
+
 
 export async function toggleUserStatus(index) {
     users[index].isLock = !users[index].isLock

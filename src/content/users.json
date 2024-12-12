@@ -1,52 +1,58 @@
-[{
-        "id": 1,
-        "name": "Admin",
-        "email": "admin@gmail.com",
-        "password": "admin",
-        "confirm_password": "12345678",
-        "gender": "female",
-        "dob": "2024-12-18",
-        "interest": "movies",
-        "address": "Số 8, Tp hcm",
-        "active": true,
-        "promoted": true,
-        "isLock": false
-    },
-    {
-        "id": 2,
-        "name": "Mai Thy",
-        "email": "thuyngocmaithyy@gmail.com",
-        "password": "12345678",
-        "confirm_password": "12345678",
-        "gender": "female",
-        "dob": "2024-12-18",
-        "interest": "movies",
-        "address": "Số 8, Tp hcm",
-        "active": true,
-        "isLock": false
-    },
-    {
-        "id": 3,
-        "name": "Lâm KHa TUấn",
-        "email": "thuyngocmaithyy@gmail.com",
-        "password": "12345678",
-        "confirm_password": "12345678",
-        "gender": "male",
-        "dob": "2024-12-13",
-        "address": "Số 8, Tp hcm",
-        "active": false,
-        "isLock": true
-    },
-    {
-        "id": 4,
-        "name": "lam tuan",
-        "email": "thuyngocmaithyy@gmail.com",
-        "password": "12345678",
-        "confirm_password": "12345678",
-        "gender": "male",
-        "dob": "2024-11-26",
-        "address": "rèibầb, ađakdbksa, 3123 ,ạohsaoh",
-        "active": false,
-        "isLock": true
-    }
+[
+  {
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "admin",
+    "confirm_password": "12345678",
+    "gender": "female",
+    "dob": "2024-12-18",
+    "interest": "movies",
+    "address": "TP HCM",
+    "active": true,
+    "promoted": true,
+    "isLock": false
+  },
+  {
+    "id": 2,
+    "name": "Mai Thy",
+    "email": "thuyngocmaithyy@gmail.com",
+    "password": "12345678",
+    "confirm_password": "12345678",
+    "gender": "female",
+    "dob": "2024-12-18",
+    "interest": "movies",
+    "address": "Số 8, Gò Vấp, TP HCM",
+    "active": false,
+    "isLock": true
+  },
+  {
+    "id": 3,
+    "name": "lam tuan",
+    "email": "tuanlam777@gmail.com",
+    "active": true
+  },
+  {
+    "index": 3,
+    "id": 4,
+    "name": "lam tuan",
+    "email": "tuanlam777@gmail.com",
+    "password": "B.#QEqMe#W2A4k",
+    "confirm_password": "B.#QEqMe#W2A4k",
+    "gender": "male",
+    "dob": "2024-12-18",
+    "address": "Quận 7 Tp Hcm",
+    "birthdate": "2024-11-29"
+  },
+  {
+    "id": 5,
+    "name": "Phương Thùy",
+    "email": "phuongthuy@gmail.com",
+    "password": {},
+    "confirm_password": "12345",
+    "gender": "female",
+    "dob": "2024-12-14",
+    "address": "Gò vấp",
+    "active": true
+  }
 ]

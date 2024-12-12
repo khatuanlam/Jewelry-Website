@@ -1,16 +1,15 @@
 'use server'
 import { register } from '@app/actions';
+import { hashPassword } from '@lib/actions';
 import { NextResponse } from "next/server";
-
 // /app/api/account/register/route.js
 export async function POST(request) {
     try {
-        let response = undefined
-        const data = await request.json(); // Nhận dữ liệu từ request body
+        let data = await request.json(); // Nhận dữ liệu từ request body
         console.log('Received: ', data);
-
+        data = { ...data, password: hashPassword(data.password) }
         // Thực hiện đăng ký và nhận lại kết quả
-        response = register(data)
+        const response = register(data)
 
         return response
     } catch (error) {

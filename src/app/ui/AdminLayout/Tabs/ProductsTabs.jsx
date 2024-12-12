@@ -1,13 +1,12 @@
 'use client'
 
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
-    CardTitle,
+    CardTitle
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -33,7 +32,7 @@ import { EditProductModal } from "@components/RootLayout/EditModal"
 import { products } from '@content'
 import { formatCurrency } from "@utils/page"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useTransition } from "react"
 
 const ITEMS_PER_PAGE = 5
 
@@ -47,9 +46,13 @@ export default function ProductsTabs() {
     const [productToDelete, setProductToDelete] = useState(null)
     const [productList, setProductList] = useState([])
     const [newProduct, setNewProduct] = useState({ name: '', price: '', image: null })
+    const [isPending, startTransition] = useTransition()
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        setProductList(products)
+        startTransition(async () => {
+            setProductList(products)
+        })
     }, [])
 
     const totalPages = Math.ceil(productList.length / ITEMS_PER_PAGE)
@@ -63,11 +66,16 @@ export default function ProductsTabs() {
     }
 
     const handleSaveEdit = async (updatedProduct) => {
-        if (updatedProduct) {
+        setIsLoading(true)
+        console.log(updatedProduct);
+        try {
             const updatedProducts = await editProduct(updatedProduct)
             setProductList(updatedProducts)
         }
-        setIsEditModalOpen(false)
+        finally {
+            setIsLoading(false)
+            setIsEditModalOpen(false)
+        }
     }
 
     const handleDeleteClick = (product) => {
@@ -75,7 +83,8 @@ export default function ProductsTabs() {
         setIsDeleteDialogOpen(true)
     }
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete = async (e) => {
+        e.preventDefault()
         if (productToDelete) {
             const updatedProducts = await deleteProduct(productToDelete.id)
             setProductList(updatedProducts)
@@ -83,17 +92,20 @@ export default function ProductsTabs() {
         setIsDeleteDialogOpen(false)
     }
 
-    const handleAddProduct = async () => {
-        if (newProduct.name && newProduct.price) {
-            const product = {
-                name: newProduct.name,
-                price: parseFloat(newProduct.price),
-                images: newProduct.image ? [URL.createObjectURL(newProduct.image)] : ['/placeholder.png']
+    const handleAddProduct = async (e) => {
+        e.preventDefault()
+        startTransition(async () => {
+            if (newProduct.name && newProduct.price) {
+                const currentProduct = {
+                    name: newProduct.name,
+                    price: parseFloat(newProduct.price),
+                    images: newProduct.image ? [URL.createObjectURL(newProduct.image)] : ['/placeholder.png']
+                }
+                const updatedProducts = await addProduct(currentProduct)
+                setProductList(updatedProducts)
+                setNewProduct({ name: '', price: '', image: null })
             }
-            const updatedProducts = await addProduct(product)
-            setProductList(updatedProducts)
-            setNewProduct({ name: '', price: '', image: null })
-        }
+        })
     }
 
     const handleNewProductChange = (e) => {
@@ -110,11 +122,10 @@ export default function ProductsTabs() {
             <TabsContent value="products" className="space-y-4">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Product Management</CardTitle>
-                        <CardDescription>Add, edit, or remove products.</CardDescription>
+                        <CardTitle className='text-[2rem]'>Quản lý sản phẩm</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="space-y-4">
+                        <form onSubmit={handleAddProduct} className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="product-name">Tên sản phẩm</Label>
@@ -123,7 +134,7 @@ export default function ProductsTabs() {
                                         name="name"
                                         value={newProduct.name}
                                         onChange={handleNewProductChange}
-                                        placeholder="Enter product name"
+                                        placeholder="Nhập vào tên sản phẩm"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -133,7 +144,7 @@ export default function ProductsTabs() {
                                         name="price"
                                         value={newProduct.price}
                                         onChange={handleNewProductChange}
-                                        placeholder="Enter price"
+                                        placeholder="Nhập giá thành"
                                         type="number"
                                     />
                                 </div>
@@ -141,11 +152,11 @@ export default function ProductsTabs() {
                                 <div className="space-y-2">
                                     <Label htmlFor="product-price">Số lượng nhập</Label>
                                     <Input
-                                        id="product-price"
-                                        name="price"
-                                        value={newProduct.price}
+                                        id="product-quantity"
+                                        name="quantity"
+                                        value={newProduct.quantity}
                                         onChange={handleNewProductChange}
-                                        placeholder="Enter price"
+                                        placeholder="Nhập số lượng"
                                         type="number"
                                     />
                                 </div>
@@ -160,8 +171,8 @@ export default function ProductsTabs() {
                                     accept="image/*"
                                 />
                             </div>
-                            <Button onClick={handleAddProduct}>Add Product</Button>
-                        </div>
+                            <Button type='submit' disabled={isPending}>Thêm sản phẩm</Button>
+                        </form>
                         <div className="mt-6 overflow-x-auto">
                             <Table>
                                 <TableHeader>
@@ -174,25 +185,25 @@ export default function ProductsTabs() {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {currentProducts.map((product) => (
+                                    {currentProducts.map((product, index) => (
                                         <TableRow key={product.id}>
                                             <TableCell>
                                                 <Image
-                                                    src={product.images ? product.images[0] : '/placeholder.png'}
-                                                    width={50}
-                                                    height={50}
+                                                    src={product.images ? product.images[0] : '/logo.png'}
+                                                    width={300}
+                                                    height={300}
                                                     alt={product.name}
                                                     className="object-cover"
                                                 />
                                             </TableCell>
                                             <TableCell className="font-medium">{product.name}</TableCell>
-                                            <TableCell>{formatCurrency(product.price)} đ</TableCell>
-                                            <TableCell>{product.quantity}</TableCell>
+                                            <TableCell>{formatCurrency(product.price)}</TableCell>
+                                            <TableCell>{product.quantity || 0}</TableCell>
                                             <TableCell className="text-right">
-                                                <Button variant="outline" size="sm" className="mr-2" onClick={() => handleEditClick(product)}>
-                                                    Edit
+                                                <Button variant="outline" size="sm" className="mr-2" disabled={isPending} onClick={() => handleEditClick(product)}>
+                                                    Sửa
                                                 </Button>
-                                                <Button variant="destructive" size="sm" onClick={() => handleDeleteClick(product)}>Delete</Button>
+                                                <Button variant="destructive" size="sm" disabled={isPending} onClick={() => handleDeleteClick(product)}>Xóa</Button>
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -237,16 +248,14 @@ export default function ProductsTabs() {
                 onSave={handleSaveEdit}
             />
             <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                <AlertDialogContent>
+                <AlertDialogContent className='bg-slate-50'>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure you want to delete this product?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete the product.
-                        </AlertDialogDescription>
+                        <AlertDialogTitle>Bạn có chắc muốn xóa dòng sản phẩm này không?</AlertDialogTitle>
+
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleConfirmDelete}>Delete</AlertDialogAction>
+                        <AlertDialogCancel>Hủy</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleConfirmDelete}>Xóa</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

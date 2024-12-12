@@ -1,18 +1,28 @@
 'use client'
 
-import products from '@content/products.json';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ThemeContext from "./ThemeContext";
 
 const ThemeProvider = ({ children }) => {
     const [windowWidth, setwindowWidth] = useState(0);
+    const [showNotification, setShowNotification] = useState('')
     const router = useRouter();
+
+    useEffect(() => {
+        if (showNotification !== '') {
+            const timer = setTimeout(() => {
+                setShowNotification('')
+            }, 3000)
+            return () => clearTimeout(timer)
+        }
+    }, [showNotification])
 
     const value = {
         windowWidth,
-        products,
-        router
+        router,
+        setShowNotification,
+        showNotification
     }
 
     return (

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 export function EditProductModal({ product, isOpen, onClose, onSave }) {
@@ -23,7 +24,7 @@ export function EditProductModal({ product, isOpen, onClose, onSave }) {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
-        setEditedProduct(prev => ({ ...prev, [name]: name === 'price' | 'quantity' ? parseFloat(value) : value }))
+        setEditedProduct(prev => ({ ...prev, [name]: name === 'price' | 'quantity' ? parseFloat(value, 10) : value }))
     }
 
     const handleImageChange = (e) => {
@@ -40,16 +41,16 @@ export function EditProductModal({ product, isOpen, onClose, onSave }) {
     if (!product) return null
 
     return (
-        <Dialog className='bg-slate-50' open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[425px]">
+        <Dialog open={isOpen} onOpenChange={onClose}>
+            <DialogContent className="sm:max-w-[425px] bg-slate-100">
                 <DialogHeader>
-                    <DialogTitle>Edit Product</DialogTitle>
+                    <DialogTitle>Chỉnh sửa thông tin</DialogTitle>
                 </DialogHeader>
                 {product ? (
                     <>
                         <div className="grid gap-4 py-4">
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name" className="text-right">
+                                <Label htmlFor="name" className="text-left">
                                     Tên sản phẩm
                                 </Label>
                                 <Input
@@ -61,33 +62,33 @@ export function EditProductModal({ product, isOpen, onClose, onSave }) {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="price" className="text-right">
+                                <Label htmlFor="price" className="text-left">
                                     Giá thành
                                 </Label>
                                 <Input
                                     id="price"
                                     name="price"
-                                    type="number"
+                                    type='number'
                                     value={editedProduct.price}
                                     onChange={handleInputChange}
                                     className="col-span-3"
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="price" className="text-right">
+                                <Label htmlFor="price" className="text-left">
                                     Số lượng
                                 </Label>
                                 <Input
                                     id="quantity"
                                     name="quantity"
                                     type="number"
-                                    value={editedProduct.quantity}
+                                    value={parseInt(editedProduct.quantity) || 0}
                                     onChange={handleInputChange}
                                     className="col-span-3"
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="image" className="text-right">
+                                <Label htmlFor="image" className="text-left">
                                     Hình ảnh
                                 </Label>
                                 <Input
@@ -100,16 +101,18 @@ export function EditProductModal({ product, isOpen, onClose, onSave }) {
                             </div>
                             {(newImage || editedProduct.images[0]) && (
                                 <div className="mt-2">
-                                    <img
+                                    <Image
                                         src={newImage || editedProduct.images[0]}
                                         alt={editedProduct.name}
                                         className="w-full max-h-48 object-cover rounded-md"
+                                        height={300}
+                                        width={300}
                                     />
                                 </div>
                             )}
                         </div>
                         <DialogFooter>
-                            <Button type="submit" onClick={handleSave}>Save changes</Button>
+                            <Button type="submit" onClick={handleSave}>Lưu thay đổi</Button>
                         </DialogFooter>
                     </>
                 ) : (
