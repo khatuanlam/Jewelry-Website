@@ -40,7 +40,7 @@
         "jewelry-web": "file:",
         "js-cookie": "^3.0.5",
         "lucide-react": "^0.447.0",
-        "next": "^14.2.13",
+        "next": "^14.2.20",
         "next-auth": "^4.24.8",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",

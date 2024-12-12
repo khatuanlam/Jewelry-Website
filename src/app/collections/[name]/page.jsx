@@ -11,12 +11,12 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import ThemeContext from "@contexts/ThemeContext"
 import { formatCurrency } from "@utils/page"
 import { Filter, X } from 'lucide-react'
 import Image from "next/image"
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 const filters = [
 
@@ -50,9 +50,8 @@ export default function CollectionPage({ params }) {
     const [cart, setCart] = useState([])
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
     const [displayedProducts, setDisplayedProducts] = useState(6)
-    const router = useRouter()
+    const { router } = useContext(ThemeContext)
     const { setShowNotification } = useContext(ThemeContext)
 
 

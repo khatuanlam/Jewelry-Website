@@ -60,7 +60,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="mt-8 text-center">
-                            <p>&copy; 2024 PNJ. Tất cả quyền được bảo lưu.</p>
+                            <p>&copy; 2024 Charisma. Tất cả quyền được bảo lưu.</p>
                         </div>
                     </div>
                 </footer>

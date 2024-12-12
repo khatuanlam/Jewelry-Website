@@ -112,7 +112,7 @@ export default function AuthForms() {
                                     <div className="grid w-full items-center gap-4">
                                         <div className="flex flex-col space-y-1.5">
                                             <Label htmlFor="login_email">Email</Label>
-                                            <Input id="login_email" name='login_email' placeholder="Enter your email" type="email" required />
+                                            <Input id="login_email" name='login_email' placeholder="Nhập email" type="email" required />
                                         </div>
                                         <div className="flex flex-col space-y-1.5">
                                             <Label htmlFor="login_password">Mật khẩu</Label>
