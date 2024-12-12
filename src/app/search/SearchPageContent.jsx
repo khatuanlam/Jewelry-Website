@@ -1,7 +1,7 @@
 "use client"; // Đảm bảo đây là Client Component
 
 import { Card, CardContent } from "@/components/ui/card";
-import products from "@/content/products.json";
+import products from "@content";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from 'next/navigation';

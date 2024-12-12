@@ -1,242 +1,237 @@
-[
-  {
-    "id": 1,
-    "name": "lam tuan",
-    "email": "tuanlam777@gmail.com",
-    "phone": "1919282001",
-    "address": "Số 8, Tp hcm",
-    "province": "25",
-    "district": "233",
-    "ward": "",
-    "payment": "cash",
-    "user_id": 2,
-    "products": [
-      {
+[{
+        "id": 1,
+        "name": "lam tuan",
+        "email": "tuanlam777@gmail.com",
+        "phone": "1919282001",
+        "address": "Số 8, Tp hcm",
+        "province": "25",
+        "district": "233",
+        "ward": "",
+        "payment": "cash",
+        "user_id": 2,
+        "products": [{
+            "id": 2,
+            "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
+            "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+            "price": 5390000,
+            "category": "Vòng tay",
+            "stock": 110,
+            "rating": 4,
+            "brand": "Charisma",
+            "collection": [
+                "Vòng tự chọn charm",
+                "Bộ sưu tập mới",
+                "Sang trọng"
+            ],
+            "color": "Không màu",
+            "material": "Bạc",
+            "images": [
+                "/assets/images/id_2a.jpg",
+                "/assets/images/id_2b.jpg",
+                "/assets/images/id_2c.jpg",
+                "/assets/images/id_2d.jpg",
+                "/assets/images/id_2e.jpg"
+            ],
+            "date": "09/05/2020",
+            "quantity": 2
+        }],
+        "owner": {
+            "id": 2,
+            "name": "Mai Thy",
+            "email": "thuyngocmaithyy@gmail.com",
+            "password": "12345678",
+            "confirm_password": "12345678",
+            "gender": "female",
+            "dob": "2024-12-18",
+            "interest": "movies",
+            "address": "Số 8, Tp hcm",
+            "active": true,
+            "isLock": false
+        },
+        "price": 10799000,
+        "status": "cancelled",
+        "createAt": "20:38:33 5/12/2024"
+    },
+    {
         "id": 2,
-        "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
-        "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
-        "price": 5390000,
-        "category": "Vòng tay",
-        "stock": 110,
-        "rating": 4,
-        "brand": "Charisma",
-        "collection": [
-          "Vòng tự chọn charm",
-          "Bộ sưu tập mới",
-          "Sang trọng"
+        "name": "lam tuan",
+        "email": "tuanlam777@gmail.com",
+        "phone": "1919282001",
+        "address": "Số 8, Gò Vấp, TP HCM",
+        "province": "02",
+        "district": "028",
+        "ward": "00820",
+        "payment": "cash",
+        "user_id": 2,
+        "products": [{
+                "id": 2,
+                "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
+                "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+                "price": 5390000,
+                "category": "Vòng tay",
+                "stock": 110,
+                "rating": 4,
+                "brand": "Charisma",
+                "collection": [
+                    "Vòng tự chọn charm",
+                    "Bộ sưu tập mới",
+                    "Sang trọng"
+                ],
+                "color": "Không màu",
+                "material": "Bạc",
+                "images": [
+                    "/assets/images/id_2a.jpg",
+                    "/assets/images/id_2b.jpg",
+                    "/assets/images/id_2c.jpg",
+                    "/assets/images/id_2d.jpg",
+                    "/assets/images/id_2e.jpg"
+                ],
+                "date": "09/05/2020",
+                "quantity": 1,
+                "image": "/assets/images/id_2a.jpg"
+            },
+            {
+                "id": 3,
+                "name": "Vòng Charisma Timeless Tennis Đính Đá Pha Lê Màu Xanh",
+                "description": "Chiếc vòng tennis cổ điển được chế tác từ bạc sterling và có một hàng đá pha lê màu xanh hoàng gia 34 viên đá. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một món trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+                "price": 4490000,
+                "category": "Vòng tay",
+                "stock": 210,
+                "rating": 3.5,
+                "brand": "Charisma",
+                "collection": [
+                    "Vòng tự chọn charm",
+                    "Bộ sưu tập mới"
+                ],
+                "color": "Xanh",
+                "material": "Bạc",
+                "images": [
+                    "/assets/images/id_3a.jpg",
+                    "/assets/images/id_3b.jpg",
+                    "/assets/images/id_3c.jpg",
+                    "/assets/images/id_3d.jpg"
+                ],
+                "date": "26/01/2023",
+                "quantity": 1,
+                "image": "/assets/images/id_3a.jpg"
+            },
+            {
+                "id": 6,
+                "name": "Vòng bạc biểu tượng Stranger Things x Charisma",
+                "description": "Kỷ niệm tình bạn, tình yêu và niềm đam mê của bạn với Hawkins, với chiếc vòng tay rắn độc quyền Charisma x Stranger Things này. Được thiết kế với khóa khắc chữ \"FRIENDS DON'T LIE\" ở một mặt và logo Stranger Things ở mặt kia, hãy lấp đầy chiếc vòng ý nghĩa này với các biểu tượng và nhân vật yêu thích của bạn.",
+                "price": 4950000,
+                "category": "Vòng tay",
+                "stock": 100,
+                "rating": 3.5,
+                "brand": "Charisma",
+                "collection": 112,
+                "color": "Đỏ",
+                "material": [
+                    "Vòng tự chọn charm",
+                    "Tình yêu và tình bạn"
+                ],
+                "images": [
+                    "/assets/images/id_6a.jpg",
+                    "/assets/images/id_6b.jpg",
+                    "/assets/images/id_6c.jpg",
+                    "/assets/images/id_6d.jpg"
+                ],
+                "date": "09/09/2022",
+                "quantity": 1
+            }
         ],
-        "color": "Không màu",
-        "material": "Bạc",
-        "images": [
-          "/assets/images/id_2a.jpg",
-          "/assets/images/id_2b.jpg",
-          "/assets/images/id_2c.jpg",
-          "/assets/images/id_2d.jpg",
-          "/assets/images/id_2e.jpg"
-        ],
-        "date": "09/05/2020",
-        "quantity": 2
-      }
-    ],
-    "owner": {
-      "id": 2,
-      "name": "Mai Thy",
-      "email": "thuyngocmaithyy@gmail.com",
-      "password": "12345678",
-      "confirm_password": "12345678",
-      "gender": "female",
-      "dob": "2024-12-18",
-      "interest": "movies",
-      "address": "Số 8, Tp hcm",
-      "active": true,
-      "isLock": false
+        "owner": {
+            "id": 2,
+            "name": "Mai Thy",
+            "email": "thuyngocmaithyy@gmail.com",
+            "password": "12345678",
+            "confirm_password": "12345678",
+            "gender": "female",
+            "dob": "2024-12-18",
+            "interest": "movies",
+            "address": "Số 8, Gò Vấp, TP HCM",
+            "active": true,
+            "isLock": false
+        },
+        "price": 14887000,
+        "status": "confirmed",
+        "createAt": "13:46:41 12/12/2024"
     },
-    "price": 10799000,
-    "status": "cancelled",
-    "createAt": "20:38:33 5/12/2024"
-  },
-  {
-    "id": 2,
-    "name": "lam tuan",
-    "email": "tuanlam777@gmail.com",
-    "phone": "1919282001",
-    "address": "Số 8, Gò Vấp, TP HCM",
-    "province": "02",
-    "district": "028",
-    "ward": "00820",
-    "payment": "cash",
-    "user_id": 2,
-    "products": [
-      {
-        "id": 2,
-        "name": "Vòng Charisma Timeless Tennis Đính Đá Nổi Bật",
-        "description": "Chiếc vòng tennis cổ điển chế tác từ bạc sterling và có một hàng đá cubic zirconia cắt 34 viên. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
-        "price": 5390000,
-        "category": "Vòng tay",
-        "stock": 110,
-        "rating": 4,
-        "brand": "Charisma",
-        "collection": [
-          "Vòng tự chọn charm",
-          "Bộ sưu tập mới",
-          "Sang trọng"
-        ],
-        "color": "Không màu",
-        "material": "Bạc",
-        "images": [
-          "/assets/images/id_2a.jpg",
-          "/assets/images/id_2b.jpg",
-          "/assets/images/id_2c.jpg",
-          "/assets/images/id_2d.jpg",
-          "/assets/images/id_2e.jpg"
-        ],
-        "date": "09/05/2020",
-        "quantity": 1,
-        "image": "/assets/images/id_2a.jpg"
-      },
-      {
+    {
         "id": 3,
-        "name": "Vòng Charisma Timeless Tennis Đính Đá Pha Lê Màu Xanh",
-        "description": "Chiếc vòng tennis cổ điển được chế tác từ bạc sterling và có một hàng đá pha lê màu xanh hoàng gia 34 viên đá. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một món trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
-        "price": 4490000,
-        "category": "Vòng tay",
-        "stock": 210,
-        "rating": 3.5,
-        "brand": "Charisma",
-        "collection": [
-          "Vòng tự chọn charm",
-          "Bộ sưu tập mới"
+        "name": "lam tuan",
+        "email": "tuanlam777@gmail.com",
+        "phone": "1919282001",
+        "address": "Số 8, Gò Vấp, TP HCM",
+        "province": "11",
+        "district": "098",
+        "ward": "03217",
+        "payment": "cash",
+        "user_id": 2,
+        "products": [{
+                "id": 3,
+                "name": "Vòng Charisma Timeless Tennis Đính Đá Pha Lê Màu Xanh",
+                "description": "Chiếc vòng tennis cổ điển được chế tác từ bạc sterling và có một hàng đá pha lê màu xanh hoàng gia 34 viên đá. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một món trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
+                "price": 4490000,
+                "category": "Vòng tay",
+                "stock": 210,
+                "rating": 3.5,
+                "brand": "Charisma",
+                "collection": [
+                    "Vòng tự chọn charm",
+                    "Bộ sưu tập mới"
+                ],
+                "color": "Xanh",
+                "material": "Bạc",
+                "images": [
+                    "/assets/images/id_3a.jpg",
+                    "/assets/images/id_3b.jpg",
+                    "/assets/images/id_3c.jpg",
+                    "/assets/images/id_3d.jpg"
+                ],
+                "date": "26/01/2023",
+                "quantity": 1,
+                "image": "/assets/images/id_3a.jpg"
+            },
+            {
+                "id": 7,
+                "name": "Vòng Charisma Moments Mạ Vàng Hồng 14k Dạng Gai Dây Rút",
+                "description": "Lắc tay dây rút dạng gai chiều lòng mọi cô gái. Với lớp mạ vàng hồng 14k sang trọng, thiết kế một size nhưng ôm trọn mọi cổ tay. Thân dây linh hoạt giúp cử động thoải mái, hạt trượt silicon trên dây mảnh cho phép điều chỉnh kích cỡ dễ dàng. Thêm tối đa 10 charm để tạo nên câu chuyện riêng của bạn. ",
+                "price": 4938000,
+                "category": "Vòng tay",
+                "stock": 120,
+                "rating": 4,
+                "brand": "Charisma",
+                "collection": [
+                    "Sang trọng"
+                ],
+                "color": "Không màu",
+                "material": "Mạ vàng hồng 14k",
+                "images": [
+                    "/assets/images/id_7a.jpg",
+                    "/assets/images/id_7b.jpg",
+                    "/assets/images/id_7c.jpg",
+                    "/assets/images/id_7d.jpg"
+                ],
+                "date": "16/11/2022",
+                "quantity": 1
+            }
         ],
-        "color": "Xanh",
-        "material": "Bạc",
-        "images": [
-          "/assets/images/id_3a.jpg",
-          "/assets/images/id_3b.jpg",
-          "/assets/images/id_3c.jpg",
-          "/assets/images/id_3d.jpg"
-        ],
-        "date": "26/01/2023",
-        "quantity": 1,
-        "image": "/assets/images/id_3a.jpg"
-      },
-      {
-        "id": 6,
-        "name": "Vòng bạc biểu tượng Stranger Things x Charisma",
-        "description": "Kỷ niệm tình bạn, tình yêu và niềm đam mê của bạn với Hawkins, với chiếc vòng tay rắn độc quyền Charisma x Stranger Things này. Được thiết kế với khóa khắc chữ \"FRIENDS DON'T LIE\" ở một mặt và logo Stranger Things ở mặt kia, hãy lấp đầy chiếc vòng ý nghĩa này với các biểu tượng và nhân vật yêu thích của bạn.",
-        "price": 4950000,
-        "category": "Vòng tay",
-        "stock": 100,
-        "rating": 3.5,
-        "brand": "Charisma",
-        "collection": 112,
-        "color": "Đỏ",
-        "material": [
-          "Vòng tự chọn charm",
-          "Tình yêu và tình bạn"
-        ],
-        "images": [
-          "/assets/images/id_6a.jpg",
-          "/assets/images/id_6b.jpg",
-          "/assets/images/id_6c.jpg",
-          "/assets/images/id_6d.jpg"
-        ],
-        "date": "09/09/2022",
-        "quantity": 1
-      }
-    ],
-    "owner": {
-      "id": 2,
-      "name": "Mai Thy",
-      "email": "thuyngocmaithyy@gmail.com",
-      "password": "12345678",
-      "confirm_password": "12345678",
-      "gender": "female",
-      "dob": "2024-12-18",
-      "interest": "movies",
-      "address": "Số 8, Gò Vấp, TP HCM",
-      "active": true,
-      "isLock": false
-    },
-    "price": 14887000,
-    "status": "confirmed",
-    "createAt": "13:46:41 12/12/2024"
-  },
-  {
-    "id": 3,
-    "name": "lam tuan",
-    "email": "tuanlam777@gmail.com",
-    "phone": "1919282001",
-    "address": "Số 8, Gò Vấp, TP HCM",
-    "province": "11",
-    "district": "098",
-    "ward": "03217",
-    "payment": "cash",
-    "user_id": 2,
-    "products": [
-      {
-        "id": 3,
-        "name": "Vòng Charisma Timeless Tennis Đính Đá Pha Lê Màu Xanh",
-        "description": "Chiếc vòng tennis cổ điển được chế tác từ bạc sterling và có một hàng đá pha lê màu xanh hoàng gia 34 viên đá. Được thiết kế với ý tưởng xếp lớp, hãy đeo chiếc vòng của bạn như một món trang sức lấp lánh suốt mùa hoặc gói nó lại như một bất ngờ lấp lánh dành cho người bạn yêu thương.",
-        "price": 4490000,
-        "category": "Vòng tay",
-        "stock": 210,
-        "rating": 3.5,
-        "brand": "Charisma",
-        "collection": [
-          "Vòng tự chọn charm",
-          "Bộ sưu tập mới"
-        ],
-        "color": "Xanh",
-        "material": "Bạc",
-        "images": [
-          "/assets/images/id_3a.jpg",
-          "/assets/images/id_3b.jpg",
-          "/assets/images/id_3c.jpg",
-          "/assets/images/id_3d.jpg"
-        ],
-        "date": "26/01/2023",
-        "quantity": 1,
-        "image": "/assets/images/id_3a.jpg"
-      },
-      {
-        "id": 7,
-        "name": "Vòng Charisma Moments Mạ Vàng Hồng 14k Dạng Gai Dây Rút",
-        "description": "Lắc tay dây rút dạng gai chiều lòng mọi cô gái. Với lớp mạ vàng hồng 14k sang trọng, thiết kế một size nhưng ôm trọn mọi cổ tay. Thân dây linh hoạt giúp cử động thoải mái, hạt trượt silicon trên dây mảnh cho phép điều chỉnh kích cỡ dễ dàng. Thêm tối đa 10 charm để tạo nên câu chuyện riêng của bạn. ",
-        "price": 4938000,
-        "category": "Vòng tay",
-        "stock": 120,
-        "rating": 4,
-        "brand": "Charisma",
-        "collection": [
-          "Sang trọng"
-        ],
-        "color": "Không màu",
-        "material": "Mạ vàng hồng 14k",
-        "images": [
-          "/assets/images/id_7a.jpg",
-          "/assets/images/id_7b.jpg",
-          "/assets/images/id_7c.jpg",
-          "/assets/images/id_7d.jpg"
-        ],
-        "date": "16/11/2022",
-        "quantity": 1
-      }
-    ],
-    "owner": {
-      "id": 2,
-      "name": "Mai Thy",
-      "email": "thuyngocmaithyy@gmail.com",
-      "password": "12345678",
-      "confirm_password": "12345678",
-      "gender": "female",
-      "dob": "2024-12-18",
-      "interest": "movies",
-      "address": "Số 8, Gò Vấp, TP HCM",
-      "active": true,
-      "isLock": false
-    },
-    "price": 9466000,
-    "status": "pending",
-    "createAt": "16:22:28 12/12/2024"
-  }
+        "owner": {
+            "id": 2,
+            "name": "Mai Thy",
+            "email": "thuyngocmaithyy@gmail.com",
+            "password": "12345678",
+            "confirm_password": "12345678",
+            "gender": "female",
+            "dob": "2024-12-18",
+            "interest": "movies",
+            "address": "Số 8, Gò Vấp, TP HCM",
+            "active": true,
+            "isLock": false
+        },
+        "price": 9466000,
+        "status": "pending",
+        "createAt": "16:22:28 12/12/2024"
+    }
 ]

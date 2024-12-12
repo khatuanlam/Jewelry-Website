@@ -4,9 +4,9 @@ import { verifyPassword } from '@lib/actions';
 import fs from 'fs';
 import { NextResponse } from 'next/server';
 import path from 'path';
-const usersPath = path.join(process.cwd(), 'src/content/users.json');
-const ordersPath = path.join(process.cwd(), 'src/content/orders.json');
-const productsPath = path.join(process.cwd(), 'src/content/products.json');
+const usersPath = path.join('/tmp', 'src/content/users.json');
+const ordersPath = path.join('/tmp', 'src/content/orders.json');
+const productsPath = path.join('/tmp', 'src/content/products.json');
 export async function login(account) {
     try {
         // Xác định người dùng có tài khoản chưa
