@@ -1,7 +1,7 @@
 
 import { orders, products, users } from '@content';
 import { verifyPassword } from '@lib/actions';
-import fs from 'fs/promises';
+// import fs from 'fs/promises';
 import { NextResponse } from 'next/server';
 import path from 'path';
 const usersPath = path.join('/tmp', 'src/content/users.json');
@@ -36,7 +36,7 @@ export async function login(account) {
 
         // Cập nhật lại trạng thái hoạt động của người dùng
         users[result].active = true
-        fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
+        // fs.writeFileSync(usersPath, JSON.stringify(users, null, 2))
 
         return NextResponse.json({
             message: `Xin chào ${account.login_email} đã đăng nhập thành công`,
@@ -58,7 +58,7 @@ export async function register(account) {
 
         const jsonString = JSON.stringify(users, null, 2)
 
-        fs.writeFileSync(usersPath, jsonString, 'utf8')
+        // fs.writeFileSync(usersPath, jsonString, 'utf8')
 
         return NextResponse.json({
             message: 'User is register successfully',
@@ -74,7 +74,7 @@ export async function take_order(order) {
     const updatedOrders = [...orders, { id: orders.length + 1, ...order }];
 
     // Ghi lại file JSON
-    fs.writeFileSync(ordersPath, JSON.stringify(updatedOrders, null, 2), 'utf8');
+    // fs.writeFileSync(ordersPath, JSON.stringify(updatedOrders, null, 2), 'utf8');
 
     return NextResponse.json({
         message: 'Order added successfully',
@@ -86,7 +86,7 @@ export async function editOrder(updatedOrder) {
     const index = await orders.findIndex(o => o.id === updatedOrder.id);
     if (index !== -1) {
         orders[index] = { ...orders[index], ...updatedOrder };
-        fs.writeFileSync(ordersPath, JSON.stringify(orders, null, 2), 'utf8');
+        // fs.writeFileSync(ordersPath, JSON.stringify(orders, null, 2), 'utf8');
     }
     return orders;
 }
@@ -95,7 +95,7 @@ export async function editProduct(updatedProduct) {
     const index = await products.findIndex(p => p.id === updatedProduct.id);
     if (index !== -1) {
         products[index] = { ...products[index], ...updatedProduct };
-        fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
+        // fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
     } else {
         console.log('updatedProduct:', updatedProduct);
         console.log('Không tìm thấy sản phẩm ');
@@ -115,11 +115,11 @@ export async function filterOrders(startDate, endDate, status) {
 
 
 async function writeUsersFile(users) {
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2), 'utf8');
+    // fs.writeFileSync(usersPath, JSON.stringify(users, null, 2), 'utf8');
 }
 
 async function writeProductsFile(products) {
-    fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
+    // fs.writeFileSync(productsPath, JSON.stringify(products, null, 2), 'utf8');
 
 }
 export async function addUser(newUser) {
