@@ -1,12 +1,13 @@
 
 import { orders, products, users } from '@content';
 import { verifyPassword } from '@lib/actions';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { NextResponse } from 'next/server';
 import path from 'path';
 const usersPath = path.join('/tmp', 'src/content/users.json');
 const ordersPath = path.join('/tmp', 'src/content/orders.json');
 const productsPath = path.join('/tmp', 'src/content/products.json');
+
 export async function login(account) {
     try {
         // Xác định người dùng có tài khoản chưa
