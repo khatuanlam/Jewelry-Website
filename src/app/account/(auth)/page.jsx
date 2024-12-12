@@ -51,7 +51,7 @@ export default function AuthForms() {
                     throw new Error('Mật khẩu xác nhận không khớp');
                 }
             }
-
+            console.log(data);
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -85,9 +85,13 @@ export default function AuthForms() {
             }
 
         } catch (error) {
-            console.error('Error:', error.message);
-            // Hiển thị thông báo lỗi (bạn có thể thêm state để hiển thị lỗi)
-            setShowNotification(error.message);
+            if (error.response && error.response.status === 400) {
+                setShowNotification('Vui lòng kiểm tra lại thông tin nhập vào');
+            } else if (error.response && error.response.status === 401) {
+                setShowNotification('Tài khoản hoặc mật khẩu không đúng');
+            } else {
+                setShowNotification('Đã xảy ra lỗi, vui lòng thử lại sau');
+            }
         }
     };
 

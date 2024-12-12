@@ -1,4 +1,3 @@
-'use server'
 
 import { orders, products, users } from '@content';
 import { verifyPassword } from '@lib/actions';
