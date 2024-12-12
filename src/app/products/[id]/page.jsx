@@ -3,8 +3,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import productsData from "@/content/products.json"
 import PaginatePage from "@components/RootLayout/Pagination"
-import { products } from "@content"
 import AuthContext from "@contexts/auth/AuthContext"
 import ThemeContext from "@contexts/ThemeContext"
 import { getProductById } from "@services/page"
@@ -21,7 +21,7 @@ export default function ProductDetail({ params }) {
     const [addToCart, setAddToCart] = useState('Thêm vào giỏ hàng')
 
     const baseProduct = getProductById(params.id)
-    const relatedProducts = products.filter(
+    const relatedProducts = productsData.filter(
         item => item.category === baseProduct.category && item.id !== baseProduct.id
     )
 

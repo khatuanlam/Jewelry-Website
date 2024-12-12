@@ -5955,6 +5955,7 @@ snapshots:
       lucide-react: 0.447.0(react@18.3.1)
       next: 14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.3)
       next-auth: 4.24.11(next@14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      path: 0.12.7
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-icons: 5.4.0(react@18.3.1)
