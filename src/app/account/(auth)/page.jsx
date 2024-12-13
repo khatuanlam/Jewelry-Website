@@ -60,16 +60,15 @@ export default function AuthForms() {
                 body: JSON.stringify(data),
             });
 
-            // Kiểm tra response status
-            if (response.status === 500) {
-                throw new Error('Lỗi server, vui lòng thử lại sau');
-            }
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Lỗi kết nối');
             }
-
-            if (response.status === 202) {
+            // Kiểm tra response status
+            if (response.status === 500) {
+                throw new Error('Lỗi server, vui lòng thử lại sau');
+            }
+            else if (response.status === 202) {
                 setShowNotification('Tài khoản của bạn đã bị khóa')
 
             } else {

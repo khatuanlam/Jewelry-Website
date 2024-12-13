@@ -10,7 +10,7 @@ export async function POST(request) {
         const hashedPassword = hashPassword(data.password);
         const response = await register({ ...data, password: hashedPassword }); // Await the register promise
 
-        if (response.status === 201) { // 201 Created is the typical success status for registration
+        if (response.status === 200) { // 201 Created is the typical success status for registration
             const responseData = await response.json();
             return NextResponse.json(responseData, { status: 201 });
         } else if (response.status === 400) { // Handle 400 Bad Request (e.g., validation errors)
